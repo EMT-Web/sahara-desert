@@ -1,0 +1,248 @@
+I want you to generate a complete, production-ready Sahara Desert Travel Website project.
+Follow all instructions carefully.
+
+Tech Stack
+
+Next.js 14 (App Router)
+
+Tailwind CSS
+
+Next-Sanity
+
+Fully connected to Sanity CMS
+
+GROQ queries for all pages
+
+SSR (server-side rendering)
+
+Reusable components
+
+Responsive layout
+
+SEO optimized
+
+📁 Project Structure
+
+Create this exact folder tree:
+
+src/
+ ├─ app/
+ │   ├─ layout.jsx
+ │   ├─ page.jsx
+ │   ├─ tours/
+ │   │    ├─ page.jsx
+ │   │    └─ [slug]/page.jsx
+ │   ├─ gallery/page.jsx
+ │   ├─ stories/page.jsx
+ │   ├─ stories/[slug]/page.jsx
+ │   ├─ music/page.jsx
+ │   ├─ culture/page.jsx
+ │   ├─ guides/page.jsx
+ │   ├─ sustainability/page.jsx
+ │   ├─ contact/page.jsx
+ ├─ components/
+ │   ├─ Navbar.jsx
+ │   ├─ Footer.jsx
+ │   ├─ Hero.jsx
+ │   ├─ SectionTitle.jsx
+ │   ├─ TourCard.jsx
+ │   ├─ GalleryGrid.jsx
+ │   ├─ StoryCard.jsx
+ │   ├─ MusicCard.jsx
+ │   ├─ GuideCard.jsx
+ │   ├─ AudioPlayer.jsx
+ ├─ lib/
+ │   ├─ sanity.js
+ │   ├─ client.js
+ │   └─ queries.js
+ ├─ styles/
+ │   └─ globals.css
+
+🔥 Pages to Build
+
+Generate full functional pages with GROQ queries:
+
+Homepage
+
+Tours listing page
+
+Tour detail page [slug]
+
+Gallery page
+
+Stories/blog list
+
+Story detail page
+
+Music page
+
+Culture page
+
+Guides page
+
+Sustainability page
+
+Contact page with WhatsApp button
+
+Each page must be server-rendered (async function Page()).
+
+🖼 Design Requirements
+
+Follow these desert-themed UI rules:
+
+Warm tones: sand/gold/amber/purple
+
+Full-width hero with video fallback to image
+
+Smooth fade/slide animations
+
+Clean typography (serif heading + modern body font)
+
+100% mobile-friendly
+
+Minimal, elegant styling (Tailwind only)
+
+Soft hover effects
+
+Light text overlays on photos
+
+🧩 Component Requirements
+Navbar
+
+Links loaded from Sanity siteSettings.navigation
+
+Hero
+
+Pull from homepage Sanity document:
+
+heroTitle
+
+heroSubtitle
+
+heroImage
+
+heroVideo
+
+TourCard
+
+title
+
+image
+
+short description
+
+duration
+
+price
+
+GalleryGrid
+
+fetch gallery items (images & videos)
+
+StoryCard
+
+title
+
+cover image
+
+excerpt
+
+MusicCard
+
+portraitImage
+
+title
+
+audioClip
+
+videoLink
+
+GuideCard
+
+profile image
+
+name
+
+role
+
+AudioPlayer
+
+plays audio from Sanity
+
+🔗 Sanity Integration Requirements
+
+In lib/sanity.js:
+
+Setup configured client
+
+Use Sanity CDN for images
+
+Export urlFor builder
+
+In lib/queries.js:
+
+Create GROQ queries for:
+
+Homepage
+
+Tours list
+
+Tour detail
+
+Gallery items
+
+Stories list
+
+Story detail
+
+Music entries
+
+Culture entries
+
+Guides
+
+Sustainability
+
+Contact info
+
+Site settings
+
+🔍 SEO Requirements
+
+Each page must return:
+
+export const metadata = {
+  title: "...",
+  description: "...",
+};
+
+🧱 Code Requirements
+Do this:
+
+✔ Full code for all files
+✔ Full GROQ queries
+✔ All page components fully functional
+✔ Fully styled elements
+✔ Use Image from Next.js
+✔ Use urlFor(image) for Sanity
+✔ All pages responsive
+✔ All data comes from Sanity (no hardcoded content)
+
+Do NOT do this:
+
+❌ No placeholders
+❌ No fake JSON
+❌ No lorem ipsum
+❌ No incomplete pages
+
+📦 FINAL OUTPUT
+
+Provide:
+
+✔ All source code files
+✔ All GROQ queries
+✔ All components
+✔ All page code
+✔ All Next.js setup files
+✔ Full Tailwind config
+✔ Full Sanity integration code
