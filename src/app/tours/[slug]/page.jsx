@@ -3,7 +3,7 @@ import { client, urlFor } from '@/lib/sanity'
 import { tourDetailQuery } from '@/lib/queries'
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params
+  const { slug } = params
   const tour = await client.fetch(tourDetailQuery, { slug })
   
   return {
@@ -23,7 +23,7 @@ async function getTour(slug) {
 }
 
 export default async function TourDetailPage({ params }) {
-  const { slug } = await params
+  const { slug } = params
   const tour = await getTour(slug)
 
   if (!tour) {

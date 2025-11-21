@@ -3,7 +3,7 @@ import { client, urlFor } from '@/lib/sanity'
 import { storyDetailQuery } from '@/lib/queries'
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params
+  const { slug } = params
   const story = await client.fetch(storyDetailQuery, { slug })
   
   return {
@@ -23,7 +23,7 @@ async function getStory(slug) {
 }
 
 export default async function StoryDetailPage({ params }) {
-  const { slug } = await params
+  const { slug } = params
   const story = await getStory(slug)
 
   if (!story) {
