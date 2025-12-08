@@ -246,6 +246,7 @@ export default async function TourDetailPage({ params }) {
           </div>
         </div>
       </div>
+      </div>
     </>
   )
 }
