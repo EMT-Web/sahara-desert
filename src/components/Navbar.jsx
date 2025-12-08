@@ -17,10 +17,8 @@ export default function Navbar({ navigation }) {
 
   const defaultNav = [
     { title: 'Home', url: '/' },
+    { title: 'About', url: '/about' },
     { title: 'Tours', url: '/tours' },
-    { title: 'Gallery', url: '/gallery' },
-    { title: 'Stories', url: '/stories' },
-    { title: 'Music', url: '/music' },
     { title: 'Culture', url: '/culture' },
     { title: 'Guides', url: '/guides' },
     { title: 'Sustainability', url: '/sustainability' },
@@ -33,7 +31,7 @@ export default function Navbar({ navigation }) {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-md'
+          ? 'bg-sand-100/95 backdrop-blur-sm shadow-md'
           : 'bg-gradient-to-b from-black/50 to-transparent'
       }`}
     >
@@ -73,17 +71,17 @@ export default function Navbar({ navigation }) {
             <div className="w-6 h-5 flex flex-col justify-between">
               <span
                 className={`block h-0.5 w-full transition-colors ${
-                  isScrolled ? 'bg-gray-900' : 'bg-white'
+                  isScrolled ? 'bg-gray-900' : 'bg-sand-100'
                 }`}
               />
               <span
                 className={`block h-0.5 w-full transition-colors ${
-                  isScrolled ? 'bg-gray-900' : 'bg-white'
+                  isScrolled ? 'bg-gray-900' : 'bg-sand-100'
                 }`}
               />
               <span
                 className={`block h-0.5 w-full transition-colors ${
-                  isScrolled ? 'bg-gray-900' : 'bg-white'
+                  isScrolled ? 'bg-gray-900' : 'bg-sand-100'
                 }`}
               />
             </div>
@@ -91,12 +89,12 @@ export default function Navbar({ navigation }) {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white shadow-lg rounded-lg mb-4 py-4">
+          <div className="lg:hidden bg-sand-100 shadow-lg rounded-lg mb-4 py-4">
             {navItems.map((item) => (
               <Link
                 key={item.url}
                 href={item.url}
-                className="block px-4 py-3 text-gray-700 hover:bg-sand-50 hover:text-desert-600 transition-colors"
+                className="block px-4 py-3 text-gray-700 hover:bg-sand-100 hover:text-desert-600 transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.title}

@@ -14,7 +14,7 @@ export default function StoryCard({ story }) {
   return (
     <Link
       href={`/stories/${story.slug.current}`}
-      className="group block bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition"
+      className="group block bg-sand-100 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition"
     >
       {story.coverImage && (
         <div className="relative h-56 overflow-hidden">

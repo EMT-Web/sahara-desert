@@ -1,15 +1,23 @@
 import Image from 'next/image'
+import Script from 'next/script'
 import { client, urlFor } from '@/lib/sanity'
 import { storyDetailQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 
 export async function generateMetadata({ params }) {
   const { slug } = params
   const story = await client.fetch(storyDetailQuery, { slug })
   
-  return {
-    title: story?.title ? `${story.title} | Sahara Desert Travel` : 'Story | Sahara Desert Travel',
+  return generateSEOMetadata({
+    title: story?.title || 'Story | Sahara Desert Travel',
     description: story?.excerpt || 'Read an inspiring story from the Sahara Desert',
-  }
+    image: story?.mainImage,
+    url: `/stories/${slug}`,
+    type: 'article',
+    publishedTime: story?.publishedAt,
+    author: story?.author?.name,
+    keywords: ['Sahara Story', story?.title, 'Desert Travel', 'Morocco Travel'],
+  })
 }
 
 async function getStory(slug) {
@@ -25,6 +33,13 @@ async function getStory(slug) {
 export default async function StoryDetailPage({ params }) {
   const { slug } = params
   const story = await getStory(slug)
+
+  const articleSchema = story ? generateArticleSchema(story) : null
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Stories', url: '/stories' },
+    { name: story?.title || 'Story', url: `/stories/${slug}` },
+  ])
 
   if (!story) {
     return (
@@ -56,12 +71,25 @@ export default async function StoryDetailPage({ params }) {
     : null
 
   return (
-    <div className="pt-20">
+    <>
+      {articleSchema && (
+        <Script
+          id="article-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+      )}
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className="pt-20">
       {story.coverImage && (
         <div className="relative h-[60vh] w-full">
           <Image
             src={urlFor(story.coverImage).width(1920).height(1080).url()}
-            alt={story.title}
+            alt={`${story.title} - Sahara Desert Story`}
             fill
             className="object-cover"
             priority
@@ -87,7 +115,7 @@ export default async function StoryDetailPage({ params }) {
               <div className="relative w-16 h-16 rounded-full overflow-hidden">
                 <Image
                   src={urlFor(story.author.image).width(80).height(80).url()}
-                  alt={story.author.name}
+                  alt={`${story.author.name} - Story Author`}
                   fill
                   className="object-cover"
                 />
@@ -115,7 +143,7 @@ export default async function StoryDetailPage({ params }) {
         </div>
 
         {story.author?.bio && (
-          <div className="mt-16 p-8 bg-sand-50 rounded-xl">
+          <div className="mt-16 p-8 bg-sand-100 rounded-xl">
             <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">
               About the Author
             </h3>
@@ -124,7 +152,7 @@ export default async function StoryDetailPage({ params }) {
                 <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={urlFor(story.author.image).width(100).height(100).url()}
-                    alt={story.author.name}
+                    alt={`${story.author.name} - Story Author`}
                     fill
                     className="object-cover"
                   />
@@ -152,5 +180,6 @@ export default async function StoryDetailPage({ params }) {
         </div>
       </article>
     </div>
+    </>
   )
 }

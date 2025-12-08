@@ -3,14 +3,16 @@ import { urlFor } from '@/lib/sanity'
 
 export default function GuideCard({ guide }) {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition group">
+    <div className="bg-sand-100 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition group">
       {guide.profileImage && (
         <div className="relative h-80 overflow-hidden">
           <Image
             src={urlFor(guide.profileImage).width(500).height(600).url()}
-            alt={guide.name}
+            alt={`${guide.name} - ${guide.role || 'Sahara Desert Guide'}`}
             fill
             className="object-cover group-hover:scale-110 smooth-transition"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         </div>

@@ -2,15 +2,30 @@ import SectionTitle from '@/components/SectionTitle'
 import TourCard from '@/components/TourCard'
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Desert Tours | Sahara Desert Travel',
-  description: 'Explore our collection of unforgettable Sahara Desert tours. From camel treks to stargazing adventures, find the perfect desert experience.',
+export async function generateMetadata() {
+  return generateSEOMetadata({
+    title: 'Desert Tours | Sahara Desert Travel',
+    description: 'Explore our collection of unforgettable Sahara Desert tours. From camel treks to stargazing adventures, find the perfect desert experience. Book your authentic Moroccan desert adventure today.',
+    url: '/tours',
+    keywords: ['Sahara Tours', 'Morocco Desert Tours', 'Camel Trekking', 'Desert Camping', 'Erg Chebbi Tours', 'Merzouga Tours', 'Zagora Tours'],
+  })
 }
 
 async function getTours() {
   try {
     const tours = await client.fetch(toursListQuery)
+    console.log('📦 Fetched tours:', tours?.length || 0)
+    if (tours && tours.length > 0) {
+      console.log('📸 First tour image check:', {
+        title: tours[0].title,
+        hasMainImage: !!tours[0].mainImage,
+        mainImageType: typeof tours[0].mainImage,
+        mainImageKeys: tours[0].mainImage ? Object.keys(tours[0].mainImage) : null,
+        mainImageAsset: tours[0].mainImage?.asset ? Object.keys(tours[0].mainImage.asset) : null,
+      })
+    }
     return tours || []
   } catch (error) {
     console.error('Error fetching tours:', error)
@@ -37,7 +52,7 @@ export default async function ToursPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-sand-50 rounded-xl p-12 max-w-2xl mx-auto">
+            <div className="bg-sand-100 rounded-xl p-12 max-w-2xl mx-auto">
               <svg
                 className="w-20 h-20 text-desert-400 mx-auto mb-6"
                 fill="none"

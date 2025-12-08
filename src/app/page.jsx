@@ -3,10 +3,16 @@ import SectionTitle from '@/components/SectionTitle'
 import TourCard from '@/components/TourCard'
 import { client } from '@/lib/sanity'
 import { homepageQuery, toursListQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Sahara Desert Travel | Authentic Desert Experiences',
-  description: 'Discover the magic of the Sahara Desert with expert guides, sustainable tourism, and unforgettable adventures through golden dunes and ancient traditions.',
+export async function generateMetadata() {
+  const homepage = await client.fetch(homepageQuery)
+  return generateSEOMetadata({
+    title: 'Sahara Desert Travel | Authentic Desert Experiences',
+    description: homepage?.heroSubtitle || 'Discover the magic of the Sahara Desert with expert guides, sustainable tourism, and unforgettable adventures through golden dunes and ancient traditions.',
+    image: homepage?.heroImage,
+    url: '/',
+  })
 }
 
 async function getHomepageData() {
@@ -15,6 +21,14 @@ async function getHomepageData() {
       client.fetch(homepageQuery),
       client.fetch(toursListQuery),
     ])
+    console.log('🏠 Homepage data:', {
+      hasHomepage: !!homepage,
+      heroImage: !!homepage?.heroImage,
+      heroImageType: typeof homepage?.heroImage,
+      heroImageKeys: homepage?.heroImage ? Object.keys(homepage.heroImage) : null,
+      toursCount: tours?.length || 0,
+      firstTourImage: tours?.[0]?.mainImage ? 'has image' : 'no image',
+    })
     return { homepage, tours: tours?.slice(0, 3) || [] }
   } catch (error) {
     console.error('Error fetching homepage data:', error)
@@ -28,10 +42,11 @@ export default async function HomePage() {
   return (
     <>
       <Hero
-        heroTitle={homepage?.heroTitle}
-        heroSubtitle={homepage?.heroSubtitle}
+        heroTitle={homepage?.heroTitle || "Where the dunes sing at sunset"}
+        heroSubtitle={homepage?.heroSubtitle || "Discover authentic Saharan culture, music, and unforgettable desert experiences"}
         heroImage={homepage?.heroImage}
         heroVideo={homepage?.heroVideo}
+        ambientSound={homepage?.ambientSound}
       />
 
       <section className="container mx-auto px-4 py-20">
@@ -72,7 +87,7 @@ export default async function HomePage() {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
+            <div className="text-center p-8 bg-sand-100 rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
               <div className="w-16 h-16 bg-desert-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-desert-600"
@@ -94,7 +109,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
+            <div className="text-center p-8 bg-sand-100 rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
               <div className="w-16 h-16 bg-desert-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-desert-600"
@@ -116,7 +131,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
+            <div className="text-center p-8 bg-sand-100 rounded-xl shadow-lg hover:shadow-2xl smooth-transition">
               <div className="w-16 h-16 bg-desert-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-desert-600"
@@ -151,7 +166,7 @@ export default async function HomePage() {
           </p>
           <a
             href="/contact"
-            className="inline-block px-8 py-4 bg-white text-desert-600 hover:bg-sand-50 font-semibold rounded-lg shadow-lg smooth-transition"
+            className="inline-block px-8 py-4 bg-white text-desert-600 hover:bg-sand-100 font-semibold rounded-lg shadow-lg smooth-transition"
           >
             Get in Touch
           </a>

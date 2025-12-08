@@ -1,15 +1,22 @@
 import Image from 'next/image'
+import Script from 'next/script'
 import { client, urlFor } from '@/lib/sanity'
 import { tourDetailQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata, generateTourSchema, generateBreadcrumbSchema } from '@/lib/seo'
 
 export async function generateMetadata({ params }) {
   const { slug } = params
   const tour = await client.fetch(tourDetailQuery, { slug })
   
-  return {
-    title: tour?.title ? `${tour.title} | Sahara Desert Travel` : 'Tour | Sahara Desert Travel',
-    description: tour?.excerpt || 'Explore an unforgettable desert experience in the Sahara',
-  }
+  return generateSEOMetadata({
+    title: tour?.title || 'Tour | Sahara Desert Travel',
+    description: tour?.excerpt || tour?.description || 'Explore an unforgettable desert experience in the Sahara',
+    image: tour?.mainImage,
+    url: `/tours/${slug}`,
+    type: 'article',
+    publishedTime: tour?.publishedAt,
+    keywords: ['Sahara Tour', tour?.title, tour?.departureCity, 'Desert Adventure', 'Morocco Travel'],
+  })
 }
 
 async function getTour(slug) {
@@ -25,6 +32,13 @@ async function getTour(slug) {
 export default async function TourDetailPage({ params }) {
   const { slug } = params
   const tour = await getTour(slug)
+
+  const tourSchema = tour ? generateTourSchema(tour) : null
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Tours', url: '/tours' },
+    { name: tour?.title || 'Tour', url: `/tours/${slug}` },
+  ])
 
   if (!tour) {
     return (
@@ -48,31 +62,45 @@ export default async function TourDetailPage({ params }) {
   }
 
   return (
-    <div className="pt-20">
-      {tour.mainImage && (
-        <div className="relative h-[60vh] w-full">
-          <Image
-            src={urlFor(tour.mainImage).width(1920).height(1080).url()}
-            alt={tour.title}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white px-4">
-              <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4 text-shadow">
-                {tour.title}
-              </h1>
-              {tour.excerpt && (
-                <p className="text-xl md:text-2xl text-white/90 text-shadow max-w-3xl mx-auto">
-                  {tour.excerpt}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
+    <>
+      {tourSchema && (
+        <Script
+          id="tour-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(tourSchema) }}
+        />
       )}
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className="pt-20">
+        {/* Hero Image Section - Image only, no text overlay */}
+        {tour.mainImage && (
+          <div className="relative h-[50vh] w-full mb-12">
+            <Image
+              src={urlFor(tour.mainImage).width(1920).height(1080).url()}
+              alt={`${tour.title} - Sahara Desert Tour`}
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+          </div>
+        )}
+
+      {/* Title and Excerpt - Below the image */}
+      <div className="container mx-auto px-4 mb-12">
+        <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">
+          {tour.title}
+        </h1>
+        {tour.excerpt && (
+          <p className="text-xl text-gray-600 max-w-3xl">
+            {tour.excerpt}
+          </p>
+        )}
+      </div>
 
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -92,7 +120,7 @@ export default async function TourDetailPage({ params }) {
                 </h2>
                 <div className="space-y-6">
                   {tour.itinerary.map((item, index) => (
-                    <div key={index} className="bg-white rounded-lg p-6 shadow-md">
+                    <div key={index} className="bg-sand-100 rounded-lg p-6 shadow-md">
                       <h3 className="text-xl font-semibold text-desert-600 mb-2">
                         Day {index + 1}: {item.day || item.title}
                       </h3>
@@ -115,9 +143,11 @@ export default async function TourDetailPage({ params }) {
                     <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
                       <Image
                         src={urlFor(image).width(400).height(400).url()}
-                        alt={`${tour.title} - Image ${index + 1}`}
+                        alt={`${tour.title} - Gallery Image ${index + 1}`}
                         fill
                         className="object-cover hover:scale-110 smooth-transition"
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -127,7 +157,7 @@ export default async function TourDetailPage({ params }) {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl p-6 shadow-xl sticky top-24">
+            <div className="bg-sand-100 rounded-xl p-6 shadow-xl sticky top-24">
               {tour.price && (
                 <div className="mb-6">
                   <p className="text-gray-600 mb-2">Price per person</p>
@@ -216,6 +246,6 @@ export default async function TourDetailPage({ params }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

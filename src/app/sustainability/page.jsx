@@ -2,10 +2,15 @@ import Image from 'next/image'
 import SectionTitle from '@/components/SectionTitle'
 import { client, urlFor } from '@/lib/sanity'
 import { sustainabilityQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Sustainability | Sahara Desert Travel',
-  description: 'Learn about our commitment to sustainable and responsible tourism in the Sahara Desert. We protect the environment and support local communities.',
+export async function generateMetadata() {
+  return generateSEOMetadata({
+    title: 'Sustainability | Sahara Desert Travel',
+    description: 'Learn about our commitment to sustainable and responsible tourism in the Sahara Desert. We protect the environment and support local communities.',
+    url: '/sustainability',
+    keywords: ['Sustainable Tourism', 'Eco-Friendly Travel', 'Responsible Tourism', 'Desert Conservation'],
+  })
 }
 
 async function getSustainabilityContent() {
@@ -43,13 +48,13 @@ export default async function SustainabilityPage() {
               {sustainability.initiatives.map((initiative, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl overflow-hidden shadow-lg"
+                  className="bg-sand-100 rounded-xl overflow-hidden shadow-lg"
                 >
                   {initiative.image && (
                     <div className="relative h-64 w-full">
                       <Image
                         src={urlFor(initiative.image).width(800).height(400).url()}
-                        alt={initiative.title}
+                        alt={`${initiative.title} - Sustainability Initiative`}
                         fill
                         className="object-cover"
                       />
@@ -68,7 +73,7 @@ export default async function SustainabilityPage() {
             </div>
           ) : (
             <div className="space-y-12">
-              <div className="bg-white rounded-xl p-8 shadow-lg">
+              <div className="bg-sand-100 rounded-xl p-8 shadow-lg">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-6">
                     <svg
@@ -94,7 +99,7 @@ export default async function SustainabilityPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-8 shadow-lg">
+              <div className="bg-sand-100 rounded-xl p-8 shadow-lg">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-16 h-16 bg-desert-100 rounded-full flex items-center justify-center mr-6">
                     <svg
@@ -120,7 +125,7 @@ export default async function SustainabilityPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-8 shadow-lg">
+              <div className="bg-sand-100 rounded-xl p-8 shadow-lg">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-6">
                     <svg

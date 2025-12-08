@@ -4,7 +4,7 @@ import AudioPlayer from './AudioPlayer'
 
 export default function MusicCard({ music }) {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition">
+    <div className="bg-sand-100 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl smooth-transition">
       {music.portraitImage && (
         <div className="relative h-72 overflow-hidden">
           <Image

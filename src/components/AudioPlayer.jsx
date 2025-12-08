@@ -18,7 +18,7 @@ export default function AudioPlayer({ audioUrl, title }) {
   }
 
   return (
-    <div className="bg-sand-50 rounded-lg p-4">
+    <div className="bg-sand-100 rounded-lg p-4">
       <audio
         ref={audioRef}
         src={audioUrl}

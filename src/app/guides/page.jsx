@@ -2,15 +2,29 @@ import SectionTitle from '@/components/SectionTitle'
 import GuideCard from '@/components/GuideCard'
 import { client } from '@/lib/sanity'
 import { guidesQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Our Guides | Sahara Desert Travel',
-  description: 'Meet our experienced local guides who will lead you on an unforgettable journey through the Sahara Desert with expert knowledge and hospitality.',
+export async function generateMetadata() {
+  return generateSEOMetadata({
+    title: 'Our Guides | Sahara Desert Travel',
+    description: 'Meet our experienced local guides who will lead you on an unforgettable journey through the Sahara Desert with expert knowledge and hospitality.',
+    url: '/guides',
+    keywords: ['Sahara Guides', 'Desert Tour Guides', 'Morocco Travel Guides', 'Local Experts'],
+  })
 }
 
 async function getGuides() {
   try {
     const guides = await client.fetch(guidesQuery)
+    console.log('👥 Guides fetched:', guides?.length || 0)
+    if (guides && guides.length > 0) {
+      console.log('📸 First guide image check:', {
+        name: guides[0].name,
+        hasProfileImage: !!guides[0].profileImage,
+        profileImageType: typeof guides[0].profileImage,
+        profileImageKeys: guides[0].profileImage ? Object.keys(guides[0].profileImage) : null,
+      })
+    }
     return guides || []
   } catch (error) {
     console.error('Error fetching guides:', error)
@@ -37,7 +51,7 @@ export default async function GuidesPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-sand-50 rounded-xl p-12 max-w-2xl mx-auto">
+            <div className="bg-sand-100 rounded-xl p-12 max-w-2xl mx-auto">
               <svg
                 className="w-20 h-20 text-desert-400 mx-auto mb-6"
                 fill="none"

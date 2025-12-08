@@ -2,15 +2,21 @@ import SectionTitle from '@/components/SectionTitle'
 import MusicCard from '@/components/MusicCard'
 import { client } from '@/lib/sanity'
 import { musicQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Traditional Music | Sahara Desert Travel',
-  description: 'Experience the sounds of the Sahara. Listen to traditional music and rhythms that have echoed through the desert for generations.',
+export async function generateMetadata() {
+  return generateSEOMetadata({
+    title: 'Traditional Music | Sahara Desert Travel',
+    description: 'Experience the sounds of the Sahara. Listen to traditional music and rhythms that have echoed through the desert for generations.',
+    url: '/music',
+    keywords: ['Sahara Music', 'Berber Music', 'Desert Music', 'Traditional Moroccan Music'],
+  })
 }
 
 async function getMusicEntries() {
   try {
     const music = await client.fetch(musicQuery)
+    console.log('Music entries fetched:', music?.length || 0)
     return music || []
   } catch (error) {
     console.error('Error fetching music:', error)
@@ -37,7 +43,7 @@ export default async function MusicPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-sand-50 rounded-xl p-12 max-w-2xl mx-auto">
+            <div className="bg-sand-100 rounded-xl p-12 max-w-2xl mx-auto">
               <svg
                 className="w-20 h-20 text-desert-400 mx-auto mb-6"
                 fill="none"

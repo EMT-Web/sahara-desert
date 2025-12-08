@@ -2,15 +2,21 @@ import SectionTitle from '@/components/SectionTitle'
 import StoryCard from '@/components/StoryCard'
 import { client } from '@/lib/sanity'
 import { storiesListQuery } from '@/lib/queries'
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Stories & Blog | Sahara Desert Travel',
-  description: 'Read inspiring stories and experiences from travelers who have explored the Sahara Desert. Discover travel tips, cultural insights, and adventure tales.',
+export async function generateMetadata() {
+  return generateSEOMetadata({
+    title: 'Stories & Blog | Sahara Desert Travel',
+    description: 'Read inspiring stories and experiences from travelers who have explored the Sahara Desert. Discover travel tips, cultural insights, and adventure tales.',
+    url: '/stories',
+    keywords: ['Sahara Stories', 'Desert Travel Blog', 'Morocco Travel Stories', 'Desert Adventures'],
+  })
 }
 
 async function getStories() {
   try {
     const stories = await client.fetch(storiesListQuery)
+    console.log('Stories fetched:', stories?.length || 0)
     return stories || []
   } catch (error) {
     console.error('Error fetching stories:', error)
@@ -37,7 +43,7 @@ export default async function StoriesPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-sand-50 rounded-xl p-12 max-w-2xl mx-auto">
+            <div className="bg-sand-100 rounded-xl p-12 max-w-2xl mx-auto">
               <svg
                 className="w-20 h-20 text-desert-400 mx-auto mb-6"
                 fill="none"
