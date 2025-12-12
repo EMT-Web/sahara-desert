@@ -32,7 +32,7 @@ export const toursListQuery = `
 `
 
 export const toursByCityQuery = `
-  *[_type == "tour" && departureCity == $city] | order(publishedAt desc){
+  *[_type == "tour" && departureCity == $city && !(_id in path("drafts.**"))] | order(coalesce(publishedAt, _createdAt) desc){
     _id,
     title,
     slug,
