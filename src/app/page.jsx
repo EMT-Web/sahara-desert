@@ -8,8 +8,10 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 export async function generateMetadata() {
   const homepage = await client.fetch(homepageQuery)
   return generateSEOMetadata({
-    title: 'Sahara Desert Travel | Authentic Desert Experiences',
-    description: homepage?.heroSubtitle || 'Discover the magic of the Sahara Desert with expert guides, sustainable tourism, and unforgettable adventures through golden dunes and ancient traditions.',
+    title: 'Authentic Sahara Desert Experiences',
+    description:
+      homepage?.heroSubtitle ||
+      'Visit Sahara Desert offers authentic Morocco desert tours with expert Berber guides, sustainable travel, camel trekking, and unforgettable journeys through golden dunes and desert oases.',
     image: homepage?.heroImage,
     url: '/',
   })

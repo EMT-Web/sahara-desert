@@ -62,7 +62,7 @@ export default function Navbar({ navigation }) {
                 isScrolled ? 'text-desert-600' : 'text-white text-shadow'
               }`}
             >
-              Sahara Desert
+              Visit Sahara Desert
             </span>
           </Link>
 
@@ -206,7 +206,7 @@ export default function Navbar({ navigation }) {
             </Link>
             
             {/* Mobile Tours Dropdown */}
-            <div className="border-t border-gray-200 mt-2 pt-2">
+            <div className="border-t border-gray-200 mt-2 pt-2 tours-dropdown">
               <button
                 onClick={() => setIsToursDropdownOpen(!isToursDropdownOpen)}
                 className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-sand-200 hover:text-desert-600 transition-colors"

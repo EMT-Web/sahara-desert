@@ -44,7 +44,7 @@ export default async function ContactPage() {
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-6">
                 Booking & Inquiry Form
               </h3>
-              <ContactForm whatsappNumber={whatsappNumber} />
+              <ContactForm />
             </div>
 
             {/* Contact Information */}

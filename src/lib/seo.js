@@ -1,8 +1,9 @@
 import { urlFor } from './sanity'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sahara-desert-travel.com'
-const siteName = 'Sahara Desert Travel'
-const defaultDescription = 'Discover the magic of the Sahara Desert with expert guides, sustainable tourism, and unforgettable adventures through golden dunes and ancient traditions.'
+const siteName = 'Visit Sahara Desert'
+const defaultDescription =
+  'Visit Sahara Desert offers authentic Morocco desert tours with expert local Berber guides, sustainable travel, and unforgettable journeys through golden dunes and desert oases.'
 
 /**
  * Generate comprehensive metadata for SEO

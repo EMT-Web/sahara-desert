@@ -21,9 +21,23 @@ const lora = Lora({
 })
 
 export const metadata = generateSEOMetadata({
-  title: 'Sahara Desert Travel | Authentic Desert Experiences',
-  description: 'Discover the magic of the Sahara Desert with expert guides, sustainable tourism, and unforgettable adventures through golden dunes and ancient traditions.',
-  keywords: ['Sahara Desert', 'Morocco Tours', 'Desert Travel', 'Sahara Adventure', 'Berber Culture', 'Desert Tours', 'Erg Chebbi', 'Merzouga', 'Zagora', 'Camel Trekking', 'Desert Camping'],
+  title: 'Authentic Sahara Desert Experiences',
+  description:
+    'Visit Sahara Desert offers authentic Morocco desert tours with expert Berber guides, sustainable travel, camel trekking, and unforgettable journeys through golden dunes and desert oases.',
+  keywords: [
+    'Visit Sahara Desert',
+    'Sahara Desert',
+    'Morocco Desert Tours',
+    'Desert Travel',
+    'Sahara Adventure',
+    'Berber Culture',
+    'Desert Tours',
+    'Erg Chebbi',
+    'Merzouga',
+    'Zagora',
+    'Camel Trekking',
+    'Desert Camping',
+  ],
 })
 
 async function getLayoutData() {
