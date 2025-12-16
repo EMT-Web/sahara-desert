@@ -19,19 +19,58 @@ export async function generateMetadata() {
 
 async function getHomepageData() {
   try {
-    const [homepage, tours] = await Promise.all([
+    const [homepage, allTours] = await Promise.all([
       client.fetch(homepageQuery),
       client.fetch(toursListQuery),
     ])
+    
+    // Group tours by departure city
+    const toursByCity = {}
+    allTours?.forEach((tour) => {
+      const city = tour.departureCity || 'other'
+      if (!toursByCity[city]) {
+        toursByCity[city] = []
+      }
+      toursByCity[city].push(tour)
+    })
+    
+    // Select up to 6 tours, distributing across different cities
+    // Priority: cities with more tours first, then distribute evenly
+    const cities = Object.keys(toursByCity).sort(
+      (a, b) => toursByCity[b].length - toursByCity[a].length
+    )
+    
+    const featuredTours = []
+    const maxTours = 6
+    
+    if (cities.length > 0) {
+      // Calculate how many tours per city (distribute evenly)
+      const toursPerCity = Math.floor(maxTours / cities.length)
+      const extraTours = maxTours % cities.length
+      
+      for (let i = 0; i < cities.length; i++) {
+        if (featuredTours.length >= maxTours) break
+        
+        const city = cities[i]
+        // Give extra tours to cities with more available tours
+        const count = toursPerCity + (i < extraTours ? 1 : 0)
+        const cityTours = toursByCity[city].slice(0, count)
+        featuredTours.push(...cityTours)
+      }
+    }
+    
     console.log('🏠 Homepage data:', {
       hasHomepage: !!homepage,
       heroImage: !!homepage?.heroImage,
       heroImageType: typeof homepage?.heroImage,
       heroImageKeys: homepage?.heroImage ? Object.keys(homepage.heroImage) : null,
-      toursCount: tours?.length || 0,
-      firstTourImage: tours?.[0]?.mainImage ? 'has image' : 'no image',
+      totalTours: allTours?.length || 0,
+      featuredToursCount: featuredTours.length,
+      citiesWithTours: cities,
+      firstTourImage: featuredTours?.[0]?.mainImage ? 'has image' : 'no image',
     })
-    return { homepage, tours: tours?.slice(0, 3) || [] }
+    
+    return { homepage, tours: featuredTours }
   } catch (error) {
     console.error('Error fetching homepage data:', error)
     return { homepage: null, tours: [] }

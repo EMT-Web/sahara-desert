@@ -9,7 +9,7 @@ export default function Footer({ contactInfo }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-2xl font-serif font-bold text-desert-200 mb-4">
-              Sahara Desert Travel
+              Visit Sahara Desert
             </h3>
             <p className="text-sand-200 leading-relaxed">
               Discover the magic of the Sahara Desert with authentic experiences,
@@ -91,7 +91,7 @@ export default function Footer({ contactInfo }) {
 
         <div className="border-t border-sand-800 mt-8 pt-8 text-center text-sand-400">
           <p>
-            &copy; {currentYear} Sahara Desert Travel. All rights reserved.
+            &copy; {currentYear} Visit Sahara Desert. All rights reserved.
           </p>
         </div>
       </div>
