@@ -122,7 +122,10 @@ export default async function TourDetailPage({ params }) {
                   {tour.itinerary.map((item, index) => (
                     <div key={index} className="bg-sand-100 rounded-lg p-6 shadow-md">
                       <h3 className="text-xl font-semibold text-desert-600 mb-2">
-                        Day {index + 1}: {item.day || item.title}
+                        {item.day && item.day.toLowerCase().includes('day') 
+                          ? item.day 
+                          : `Day ${index + 1}`}
+                        {item.title ? `: ${item.title}` : ''}
                       </h3>
                       <p className="text-gray-700">
                         {item.description || item.content}
