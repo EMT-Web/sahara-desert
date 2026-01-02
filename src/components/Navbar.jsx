@@ -130,9 +130,21 @@ export default function Navbar({ navigation }) {
               )}
             </div>
             
+            {/* Gallery */}
+            <Link
+              href="/gallery"
+              className={`font-medium transition-colors smooth-transition ${
+                isScrolled
+                  ? 'text-gray-700 hover:text-desert-600'
+                  : 'text-white hover:text-desert-300 text-shadow'
+              }`}
+            >
+              Gallery
+            </Link>
+            
             {/* Other nav items */}
             {navItems
-              .filter((item) => item.title !== 'Home' && item.title !== 'About' && item.title !== 'Contact')
+              .filter((item) => item.title !== 'Home' && item.title !== 'About' && item.title !== 'Contact' && item.title !== 'Gallery')
               .map((item) => (
                 <Link
                   key={item.url}
@@ -157,6 +169,21 @@ export default function Navbar({ navigation }) {
               }`}
             >
               Contact
+            </Link>
+            
+            {/* Sanity Studio Link */}
+            <Link
+              href="/studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`font-medium transition-colors smooth-transition text-sm px-3 py-1.5 rounded-md border ${
+                isScrolled
+                  ? 'text-desert-600 border-desert-600 hover:bg-desert-50'
+                  : 'text-white border-white/50 hover:bg-white/10 text-shadow'
+              }`}
+              title="Open Sanity Studio to manage content"
+            >
+              Studio
             </Link>
           </div>
 
@@ -243,9 +270,18 @@ export default function Navbar({ navigation }) {
               )}
             </div>
             
+            {/* Gallery */}
+            <Link
+              href="/gallery"
+              className="block px-4 py-3 text-gray-700 hover:bg-sand-200 hover:text-desert-600 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Gallery
+            </Link>
+            
             {/* Other nav items */}
             {navItems
-              .filter((item) => item.title !== 'Home' && item.title !== 'About' && item.title !== 'Contact')
+              .filter((item) => item.title !== 'Home' && item.title !== 'About' && item.title !== 'Contact' && item.title !== 'Gallery')
               .map((item) => (
                 <Link
                   key={item.url}
@@ -264,6 +300,18 @@ export default function Navbar({ navigation }) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact
+            </Link>
+            
+            {/* Sanity Studio Link */}
+            <Link
+              href="/studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-3 text-gray-700 hover:bg-sand-200 hover:text-desert-600 transition-colors border-t border-gray-200 mt-2 pt-3 text-sm font-semibold"
+              onClick={() => setIsMobileMenuOpen(false)}
+              title="Open Sanity Studio to manage content"
+            >
+              📝 Manage Content (Studio)
             </Link>
           </div>
         )}
