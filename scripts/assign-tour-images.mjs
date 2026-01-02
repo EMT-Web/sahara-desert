@@ -72,8 +72,16 @@ async function updateTourWithImage(client, tourSlug, imageAsset) {
       })
       .commit()
 
-    // Publish the tour
-    await client.patch(tour._id).publish()
+    // Ensure tour is published by using createOrReplace
+    // This copies any draft version to published
+    const tourData = await client.fetch(`*[_id == $id][0]`, { id: tour._id })
+    if (tourData) {
+      const { _id, _rev, ...docData } = tourData
+      await client.createOrReplace({
+        ...docData,
+        _id: tour._id,
+      })
+    }
 
     console.log(`  ✅ Assigned image and published tour: ${tour.title}`)
     return true
@@ -100,8 +108,8 @@ async function createGalleryItem(client, imageAsset, index) {
       order: index,
     })
 
-    // Publish the gallery item
-    await client.patch(result._id).publish()
+    // Gallery items created with client.create() are already published
+    // No need to publish separately
 
     console.log(`  ✅ Created and published gallery item: Image ${index + 1}`)
     return true

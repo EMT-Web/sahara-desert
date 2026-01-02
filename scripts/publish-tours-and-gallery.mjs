@@ -16,24 +16,48 @@ function sleep(ms) {
 
 async function publishAllTours(client) {
   try {
-    // Fetch all tours (including drafts)
-    const tours = await client.fetch(
+    // Fetch all tours (including drafts) - get both published and draft versions
+    const allTours = await client.fetch(
       `*[_type == "tour"] | order(_createdAt desc)`
     )
 
-    if (!tours || tours.length === 0) {
+    if (!allTours || allTours.length === 0) {
       console.log('⚠️  No tours found.')
       return 0
     }
 
-    console.log(`📦 Found ${tours.length} tours to publish...\n`)
+    console.log(`📦 Found ${allTours.length} tours to check...\n`)
 
     let publishedCount = 0
-    for (const tour of tours) {
+    const processedIds = new Set()
+
+    for (const tour of allTours) {
+      // Skip if we've already processed this ID (avoid processing both draft and published)
+      const baseId = tour._id.replace('drafts.', '')
+      if (processedIds.has(baseId)) {
+        continue
+      }
+      processedIds.add(baseId)
+
       try {
-        await client.patch(tour._id).publish()
-        console.log(`  ✅ Published: ${tour.title || tour.slug?.current || 'Untitled'}`)
-        publishedCount++
+        // Check if it's a draft
+        const isDraft = tour._id.startsWith('drafts.')
+        const publishedId = isDraft ? tour._id.replace('drafts.', '') : tour._id
+
+        if (isDraft) {
+          // Copy draft to published version
+          const { _id, _rev, ...docData } = tour
+          await client.createOrReplace({
+            ...docData,
+            _id: publishedId,
+          })
+          console.log(`  ✅ Published: ${tour.title || tour.slug?.current || 'Untitled'}`)
+          publishedCount++
+        } else {
+          // Already published, just ensure it exists
+          console.log(`  ℹ️  Already published: ${tour.title || tour.slug?.current || 'Untitled'}`)
+          publishedCount++
+        }
         await sleep(200) // Small delay between publishes
       } catch (error) {
         console.error(`  ❌ Error publishing tour "${tour._id}":`, error.message)
@@ -50,23 +74,47 @@ async function publishAllTours(client) {
 async function publishAllGalleryItems(client) {
   try {
     // Fetch all gallery items (including drafts)
-    const items = await client.fetch(
+    const allItems = await client.fetch(
       `*[_type == "galleryItem"] | order(_createdAt desc)`
     )
 
-    if (!items || items.length === 0) {
+    if (!allItems || allItems.length === 0) {
       console.log('⚠️  No gallery items found.')
       return 0
     }
 
-    console.log(`📦 Found ${items.length} gallery items to publish...\n`)
+    console.log(`📦 Found ${allItems.length} gallery items to check...\n`)
 
     let publishedCount = 0
-    for (const item of items) {
+    const processedIds = new Set()
+
+    for (const item of allItems) {
+      // Skip if we've already processed this ID
+      const baseId = item._id.replace('drafts.', '')
+      if (processedIds.has(baseId)) {
+        continue
+      }
+      processedIds.add(baseId)
+
       try {
-        await client.patch(item._id).publish()
-        console.log(`  ✅ Published: ${item.title || 'Untitled'}`)
-        publishedCount++
+        // Check if it's a draft
+        const isDraft = item._id.startsWith('drafts.')
+        const publishedId = isDraft ? item._id.replace('drafts.', '') : item._id
+
+        if (isDraft) {
+          // Copy draft to published version
+          const { _id, _rev, ...docData } = item
+          await client.createOrReplace({
+            ...docData,
+            _id: publishedId,
+          })
+          console.log(`  ✅ Published: ${item.title || 'Untitled'}`)
+          publishedCount++
+        } else {
+          // Already published
+          console.log(`  ℹ️  Already published: ${item.title || 'Untitled'}`)
+          publishedCount++
+        }
         await sleep(200) // Small delay between publishes
       } catch (error) {
         console.error(`  ❌ Error publishing gallery item "${item._id}":`, error.message)
