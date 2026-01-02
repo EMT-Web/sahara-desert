@@ -15,7 +15,7 @@ dist
 next-env.d.ts
 
 
-# Productions
+# Productionss
 *.log
 npm-debug.log*
 yarn-debug.log*
