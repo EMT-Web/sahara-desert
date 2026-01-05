@@ -170,21 +170,6 @@ export default function Navbar({ navigation }) {
             >
               Contact
             </Link>
-            
-            {/* Sanity Studio Link */}
-            <Link
-              href="/studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`font-medium transition-colors smooth-transition text-sm px-3 py-1.5 rounded-md border ${
-                isScrolled
-                  ? 'text-desert-600 border-desert-600 hover:bg-desert-50'
-                  : 'text-white border-white/50 hover:bg-white/10 text-shadow'
-              }`}
-              title="Open Sanity Studio to manage content"
-            >
-              Studio
-            </Link>
           </div>
 
           <button
@@ -300,18 +285,6 @@ export default function Navbar({ navigation }) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact
-            </Link>
-            
-            {/* Sanity Studio Link */}
-            <Link
-              href="/studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-4 py-3 text-gray-700 hover:bg-sand-200 hover:text-desert-600 transition-colors border-t border-gray-200 mt-2 pt-3 text-sm font-semibold"
-              onClick={() => setIsMobileMenuOpen(false)}
-              title="Open Sanity Studio to manage content"
-            >
-              📝 Manage Content (Studio)
             </Link>
           </div>
         )}
