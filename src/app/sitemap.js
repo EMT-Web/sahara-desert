@@ -126,24 +126,35 @@ export default async function sitemap() {
     },
   ]
 
-  const tourRoutes = tours.map((tour) => ({
-    url: `${siteUrl}/tours/${tour.slug?.current || ''}`,
-    lastModified: tour.publishedAt ? new Date(tour.publishedAt) : new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.8,
-  }))
+  // Filter out tours and stories with invalid or empty slugs
+  const tourRoutes = tours
+    .filter((tour) => tour.slug?.current && tour.slug.current.trim() !== '')
+    .map((tour) => ({
+      url: `${siteUrl}/tours/${tour.slug.current}`,
+      lastModified: tour.publishedAt ? new Date(tour.publishedAt) : new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    }))
 
-  const storyRoutes = stories.map((story) => ({
-    url: `${siteUrl}/stories/${story.slug?.current || ''}`,
-    lastModified: story._updatedAt
-      ? new Date(story._updatedAt)
-      : story.publishedAt
-      ? new Date(story.publishedAt)
-      : new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }))
+  const storyRoutes = stories
+    .filter((story) => story.slug?.current && story.slug.current.trim() !== '')
+    .map((story) => ({
+      url: `${siteUrl}/stories/${story.slug.current}`,
+      lastModified: story._updatedAt
+        ? new Date(story._updatedAt)
+        : story.publishedAt
+        ? new Date(story.publishedAt)
+        : new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }))
 
-  return [...routes, ...tourRoutes, ...storyRoutes]
+  // Combine all routes and ensure no duplicate URLs
+  const allRoutes = [...routes, ...tourRoutes, ...storyRoutes]
+  const uniqueRoutes = Array.from(
+    new Map(allRoutes.map((route) => [route.url, route])).values()
+  )
+
+  return uniqueRoutes
 }
 
