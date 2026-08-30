@@ -1,0 +1,8 @@
+node_modules
+.next
+/images
+.local
+attached_assets
+*.md
+scripts
+sanity-schemas
