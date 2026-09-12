@@ -73,8 +73,12 @@ export default function Footer({ contactInfo }) {
         </div>
 
         <div className="border-t border-sand-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sand-400 text-sm">
-          <p>&copy; {currentYear} Visit Sahara Desert. All rights reserved.</p>
-          <a
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>&copy; {currentYear} Visit Sahara Desert. All rights reserved.</span>
+            <Link href="/privacy" className="hover:text-desert-100 transition-colors underline underline-offset-2">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-desert-100 transition-colors underline underline-offset-2">Terms &amp; Conditions</Link>
+          </p>
+          
             href="https://www.tripadvisor.com/Attraction_Review-g293734-d34078524-Reviews-Visit_Sahara_Desert-Marrakech_Marrakech_Safi.html"
             target="_blank"
             rel="noopener noreferrer"
