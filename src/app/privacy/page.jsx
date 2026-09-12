@@ -3,7 +3,7 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Privacy Policy | Visit Sahara Desert',
+    title: 'Privacy Policy',
     description: 'Privacy policy for Visit Sahara Desert: how we collect, use, and protect your personal data when you use our website and book desert tours.',
     url: '/privacy',
   })
