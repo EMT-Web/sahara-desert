@@ -55,7 +55,7 @@ export default async function LuxuryDesertCampsPage() {
         <Image src="/images/camp_in_desert.jpeg" alt="Desert camp set among the dunes of the Sahara" fill className="object-cover object-center" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
         <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Where You'll Sleep</p>
+          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Where You Will Sleep</p>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">Luxury Sahara Desert Camps</h1>
           <p className="text-white/75 mt-3 text-lg max-w-2xl">
             A night in the dunes, without giving up comfort
@@ -77,15 +77,15 @@ export default async function LuxuryDesertCampsPage() {
             near Merzouga, is the more accessible of the two and features on most of our tours — see our{' '}
             <Link href="/merzouga-erg-chebbi" className="text-desert-600 hover:underline">Merzouga &amp; Erg Chebbi guide</Link>{' '}
             for the full picture. <strong className="text-desert-700 font-semibold">Erg Chigaga</strong>, reached via
-            Zagora and M'Hamid, is Morocco's largest and most remote dune field — camps here sit further from any
-            road, which means a longer 4x4 approach but a genuinely quieter, more exclusive night in the dunes.
+            Zagora and {"M'Hamid"}, is the largest and most remote dune field in Morocco — camps here sit further
+            from any road, which means a longer 4x4 approach but a genuinely quieter, more exclusive night in the dunes.
           </p>
           <p className="text-gray-600 leading-relaxed text-base">
             Not every tour includes a luxury camp night by default, and comfort levels vary between traditional,
             mid-range, and luxury tents. If you want to understand those differences in more depth before you
             book, read{' '}
             <Link href="/blog/how-to-choose-desert-camp" className="text-desert-600 hover:underline">how to choose the right desert camp for your budget</Link>{' '}
-            on our blog, or message us on WhatsApp and we'll point you to the right tour.
+            on our blog, or message us on WhatsApp and we will point you to the right tour.
           </p>
         </div>
       </section>
