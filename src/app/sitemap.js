@@ -2,7 +2,7 @@ import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
 import { blogPosts } from '@/data/blogPosts'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://visitsaharadesert.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
 
 async function getTours() {
   try {
@@ -139,7 +139,6 @@ export default async function sitemap() {
     })),
   ]
 
-  // Filter out tours and stories with invalid or empty slugs
   const tourRoutes = tours
     .filter((tour) => tour.slug?.current && tour.slug.current.trim() !== '')
     .map((tour) => ({
@@ -162,7 +161,6 @@ export default async function sitemap() {
       priority: 0.7,
     }))
 
-  // Combine all routes and ensure no duplicate URLs
   const allRoutes = [...routes, ...tourRoutes, ...storyRoutes]
   const uniqueRoutes = Array.from(
     new Map(allRoutes.map((route) => [route.url, route])).values()
@@ -170,4 +168,3 @@ export default async function sitemap() {
 
   return uniqueRoutes
 }
-
