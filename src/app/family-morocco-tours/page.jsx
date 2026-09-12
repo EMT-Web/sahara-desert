@@ -71,8 +71,8 @@ export default async function FamilyMoroccoToursPage() {
             an easy or moderate activity level rather than a demanding one, and guides who know how to keep a camel
             trek fun rather than frightening for a nervous first-timer. Several of our shorter itineraries (3 and 4
             days) are built around exactly that balance: a manageable amount of time in the vehicle each day, a
-            comfortable desert camp night, and real cultural moments that hold a child's attention as well as an
-            adult's — riding a camel at sunset, learning a few words of Berber, or watching bread baked in the sand.
+            comfortable desert camp night, and real cultural moments that hold the attention of children and
+            adults alike — riding a camel at sunset, learning a few words of Berber, or watching bread baked in the sand.
           </p>
           <p className="text-gray-600 leading-relaxed text-base mb-6">
             Our guides each bring a different strength to a family group — Abdul teaches simple Berber cooking
@@ -82,10 +82,10 @@ export default async function FamilyMoroccoToursPage() {
           </p>
           <p className="text-gray-600 leading-relaxed text-base">
             We do not currently publish a fixed child-discount policy or age restrictions on our tour pages — every
-            family is different, so the most reliable way to plan around your children's ages, nap schedules, or
-            dietary needs is to tell us directly. Choose "Custom Tour" on our{' '}
+            family is different, so the most reliable way to plan around your children&rsquo;s ages, nap schedules,
+            or dietary needs is to tell us directly. Choose the Custom Tour option on our{' '}
             <Link href="/contact" className="text-desert-600 hover:underline">contact form</Link>, or message us on
-            WhatsApp, and we'll help you adapt any of the itineraries below.
+            WhatsApp, and we will help you adapt any of the itineraries below.
           </p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default async function FamilyMoroccoToursPage() {
           )}
           <div className="text-center mt-10">
             <Link href="/contact" className="inline-flex items-center gap-2 text-desert-600 font-semibold hover:underline">
-              Tell us your children's ages and we'll suggest the right route →
+              Tell us your children&rsquo;s ages and we will suggest the right route →
             </Link>
           </div>
         </div>
