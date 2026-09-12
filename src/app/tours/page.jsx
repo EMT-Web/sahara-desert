@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import FilterableTours from '@/components/FilterableTours'
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
@@ -62,6 +63,19 @@ export default async function ToursPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <FilterableTours tours={tours} />
+        </div>
+      </section>
+
+      {/* Guides */}
+      <section className="py-12 bg-sand-50 border-t border-sand-100">
+        <div className="container mx-auto px-4">
+          <p className="text-center text-xs font-semibold tracking-widest uppercase text-desert-500 mb-6">Planning Your Trip?</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/merzouga-erg-chebbi" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Merzouga &amp; Erg Chebbi Guide</Link>
+            <Link href="/luxury-desert-camps" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Luxury Desert Camps</Link>
+            <Link href="/family-morocco-tours" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Family Tours</Link>
+            <Link href="/honeymoon-morocco-tours" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Honeymoon Tours</Link>
+          </div>
         </div>
       </section>
     </>
