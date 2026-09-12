@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
@@ -50,17 +51,9 @@ export default async function TourDetailPage({ params }) {
   const { tour, relatedTours } = await fetchTour(slug)
 
   if (!tour) {
-    return (
-      <div className="pt-32 pb-20 text-center">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-serif font-bold text-gray-900 mb-4">Tour Not Found</h1>
-          <p className="text-gray-600 mb-8">The tour you are looking for could not be found.</p>
-          <Link href="/tours" className="inline-block px-8 py-4 bg-desert-600 hover:bg-desert-700 text-white font-semibold rounded-lg shadow-lg smooth-transition">
-            Browse All Tours
-          </Link>
-        </div>
-      </div>
-    )
+    // Return a real 404 (not a 200 "not found" page) so this doesn't get
+    // indexed as a soft 404 — see the 2026-09-12 SEO audit.
+    notFound()
   }
 
   const departureCityLabel = tour.departureCity
@@ -444,8 +437,7 @@ export default async function TourDetailPage({ params }) {
                     >
                       Book This Tour
                     </Link>
-                    <a
-                      href={whatsappHref}
+                    <a href={whatsappHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-sm font-semibold rounded-xl transition-colors"
