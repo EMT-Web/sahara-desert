@@ -114,6 +114,30 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
+      url: `${siteUrl}/merzouga-erg-chebbi`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/luxury-desert-camps`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/family-morocco-tours`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/honeymoon-morocco-tours`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${siteUrl}/stories`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
@@ -139,6 +163,7 @@ export default async function sitemap() {
     })),
   ]
 
+  // Filter out tours and stories with invalid or empty slugs
   const tourRoutes = tours
     .filter((tour) => tour.slug?.current && tour.slug.current.trim() !== '')
     .map((tour) => ({
@@ -161,6 +186,7 @@ export default async function sitemap() {
       priority: 0.7,
     }))
 
+  // Combine all routes and ensure no duplicate URLs
   const allRoutes = [...routes, ...tourRoutes, ...storyRoutes]
   const uniqueRoutes = Array.from(
     new Map(allRoutes.map((route) => [route.url, route])).values()
