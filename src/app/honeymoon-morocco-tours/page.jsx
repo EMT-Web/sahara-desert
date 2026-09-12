@@ -70,21 +70,21 @@ export default async function HoneymoonMoroccoToursPage() {
             A honeymoon in the Sahara has a rhythm all its own: mountain passes and kasbahs by day, then a camel
             trek into the dunes as the light turns gold, ending at a desert camp under a sky with no city light to
             compete with it. For the most private, exclusive version of that night, our route to{' '}
-            <strong className="text-desert-700 font-semibold">Erg Chigaga</strong> — Morocco's largest and most remote
-            dune field, reached via Zagora and M'Hamid — trades a little travel time for a camp that sits well away
-            from the road.
+            <strong className="text-desert-700 font-semibold">Erg Chigaga</strong> — the largest and most remote
+            dune field in Morocco, reached via Zagora and {"M'Hamid"} — trades a little travel time for a camp that
+            sits well away from the road.
           </p>
           <p className="text-gray-600 leading-relaxed text-base mb-6">
-            If you would rather combine the desert with more of Morocco's imperial cities — Marrakech, Fes, or a
+            If you would rather combine the desert with more of the imperial cities of Morocco — Marrakech, Fes, or a
             longer grand circuit — our 5 to 9-day routes below fold in a luxury camp night alongside the High Atlas,
             historic kasbahs, and time in the medinas. Every tour on this site can be booked as a private, just-the-two-of-you
             experience rather than joining a larger group — mention that when you get in touch.
           </p>
           <p className="text-gray-600 leading-relaxed text-base">
-            We don't publish a dedicated honeymoon package or set-price add-ons (a private room upgrade, for
+            We do not publish a dedicated honeymoon package or set-price add-ons (a private room upgrade, for
             example, is already reflected in the per-person double-room pricing on each tour), so the best way to
             plan a honeymoon itinerary — timing around your wedding, a specific camp, or an anniversary surprise —
-            is to select "Custom Tour" on our{' '}
+            is to select the Custom Tour option on our{' '}
             <Link href="/contact" className="text-desert-600 hover:underline">contact form</Link> or message us on
             WhatsApp directly.
           </p>
