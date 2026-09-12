@@ -1,7 +1,7 @@
 import { urlFor } from './sanity'
 import { testimonials, TRIPADVISOR_URL } from '../data/testimonials'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://visitsaharadesert.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
 const siteName = 'Visit Sahara Desert'
 const defaultDescription =
   'Visit Sahara Desert offers authentic Morocco desert tours with expert local Berber guides, sustainable travel, and unforgettable journeys through golden dunes and desert oases.'
@@ -104,13 +104,6 @@ export function generateOrganizationSchema(contact = null) {
     },
     ...(contact?.email && { email: contact.email }),
     ...(contact?.phone && { telephone: contact.phone }),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '500',
-      bestRating: '5',
-    },
-    review: generateReviewSchema(),
     knowsAbout: [
       'Sahara Desert tours',
       'Morocco desert travel',
@@ -362,4 +355,3 @@ export function generateFAQSchema(faqs) {
     })),
   }
 }
-
