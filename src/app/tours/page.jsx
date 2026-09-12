@@ -6,10 +6,10 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Desert Tours | Sahara Desert Travel',
-    description: 'Explore our collection of unforgettable Sahara Desert tours. From camel treks to stargazing adventures, find the perfect desert experience.',
+    title: 'Sahara Desert Tours & Private Morocco Tours',
+    description: 'Browse private Sahara Desert tours and custom Morocco itineraries from Marrakech, Fes, Casablanca, Agadir, and Errachidia — camel trekking, luxury desert camps, and Berber-guided desert adventures.',
     url: '/tours',
-    keywords: ['Sahara Tours', 'Morocco Desert Tours', 'Camel Trekking', 'Desert Camping', 'Erg Chebbi Tours', 'Merzouga Tours', 'Zagora Tours'],
+    keywords: ['Sahara Desert Tours', 'Morocco Desert Tours', 'Private Morocco Tours', 'Camel Trekking Morocco', 'Luxury Sahara Desert Camp', 'Erg Chebbi Tours', 'Merzouga Tours', 'Zagora Tours'],
   })
 }
 
