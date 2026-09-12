@@ -1,0 +1,15 @@
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
+
+export default function robots() {
+  return {
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/studio/', '/_next/static/media/'],
+      },
+    ],
+    sitemap: `${siteUrl}/sitemap.xml`,
+  }
+}
+
