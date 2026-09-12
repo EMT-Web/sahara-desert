@@ -77,7 +77,7 @@ export default async function MerzougaErgChebbiPage() {
           <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Destination Guide</p>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">Merzouga &amp; the Erg Chebbi Dunes</h1>
           <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            Morocco's most iconic desert gateway — camel treks, luxury camps, and Morocco's tallest easily-reached dunes
+                        The most iconic desert gateway in Morocco — camel treks, luxury camps, and the tallest easily-reached dunes in the country
           </p>
         </div>
       </section>
