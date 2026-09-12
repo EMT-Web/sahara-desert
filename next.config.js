@@ -18,6 +18,16 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'visitsaharadesert.com' }],
+        destination: 'https://www.visitsaharadesert.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
@@ -40,5 +50,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-
-
