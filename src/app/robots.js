@@ -1,4 +1,6 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
+import { resolveSiteUrl } from '@/lib/seo'
+
+const siteUrl = resolveSiteUrl()
 
 export default function robots() {
   return {
