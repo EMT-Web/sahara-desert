@@ -177,9 +177,8 @@ CONTACT_FROM_EMAIL                  # optional override
 
 Optional features:
 ```
-NEXT_PUBLIC_WHATSAPP_NUMBER         # WhatsApp number for floating button + tour sidebar (fallback: 212600000000)
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY     # enables embedded map on /contact page
-NEXT_PUBLIC_SITE_URL
+NEXT_PUBLIC_SITE_URL                # must include the www host if set — see src/lib/seo.js resolveSiteUrl()
 NEXT_PUBLIC_GOOGLE_VERIFICATION
 NEXT_PUBLIC_BING_VERIFICATION
 NEXT_PUBLIC_YANDEX_VERIFICATION
@@ -187,3 +186,5 @@ NEXT_PUBLIC_FACEBOOK_URL
 NEXT_PUBLIC_INSTAGRAM_URL
 NEXT_PUBLIC_TWITTER_URL
 ```
+
+**WhatsApp number**: not an env var. Every WhatsApp link on the site (floating button, tour sidebar, footer, contact page) reads `contact.whatsapp` from the Sanity `contact` document via `contactQuery`, with a hardcoded fallback of the real number (`212670707151`) in `WhatsAppButton.jsx` and `tours/[slug]/page.jsx` — never a placeholder. `NEXT_PUBLIC_WHATSAPP_NUMBER` used to exist as an unset env var that the tour detail page silently fell back from to a placeholder number (`212600000000`); it was removed in favor of the CMS value on 2026-09-20. Don't reintroduce an env-var-based WhatsApp number — edit the Sanity contact document instead.
