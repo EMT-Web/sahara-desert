@@ -4,21 +4,30 @@ import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
 import { client, urlFor } from '@/lib/sanity'
-import { tourDetailQuery, relatedToursQuery } from '@/lib/queries'
+import { tourDetailQuery, relatedToursQuery, contactQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateTourSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo'
 import TourCard from '@/components/TourCard'
+
+// The real WhatsApp number, used only if the Sanity contact document has no
+// whatsapp field set — never the old '212600000000' placeholder, which was
+// silently live on every tour page's "Ask on WhatsApp" button because
+// NEXT_PUBLIC_WHATSAPP_NUMBER was never set in Vercel.
+const FALLBACK_WHATSAPP = '212670707151'
 
 // cache() deduplicates the Sanity fetch so generateMetadata and the page
 // component share one request instead of making two separate calls.
 const fetchTour = cache(async (slug) => {
   try {
-    const tour = await client.fetch(tourDetailQuery, { slug })
+    const [tour, contact] = await Promise.all([
+      client.fetch(tourDetailQuery, { slug }),
+      client.fetch(contactQuery).catch(() => null),
+    ])
     const relatedTours = tour?.departureCity
       ? await client.fetch(relatedToursQuery, { slug, city: tour.departureCity }).catch(() => [])
       : []
-    return { tour, relatedTours }
+    return { tour, relatedTours, contact }
   } catch {
-    return { tour: null, relatedTours: [] }
+    return { tour: null, relatedTours: [], contact: null }
   }
 })
 
@@ -48,7 +57,7 @@ export async function generateMetadata({ params }) {
 
 export default async function TourDetailPage({ params }) {
   const { slug } = params
-  const { tour, relatedTours } = await fetchTour(slug)
+  const { tour, relatedTours, contact } = await fetchTour(slug)
 
   if (!tour) {
     // Return a real 404 (not a 200 "not found" page) so this doesn't get
@@ -76,7 +85,7 @@ export default async function TourDetailPage({ params }) {
     { name: tour.title, url: `/tours/${slug}` },
   ])
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '212600000000'
+  const whatsappNumber = contact?.whatsapp || FALLBACK_WHATSAPP
   const whatsappMessage = encodeURIComponent(`Hi! I'm interested in booking "${tour.title}". Can you help me?`)
   const whatsappHref = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${whatsappMessage}`
 
