@@ -114,7 +114,7 @@ export function generateOrganizationSchema(contact = null) {
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MA',
-      addressRegion: 'Zagora',
+      addressRegion: 'Marrakech-Safi',
       ...(contact?.address && { streetAddress: contact.address }),
     },
     contactPoint: {
@@ -180,7 +180,7 @@ export function generateLocalBusinessSchema(contact = null) {
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MA',
-      addressRegion: 'Draa-Tafilalet',
+      addressRegion: 'Marrakech-Safi',
       ...(contact?.address && { streetAddress: contact.address }),
     },
     ...(contact?.phone && { telephone: contact.phone }),
@@ -261,8 +261,8 @@ export function generateTourSchema(tour) {
       url: `${siteUrl}/tours/${tour.slug?.current || ''}`,
       eligibleQuantity: {
         '@type': 'QuantitativeValue',
-        minValue: 6,
-        maxValue: 16,
+        minValue: 1,
+        maxValue: 17,
         unitText: 'travelers',
       },
     },
