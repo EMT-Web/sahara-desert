@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react'
 
 export default function WhatsAppButton({ number }) {
   const [visible, setVisible] = useState(false)
-  const phone = number || '212600000000'
+  // Fallback only fires if the Sanity contact document has no whatsapp
+  // field set; kept as the real number, not a placeholder, so a missing
+  // CMS value never sends an inquiry into the void.
+  const phone = number || '212670707151'
   const message = encodeURIComponent('Hello! I\'m interested in a Sahara Desert tour. Can you help me plan my trip?')
   const href = `https://wa.me/${phone.replace(/\D/g, '')}?text=${message}`
 
