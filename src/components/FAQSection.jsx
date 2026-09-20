@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'What languages do your guides speak?',
-    a: 'Our Berber guides are fluent in English, French, and Arabic, with many also speaking Spanish and German. We can accommodate most European languages with advance notice.',
+    a: 'We operate tours in 5 languages: English, French, Arabic, Spanish, and German. Our Berber guides are fluent in English, French, and Arabic, with many also speaking Spanish and German, and we can accommodate most other European languages with advance notice.',
   },
   {
     q: 'How far in advance should I book?',
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: 'Are the tours eco-friendly?',
-    a: 'Yes. We operate small groups only (max 8 people), use no single-use plastics in the desert, partner exclusively with local Berber villages, and contribute 10% of every booking to desert community programmes.',
+    a: 'Yes. We accommodate both private tours (any group size) and shared group tours of up to 17 people, use no single-use plastics in the desert, partner exclusively with local Berber villages, and contribute 10% of every booking to desert community programmes.',
   },
   {
     q: 'What is your cancellation policy?',
