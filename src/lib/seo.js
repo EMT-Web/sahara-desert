@@ -1,7 +1,29 @@
 import { urlFor } from './sanity'
 import { testimonials, TRIPADVISOR_URL } from '../data/testimonials'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
+const CANONICAL_HOST = 'www.visitsaharadesert.com'
+const BARE_HOST = 'visitsaharadesert.com'
+
+// Always resolve to the canonical www host, even if NEXT_PUBLIC_SITE_URL is
+// misconfigured in Vercel without the www prefix. A bare-domain env var was
+// the root cause of the www/non-www duplicate-host bug found in the
+// 2026-09-12 SEO audit: next.config.js redirects visitors to www, but
+// canonical tags, JSON-LD, robots.txt and the sitemap were still
+// self-referencing whatever host this env var held. Normalizing it here
+// means that class of bug can't recur regardless of dashboard config.
+export function resolveSiteUrl() {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL || `https://${CANONICAL_HOST}`
+  try {
+    const u = new URL(raw)
+    if (u.hostname === BARE_HOST) u.hostname = CANONICAL_HOST
+    u.protocol = 'https:'
+    return u.origin
+  } catch {
+    return `https://${CANONICAL_HOST}`
+  }
+}
+
+const siteUrl = resolveSiteUrl()
 const siteName = 'Visit Sahara Desert'
 const defaultDescription =
   'Visit Sahara Desert offers authentic Morocco desert tours with expert local Berber guides, sustainable travel, and unforgettable journeys through golden dunes and desert oases.'
