@@ -1,8 +1,9 @@
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
 import { blogPosts } from '@/data/blogPosts'
+import { resolveSiteUrl } from '@/lib/seo'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'
+const siteUrl = resolveSiteUrl()
 
 async function getTours() {
   try {
