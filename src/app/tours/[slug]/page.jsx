@@ -153,11 +153,11 @@ export default async function TourDetailPage({ params }) {
               )}
               <div className="flex items-center gap-2.5 px-6 py-4 min-w-0">
                 <svg className="w-5 h-5 text-desert-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <div><p className="text-xs text-gray-400 uppercase tracking-wide">Group Size</p><p className="text-sm font-semibold text-gray-800">6 – 16 people</p></div>
+                <div><p className="text-xs text-gray-400 uppercase tracking-wide">Group Size</p><p className="text-sm font-semibold text-gray-800">Private or Group (up to 17)</p></div>
               </div>
               <div className="flex items-center gap-2.5 px-6 py-4 min-w-0">
                 <svg className="w-5 h-5 text-desert-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
-                <div><p className="text-xs text-gray-400 uppercase tracking-wide">Languages</p><p className="text-sm font-semibold text-gray-800">English</p></div>
+                <div><p className="text-xs text-gray-400 uppercase tracking-wide">Languages</p><p className="text-sm font-semibold text-gray-800">5 Languages</p></div>
               </div>
               <div className="flex items-center gap-2.5 px-6 py-4 min-w-0">
                 <svg className="w-5 h-5 text-desert-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
