@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import SectionTitle from '@/components/SectionTitle'
 import { client, urlFor } from '@/lib/sanity'
 import { sustainabilityQuery } from '@/lib/queries'
@@ -8,7 +7,7 @@ import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } fro
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Sustainable Desert Tourism | Sahara Desert Travel',
+    title: 'Sustainable Desert Tourism in Morocco',
     description: 'We protect the Sahara for future generations. Zero single-use plastic, 100% local suppliers, 10% of profits invested in Berber communities, and leave-no-trace principles on every tour.',
     url: '/sustainability',
     keywords: ['sustainable desert tourism', 'eco-friendly Morocco tours', 'responsible travel Sahara', 'Berber community investment', 'low-impact desert tours', 'leave no trace Morocco', 'conservation Sahara'],
@@ -35,7 +34,7 @@ export default async function SustainabilityPage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Page Hero */}

@@ -5,6 +5,11 @@ import { resolveSiteUrl } from '@/lib/seo'
 
 const siteUrl = resolveSiteUrl()
 
+// Date of the last real content or template change to the static pages.
+// Using new Date() here told Google every page changed on every deploy,
+// which makes lastmod meaningless. Update this when those pages change.
+const SITE_UPDATED = new Date('2026-09-23')
+
 async function getTours() {
   try {
     const tours = await client.fetch(toursListQuery)
@@ -38,43 +43,43 @@ export default async function sitemap() {
   const routes = [
     {
       url: siteUrl,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${siteUrl}/tours`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/tours/marrakech`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/tours/fes`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/tours/casablanca`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/tours/agadir`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/tours/errachidia`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -86,7 +91,7 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/guides`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -110,7 +115,7 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/gallery`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -139,12 +144,6 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/stories`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${siteUrl}/music`,
       lastModified: new Date('2026-06-26'),
       changeFrequency: 'monthly',
@@ -152,9 +151,21 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/privacy`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/terms`,
+      lastModified: new Date('2026-09-12'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
     ...blogPosts.map(post => ({
       url: `${siteUrl}/blog/${post.slug}`,
@@ -169,7 +180,11 @@ export default async function sitemap() {
     .filter((tour) => tour.slug?.current && tour.slug.current.trim() !== '')
     .map((tour) => ({
       url: `${siteUrl}/tours/${tour.slug.current}`,
-      lastModified: tour.publishedAt ? new Date(tour.publishedAt) : new Date(),
+      lastModified: tour._updatedAt
+        ? new Date(tour._updatedAt)
+        : tour.publishedAt
+        ? new Date(tour.publishedAt)
+        : SITE_UPDATED,
       changeFrequency: 'monthly',
       priority: 0.8,
     }))

@@ -1,6 +1,5 @@
 import { cache } from 'react'
 import Image from 'next/image'
-import Script from 'next/script'
 import { client, urlFor } from '@/lib/sanity'
 import { storyDetailQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }) {
   const { slug } = params
   const story = await fetchStory(slug)
   return generateSEOMetadata({
-    title: story?.title || 'Story | Sahara Desert Travel',
+    title: story?.title || 'Desert Travel Story',
     description: story?.excerpt || 'Read an inspiring story from the Sahara Desert',
     image: story?.coverImage,
     url: `/stories/${slug}`,
@@ -78,13 +77,13 @@ export default async function StoryDetailPage({ params }) {
   return (
     <>
       {articleSchema && (
-        <Script
+        <script
           id="article-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
       )}
-      <Script
+      <script
         id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

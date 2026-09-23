@@ -1,8 +1,8 @@
 # Visit Sahara Desert
 
-> Morocco-based Sahara Desert tour operator run by native Berber (Amazigh) guides. We run authentic, small-group desert experiences — camel trekking, desert camping, sandboarding, and cultural immersion — departing from Marrakech, Fes, Casablanca, Agadir, and Errachidia.
+> Morocco-based Sahara Desert tour operator run by native Berber (Amazigh) guides. We run authentic private and group desert experiences — camel trekking, desert camping, sandboarding, and cultural immersion — departing from Marrakech, Fes, Casablanca, Agadir, and Errachidia.
 
-Small groups only (max 8 people), no single-use plastics in the desert, exclusive partnerships with local Berber communities, and 10% of every booking contributed to desert community programmes.
+Private tours for any group size, plus shared group tours of up to 17 people. Tours are operated in 5 languages (English, French, Arabic, Spanish, German). No single-use plastics in the desert, exclusive partnerships with local Berber communities, and 10% of every booking contributed to desert community programmes.
 
 ## Tours
 
@@ -12,6 +12,13 @@ Small groups only (max 8 people), no single-use plastics in the desert, exclusiv
 - [Tours from Casablanca](https://www.visitsaharadesert.com/tours/casablanca): Multi-day imperial cities and Sahara circuits.
 - [Tours from Agadir](https://www.visitsaharadesert.com/tours/agadir): Desert trips from Morocco's Atlantic coast.
 - [Tours from Errachidia](https://www.visitsaharadesert.com/tours/errachidia): Shortest route into Erg Chebbi.
+
+## Destination & Planning Guides
+
+- [Merzouga & Erg Chebbi](https://www.visitsaharadesert.com/merzouga-erg-chebbi): Guide to Morocco's best known Sahara dunes, how to get there and how long to stay.
+- [Luxury Desert Camps](https://www.visitsaharadesert.com/luxury-desert-camps): What luxury camps in the Sahara offer and which tours include them.
+- [Family Morocco Tours](https://www.visitsaharadesert.com/family-morocco-tours): Planning a Sahara trip with children.
+- [Honeymoon Morocco Tours](https://www.visitsaharadesert.com/honeymoon-morocco-tours): Private desert trips for couples.
 
 ## Guides & Culture
 
@@ -23,7 +30,6 @@ Small groups only (max 8 people), no single-use plastics in the desert, exclusiv
 ## Stories & Media
 
 - [Blog](https://www.visitsaharadesert.com/blog): Articles on desert travel planning, Berber culture, photography, and sustainability.
-- [Travel Stories](https://www.visitsaharadesert.com/stories): First-person stories from guests and guides.
 - [Gallery](https://www.visitsaharadesert.com/gallery): Desert photography and video.
 - [Music](https://www.visitsaharadesert.com/music): Traditional Saharan music.
 

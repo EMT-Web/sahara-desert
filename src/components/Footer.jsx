@@ -28,7 +28,10 @@ export default function Footer({ contactInfo }) {
               <li><Link href="/guides" className="text-sand-200 hover:text-desert-100 transition-colors">Our Guides</Link></li>
               <li><Link href="/gallery" className="text-sand-200 hover:text-desert-100 transition-colors">Gallery</Link></li>
               <li><Link href="/blog" className="text-sand-200 hover:text-desert-100 transition-colors">Blog</Link></li>
-              <li><Link href="/stories" className="text-sand-200 hover:text-desert-100 transition-colors">Stories</Link></li>
+              <li><Link href="/merzouga-erg-chebbi" className="text-sand-200 hover:text-desert-100 transition-colors">Merzouga &amp; Erg Chebbi</Link></li>
+              <li><Link href="/luxury-desert-camps" className="text-sand-200 hover:text-desert-100 transition-colors">Luxury Desert Camps</Link></li>
+              <li><Link href="/family-morocco-tours" className="text-sand-200 hover:text-desert-100 transition-colors">Family Tours</Link></li>
+              <li><Link href="/honeymoon-morocco-tours" className="text-sand-200 hover:text-desert-100 transition-colors">Honeymoon Tours</Link></li>
               <li><Link href="/culture" className="text-sand-200 hover:text-desert-100 transition-colors">Berber Culture</Link></li>
               <li><Link href="/sustainability" className="text-sand-200 hover:text-desert-100 transition-colors">Sustainability</Link></li>
               <li><Link href="/contact" className="text-sand-200 hover:text-desert-100 transition-colors">Contact</Link></li>

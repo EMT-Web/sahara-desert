@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import TourCard from '@/components/TourCard'
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
@@ -47,7 +46,7 @@ export default async function HoneymoonMoroccoToursPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Script id="breadcrumb-schema-honeymoon" type="application/ld+json"
+      <script id="breadcrumb-schema-honeymoon" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}

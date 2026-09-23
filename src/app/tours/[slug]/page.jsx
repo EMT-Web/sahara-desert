@@ -1,7 +1,6 @@
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Script from 'next/script'
 import Link from 'next/link'
 import { client, urlFor } from '@/lib/sanity'
 import { tourDetailQuery, relatedToursQuery, contactQuery } from '@/lib/queries'
@@ -45,7 +44,7 @@ export async function generateMetadata({ params }) {
     ? tour.departureCity.charAt(0).toUpperCase() + tour.departureCity.slice(1)
     : undefined
   return generateSEOMetadata({
-    title: tour?.title || 'Tour | Sahara Desert Travel',
+    title: tour?.title || 'Sahara Desert Tour',
     description: tour?.excerpt || 'Explore an unforgettable desert experience in the Sahara',
     image: tour?.mainImage,
     url: `/tours/${slug}`,
@@ -92,14 +91,14 @@ export default async function TourDetailPage({ params }) {
   return (
     <>
       {tourSchema && (
-        <Script id="tour-schema" type="application/ld+json"
+        <script id="tour-schema" type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(tourSchema) }} />
       )}
       {tourFAQSchema && (
-        <Script id="tour-faq-schema" type="application/ld+json"
+        <script id="tour-faq-schema" type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(tourFAQSchema) }} />
       )}
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="pt-20">

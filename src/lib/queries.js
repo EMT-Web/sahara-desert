@@ -30,7 +30,8 @@ export const toursListQuery = `
     price,
     priceDouble,
     departureCity,
-    publishedAt
+    publishedAt,
+    _updatedAt
   }
 `
 

@@ -1,10 +1,39 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import BlogCard from '@/components/BlogCard'
 import { getBlogPost, getRelatedPosts, blogPosts } from '@/data/blogPosts'
-import { generateBlogPostSchema, generateBreadcrumbSchema } from '@/lib/seo'
+import { generateBlogPostSchema, generateBreadcrumbSchema, resolveSiteUrl } from '@/lib/seo'
+import { client } from '@/lib/sanity'
+import { toursListQuery } from '@/lib/queries'
+
+// Pick up to 4 real tours (from Sanity) that match a blog post, so every
+// guide passes links to the tour pages. Before this, most tour pages had only
+// 2 to 5 internal links and Google had never crawled 20 of them.
+const CITY_HINTS = ['marrakech', 'fes', 'agadir', 'casablanca', 'errachidia']
+async function getMatchingTours(post) {
+  try {
+    const tours = (await client.fetch(toursListQuery)) || []
+    const text = `${post.slug} ${post.title}`.toLowerCase()
+    const city = CITY_HINTS.find((c) => text.includes(c))
+    const wantsChigaga = text.includes('chigaga') || text.includes('zagora')
+    let picks = tours.filter((t) => t.slug?.current)
+    if (wantsChigaga) {
+      const chigaga = picks.filter((t) => t.slug.current.includes('chigaga'))
+      if (chigaga.length) picks = [...chigaga, ...picks.filter((t) => !chigaga.includes(t))]
+    } else if (city) {
+      const inCity = picks.filter((t) => t.departureCity?.toLowerCase() === city)
+      if (inCity.length) picks = [...inCity, ...picks.filter((t) => !inCity.includes(t))]
+    } else {
+      // Rotate through the catalogue so different posts link to different tours
+      const offset = post.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % Math.max(picks.length, 1)
+      picks = [...picks.slice(offset), ...picks.slice(0, offset)]
+    }
+    return picks.slice(0, 4)
+  } catch {
+    return []
+  }
+}
 
 // Outbound authority resources keyed by post category
 const resourcesByCategory = {
@@ -148,14 +177,16 @@ export async function generateMetadata({ params }) {
       images: [post.image],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com'}/blog/${params.slug}`,
+      canonical: `${resolveSiteUrl()}/blog/${params.slug}`,
     },
   }
 }
 
-export default function BlogPostPage({ params }) {
+export default async function BlogPostPage({ params }) {
   const post = getBlogPost(params.slug)
   if (!post) notFound()
+
+  const matchingTours = await getMatchingTours(post)
 
   const related = getRelatedPosts(post.slug, post.category, 3)
   const resources = resourcesByCategory[post.category] || []
@@ -176,9 +207,9 @@ export default function BlogPostPage({ params }) {
 
   return (
     <>
-      <Script id="blog-post-schema" type="application/ld+json"
+      <script id="blog-post-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }} />
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}
@@ -253,6 +284,26 @@ export default function BlogPostPage({ params }) {
             </div>
           )}
 
+          {/* Matching tours: contextual links to real tour pages */}
+          {matchingTours.length > 0 && (
+            <div className="mt-12 pt-10 border-t border-sand-200">
+              <h2 className="text-lg font-serif font-bold text-gray-900 mb-4">Sahara Tours Related to This Guide</h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {matchingTours.map((t) => (
+                  <li key={t._id}>
+                    <Link
+                      href={`/tours/${t.slug.current}`}
+                      className="block p-4 bg-sand-50 rounded-xl border border-sand-200 hover:border-desert-300 hover:shadow-sm transition-all"
+                    >
+                      <span className="block font-semibold text-gray-800 text-sm">{t.title}</span>
+                      {t.duration && <span className="block text-xs text-gray-500 mt-1">{t.duration}</span>}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Internal CTA: plan your trip */}
           <div className="mt-12 bg-desert-700 rounded-2xl p-8 text-white">
             <h2 className="font-serif font-bold text-xl mb-2">Ready to Experience the Sahara?</h2>
@@ -282,7 +333,7 @@ export default function BlogPostPage({ params }) {
             <div>
               <p className="font-serif font-bold text-gray-900">{post.author}</p>
               <p className="text-sm text-gray-500">
-                Berber desert guide and founder of Sahara Desert Travel, born and raised in the Draa Valley
+                Berber desert guide and founder of Visit Sahara Desert, born and raised in the Draa Valley
               </p>
             </div>
           </div>

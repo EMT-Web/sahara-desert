@@ -65,7 +65,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <head>
-        <Script
+        <script
           id="organization-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

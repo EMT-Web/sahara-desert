@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Script from 'next/script'
 import SectionTitle from '@/components/SectionTitle'
 import ContactForm from '@/components/ContactForm'
 import { client } from '@/lib/sanity'
@@ -8,7 +7,7 @@ import { generateMetadata as generateSEOMetadata, generateLocalBusinessSchema, g
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Contact Us | Sahara Desert Travel',
+    title: 'Contact Us: Plan Your Morocco Desert Tour',
     description: 'Get in touch with us to plan your Sahara Desert adventure. We are here to answer your questions and help create your perfect desert experience.',
     url: '/contact',
     keywords: ['Contact Sahara Travel', 'Book Desert Tour', 'Morocco Travel Booking'],
@@ -39,9 +38,9 @@ export default async function ContactPage() {
 
   return (
     <>
-      <Script id="local-business-schema" type="application/ld+json"
+      <script id="local-business-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Page Hero */}

@@ -1,6 +1,5 @@
 ﻿import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import TourCard from '@/components/TourCard'
 import { client } from '@/lib/sanity'
 import { toursByCityQuery } from '@/lib/queries'
@@ -42,7 +41,7 @@ export default async function ErrachidiaToursPage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Page Hero */}

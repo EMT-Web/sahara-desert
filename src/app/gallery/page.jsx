@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Script from 'next/script'
 import GalleryGrid from '@/components/GalleryGrid'
 import { client } from '@/lib/sanity'
 import { galleryQuery } from '@/lib/queries'
@@ -92,7 +91,7 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}

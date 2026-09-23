@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import SectionTitle from '@/components/SectionTitle'
 import { client, urlFor } from '@/lib/sanity'
 import { cultureQuery } from '@/lib/queries'
@@ -8,7 +7,7 @@ import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } fro
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Berber Culture & Saharan Traditions | Sahara Desert Travel',
+    title: 'Berber Culture & Saharan Traditions of Morocco',
     description: 'Discover the living culture of the Sahara: Berber language, Gnawa music, desert hospitality, and traditions passed down for millennia by the Amazigh people of Morocco.',
     url: '/culture',
     keywords: ['Berber culture Morocco', 'Amazigh traditions', 'Saharan culture', 'Gnawa music', 'desert heritage', 'nomadic culture Sahara', 'Berber people Morocco', 'Tamazight language'],
@@ -50,7 +49,7 @@ export default async function CulturePage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Page Hero */}

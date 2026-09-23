@@ -28,6 +28,15 @@ const siteName = 'Visit Sahara Desert'
 const defaultDescription =
   'Visit Sahara Desert offers authentic Morocco desert tours with expert local Berber guides, sustainable travel, and unforgettable journeys through golden dunes and desert oases.'
 
+function trimDescription(text, max = 158) {
+  if (!text) return text
+  const clean = String(text).replace(/\s+/g, ' ').trim()
+  if (clean.length <= max) return clean
+  const cut = clean.slice(0, max)
+  const lastSpace = cut.lastIndexOf(' ')
+  return `${cut.slice(0, lastSpace > 100 ? lastSpace : max).replace(/[\s,;:.]+$/, '')}…`
+}
+
 /**
  * Generate comprehensive metadata for SEO
  */
@@ -43,6 +52,10 @@ export function generateMetadata({
   keywords = ['Sahara Desert', 'Morocco Tours', 'Desert Travel', 'Sahara Adventure', 'Berber Culture', 'Desert Tours'],
 }) {
   const fullTitle = title ? `${title} | ${siteName}` : siteName
+  // Search engines cut meta descriptions at roughly 155 to 160 characters.
+  // Several tour excerpts in Sanity run to 400 to 900 characters, so trim
+  // at a word boundary instead of letting Google pick an arbitrary cut.
+  description = trimDescription(description)
   const fullUrl = url ? `${siteUrl}${url}` : siteUrl
   const imageUrl = image ? urlFor(image).width(1200).height(630).url() : `${siteUrl}/og-image.jpg`
 
@@ -79,7 +92,6 @@ export function generateMetadata({
       title: fullTitle,
       description,
       images: [imageUrl],
-      creator: '@saharadeserttravel',
     },
     robots: {
       index: true,
@@ -110,7 +122,10 @@ export function generateOrganizationSchema(contact = null) {
     name: siteName,
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
+    image: `${siteUrl}/og-image.jpg`,
     description: defaultDescription,
+    priceRange: '$$',
+    areaServed: { '@type': 'Country', name: 'Morocco' },
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MA',
@@ -120,7 +135,8 @@ export function generateOrganizationSchema(contact = null) {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
-      availableLanguage: ['English', 'French', 'Arabic', 'Berber'],
+      // Keep in sync with the 5 tour languages stated in the homepage FAQ
+      availableLanguage: ['English', 'French', 'Arabic', 'Spanish', 'German'],
       ...(contact?.email && { email: contact.email }),
       ...(contact?.phone && { telephone: contact.phone }),
     },

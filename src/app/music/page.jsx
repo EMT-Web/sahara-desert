@@ -7,7 +7,7 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'Traditional Music | Sahara Desert Travel',
+    title: 'Traditional Berber & Gnawa Music of the Sahara',
     description: 'Experience the sounds of the Sahara. Listen to traditional music and rhythms that have echoed through the desert for generations.',
     url: '/music',
     keywords: ['Sahara Music', 'Berber Music', 'Desert Music', 'Traditional Moroccan Music'],

@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import SectionTitle from '@/components/SectionTitle'
 import GuideCard from '@/components/GuideCard'
 import { client, urlFor } from '@/lib/sanity'
@@ -9,7 +8,7 @@ import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } fro
 
 export async function generateMetadata() {
   return generateSEOMetadata({
-    title: 'About Us: Berber Desert Guides Since 2014 | Sahara Desert Travel',
+    title: 'About Us: Berber Desert Guides Since 2014',
     description: 'Meet the people behind Sahara Desert Travel: native Berber guides born in the Sahara with over a decade of experience. Learn about our story, values, and commitment to authentic, sustainable desert tourism.',
     url: '/about',
     keywords: ['About Sahara Desert Travel', 'Berber desert guides', 'Morocco travel company', 'sustainable desert tourism', 'authentic Morocco experience', 'local guides Sahara', 'Mustapha Oufota'],
@@ -39,7 +38,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Page Hero */}

@@ -6,12 +6,20 @@ import { storiesListQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
-  return generateSEOMetadata({
-    title: 'Stories & Blog | Sahara Desert Travel',
+  const meta = generateSEOMetadata({
+    title: 'Desert Travel Stories',
     description: 'Read inspiring stories and experiences from travelers who have explored the Sahara Desert. Discover travel tips, cultural insights, and adventure tales.',
     url: '/stories',
     keywords: ['Sahara Stories', 'Desert Travel Blog', 'Morocco Travel Stories', 'Desert Adventures'],
   })
+  // While no stories are published in Sanity this page is an empty shell
+  // (under 100 words). Keep it out of the index until it has real content;
+  // it switches back to index automatically once a story is published.
+  const stories = await getStories()
+  if (stories.length === 0) {
+    meta.robots = { index: false, follow: true }
+  }
+  return meta
 }
 
 async function getStories() {

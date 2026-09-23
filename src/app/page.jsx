@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import Hero from '@/components/Hero'
 import SectionTitle from '@/components/SectionTitle'
 import TourCard from '@/components/TourCard'
@@ -26,10 +25,9 @@ const homepageFAQs = [
 export async function generateMetadata() {
   const homepage = await client.fetch(homepageQuery)
   return generateSEOMetadata({
-    title: 'Authentic Sahara Desert Experiences',
+    title: 'Sahara Desert Tours in Morocco from Marrakech & Fes',
     description:
-      homepage?.heroSubtitle ||
-      'Visit Sahara Desert offers authentic Morocco desert tours with expert Berber guides, sustainable travel, camel trekking, and unforgettable journeys through golden dunes and desert oases.',
+      'Private Sahara Desert tours with local Berber guides: camel treks in Merzouga, desert camps and 2 to 15 day trips from Marrakech, Fes, Casablanca and Agadir.',
     image: homepage?.heroImage,
     url: '/',
   })
@@ -92,7 +90,7 @@ export default async function HomePage() {
   return (
     <>
       {faqSchema && (
-        <Script id="faq-schema" type="application/ld+json"
+        <script id="faq-schema" type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
       <Hero

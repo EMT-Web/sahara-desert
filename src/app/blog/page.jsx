@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Script from 'next/script'
 import FilterableBlog from '@/components/FilterableBlog'
 import { blogPosts } from '@/data/blogPosts'
 import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } from '@/lib/seo'
@@ -21,7 +20,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <Script id="breadcrumb-schema" type="application/ld+json"
+      <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}

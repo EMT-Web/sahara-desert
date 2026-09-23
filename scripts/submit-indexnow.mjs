@@ -2,7 +2,7 @@
  * Submit URLs to IndexNow (Bing, Yandex, Seznam, Naver, ...).
  *
  * Setup: the key file public/41b64e48b02d4819a18d8f97835bbf52.txt is served at
- * https://visitsaharadesert.com/41b64e48b02d4819a18d8f97835bbf52.txt
+ * https://www.visitsaharadesert.com/41b64e48b02d4819a18d8f97835bbf52.txt
  *
  * Usage:
  *   node scripts/submit-indexnow.mjs                 # submit every public URL (static routes + blog + tours + stories)
@@ -16,7 +16,11 @@ import { createClient } from '@sanity/client'
 import { blogPosts } from '../src/data/blogPosts.js'
 
 const KEY = '41b64e48b02d4819a18d8f97835bbf52'
-const SITE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://visitsaharadesert.com').replace(/\/$/, '')
+// Always submit the canonical www host. The bare domain 301-redirects to www,
+// and IndexNow expects the submitted URLs to be the final canonical ones.
+const SITE = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.visitsaharadesert.com')
+  .replace(/\/$/, '')
+  .replace('://visitsaharadesert.com', '://www.visitsaharadesert.com')
 const HOST = new URL(SITE).host
 const KEY_LOCATION = `${SITE}/${KEY}.txt`
 const ENDPOINT = 'https://api.indexnow.org/indexnow'
@@ -32,7 +36,8 @@ const client = createClient({
 const STATIC_PATHS = [
   '/', '/tours', '/tours/marrakech', '/tours/fes', '/tours/casablanca',
   '/tours/agadir', '/tours/errachidia', '/about', '/guides', '/culture',
-  '/sustainability', '/contact', '/gallery', '/stories', '/music', '/blog', '/privacy',
+  '/sustainability', '/contact', '/gallery', '/music', '/blog', '/privacy', '/terms',
+  '/merzouga-erg-chebbi', '/luxury-desert-camps', '/family-morocco-tours', '/honeymoon-morocco-tours',
 ]
 
 function toUrl(pathOrUrl) {

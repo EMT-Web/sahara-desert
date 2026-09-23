@@ -17,12 +17,18 @@ export default function Navbar({ navigation }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // These links are always rendered in the HTML (the dropdown is only hidden
+  // with CSS) so search engines can discover the tour hubs from every page.
+  // Rendering them only after a click hid them from crawlers.
   const toursSubmenu = [
-    { title: 'Visit Sahara Desert Tours from Marrakech', url: '/tours/marrakech' },
-    { title: 'Visit Sahara Desert from Fes', url: '/tours/fes' },
-    { title: 'Visit Sahara Desert from Casablanca', url: '/tours/casablanca' },
-    { title: 'Visit Sahara Desert from Agadir', url: '/tours/agadir' },
-    { title: 'Visit Sahara Desert from Errachidia', url: '/tours/errachidia' },
+    { title: 'All Sahara Desert Tours', url: '/tours' },
+    { title: 'Sahara Tours from Marrakech', url: '/tours/marrakech' },
+    { title: 'Sahara Tours from Fes', url: '/tours/fes' },
+    { title: 'Sahara Tours from Casablanca', url: '/tours/casablanca' },
+    { title: 'Sahara Tours from Agadir', url: '/tours/agadir' },
+    { title: 'Sahara Tours from Errachidia', url: '/tours/errachidia' },
+    { title: 'Merzouga & Erg Chebbi Guide', url: '/merzouga-erg-chebbi' },
+    { title: 'Luxury Desert Camps', url: '/luxury-desert-camps' },
   ]
 
   const defaultNav = [
@@ -116,8 +122,7 @@ export default function Navbar({ navigation }) {
                 </svg>
               </button>
               
-              {isToursDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+              <div className={`absolute top-full left-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 ${isToursDropdownOpen ? '' : 'hidden'}`}>
                   {toursSubmenu.map((item) => (
                     <Link
                       key={item.url}
@@ -128,8 +133,7 @@ export default function Navbar({ navigation }) {
                       {item.title}
                     </Link>
                   ))}
-                </div>
-              )}
+              </div>
             </div>
             
             {/* Other nav items */}
@@ -226,8 +230,7 @@ export default function Navbar({ navigation }) {
                 </svg>
               </button>
               
-              {isToursDropdownOpen && (
-                <div className="pl-4 pb-2">
+              <div className={`pl-4 pb-2 ${isToursDropdownOpen ? '' : 'hidden'}`}>
                   {toursSubmenu.map((item) => (
                     <Link
                       key={item.url}
@@ -241,8 +244,7 @@ export default function Navbar({ navigation }) {
                       {item.title}
                     </Link>
                   ))}
-                </div>
-              )}
+              </div>
             </div>
             
             {/* Other nav items */}
