@@ -204,7 +204,7 @@ export default async function SustainabilityPage() {
       </section>
 
       <CTASection
-        image="/images/desert8.jpeg"
+        image="/images/image00044.jpeg"
         imageAlt="Sahara Desert sustainable tourism"
         eyebrow="Travel Responsibly"
         title="Join a Tour That Gives Back"

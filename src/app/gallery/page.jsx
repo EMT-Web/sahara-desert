@@ -20,7 +20,6 @@ export async function generateMetadata() {
 
 const staticPhotos = [
   { src: '/images/desert1.jpeg', alt: 'Golden Sahara dunes at sunrise' },
-  { src: '/images/camels_farview.jpeg', alt: 'Camel caravan crossing the dunes' },
   { src: '/images/evening.jpeg', alt: 'Desert camp at evening' },
   { src: '/images/desert2.jpeg', alt: 'Rippled sand dunes, Erg Chebbi' },
   { src: '/images/morningsunset.jpeg', alt: 'Morning light over the Sahara' },
@@ -41,7 +40,6 @@ const staticPhotos = [
   { src: '/images/image00011.jpeg', alt: 'Desert landscape' },
   { src: '/images/desert9.jpeg', alt: 'Desert horizon' },
   { src: '/images/image00016.jpeg', alt: 'Desert scenery' },
-  { src: '/images/desert_midday.jpeg', alt: 'Sahara desert under midday sun' },
   { src: '/images/image00017.jpeg', alt: 'Desert landscape' },
   { src: '/images/image00019.jpeg', alt: 'Desert scenery' },
   { src: '/images/image00021.jpeg', alt: 'Desert landscape' },
@@ -120,7 +118,7 @@ export default async function GalleryPage() {
       </section>
 
       <CTASection
-        image="/images/camels_farview.jpeg"
+        image="/images/image00040.jpeg"
         imageAlt="Camels in the Sahara Desert"
         eyebrow="Your Story Starts Here"
         title="Be in the Next Photo"

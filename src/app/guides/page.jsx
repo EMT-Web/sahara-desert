@@ -140,7 +140,7 @@ export default async function GuidesPage() {
       </section>
 
       <CTASection
-        image="/images/desert5.jpg"
+        image="/images/image00002.jpeg"
         imageAlt="Sahara Desert dunes"
         eyebrow="Your Guide Awaits"
         title="Ready to Explore with a Local Expert?"

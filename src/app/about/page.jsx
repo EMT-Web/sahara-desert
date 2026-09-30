@@ -43,8 +43,8 @@ export default async function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <PageHero
-        image="/images/gathering_team.JPG"
-        imageAlt="Sahara Desert team gathering"
+        image="/images/image00018.jpeg"
+        imageAlt="Our guides with a group of travellers on the Erg Chebbi dunes"
         eyebrow="Our Company"
         title={about?.title || 'Our Story'}
         subtitle={about?.subtitle || 'Born from a passion for the Sahara and a commitment to authentic experiences'}

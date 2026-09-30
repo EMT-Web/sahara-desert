@@ -178,7 +178,7 @@ export default async function CulturePage() {
                 {
                   title: 'Music, Dance & Celebration',
                   body: 'Gnawa rhythms, guembri lutes, and communal ahwach dances are central to Berber identity. Music is not entertainment here: it is ritual, memory, and connection to ancestors stretching back thousands of years.',
-                  image: '/images/gathering_team.JPG',
+                  image: '/images/image00022.jpeg',
                 },
                 {
                   title: 'Desert Hospitality',
@@ -243,7 +243,7 @@ export default async function CulturePage() {
       </section>
 
       <CTASection
-        image="/images/fort2.jpg"
+        image="/images/image00007.jpeg"
         imageAlt="Desert fortress in Morocco"
         eyebrow="Experience It Yourself"
         title="Immerse Yourself in Saharan Culture"

@@ -183,6 +183,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
+// Photos not used as any blog post's own image or as a page header.
+const CTA_IMAGES = ['/images/image00007.jpeg', '/images/image00051.jpeg', '/images/image00049.jpeg', '/images/desert_midday.jpeg', '/images/image00035.jpeg', '/images/image00027.jpeg', '/images/image00030.jpeg', '/images/image00058.jpeg']
+
 export default async function BlogPostPage({ params }) {
   const post = getBlogPost(params.slug)
   if (!post) notFound()
@@ -192,6 +195,13 @@ export default async function BlogPostPage({ params }) {
   const related = getRelatedPosts(post.slug, post.category, 3)
   const resources = resourcesByCategory[post.category] || []
   const ctaLinks = internalLinks[post.slug] || defaultInternalLinks
+
+  // Closing banner photo varies by post and never repeats the post's own photo
+  // or a related-post card on the same page.
+  const onPage = new Set([post.image, ...related.map((r) => r.image)])
+  const ctaChoices = CTA_IMAGES.filter((src) => !onPage.has(src))
+  const slugHash = [...post.slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7)
+  const ctaImage = ctaChoices[slugHash % ctaChoices.length] || CTA_IMAGES[0]
 
   const blogPostSchema = generateBlogPostSchema(post)
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -359,7 +369,7 @@ export default async function BlogPostPage({ params }) {
       )}
 
       <CTASection
-        image="/images/image00001.jpeg"
+        image={ctaImage}
         imageAlt="Sahara Desert landscape"
         eyebrow="Ready to Go?"
         title="Turn Words Into Memories"

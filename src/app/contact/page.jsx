@@ -45,8 +45,8 @@ export default async function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <PageHero
-        image="/images/desert9.jpeg"
-        imageAlt="Desert camp lounge set on the dunes at sunset"
+        image="/images/image00043.jpeg"
+        imageAlt="Nomad tent in the Sahara at first light"
         eyebrow="Plan your trip"
         title="Tell us about your Morocco journey"
         subtitle="Share a few details and we will design a private itinerary around you, with a clear price. It is free and there is no obligation."

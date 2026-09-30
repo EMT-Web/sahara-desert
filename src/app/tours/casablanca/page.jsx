@@ -54,8 +54,8 @@ export default async function CasablancaToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Casablanca',
           subtitle: "Morocco's great crossing, from the Atlantic coast to the heart of the Sahara in one epic journey",
-          image: '/images/fort.jpg',
-          imageAlt: 'Kasbah village and palm grove in the Skoura oasis on the road to the Sahara',
+          image: '/images/image00013.jpeg',
+          imageAlt: 'View of the Sahara through a blue Moroccan archway',
         }}
         stops={stops}
         note={null}
@@ -63,7 +63,7 @@ export default async function CasablancaToursPage() {
         cta={{
           title: 'From the Atlantic to the Sahara',
           text: "Morocco's greatest road trip. Ancient cities, mountain passes, desert kasbahs, and finally, the silence of the dunes.",
-          image: '/images/image00020.jpeg',
+          image: '/images/image00031.jpeg',
           imageAlt: 'Sahara Desert landscape',
         }}
       />

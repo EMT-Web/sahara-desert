@@ -27,14 +27,14 @@ async function getTours() {
 }
 
 const STYLES = [
-  { title: 'Luxury desert camps', href: '/luxury-desert-camps', image: '/images/desert6.jpg' },
-  { title: 'Honeymoon tours', href: '/honeymoon-morocco-tours', image: '/images/morningsunset.jpeg' },
+  { title: 'Luxury desert camps', href: '/luxury-desert-camps', image: '/images/image00029.jpeg' },
+  { title: 'Honeymoon tours', href: '/honeymoon-morocco-tours', image: '/images/image00030.jpeg' },
   { title: 'Family tours', href: '/family-morocco-tours', image: '/images/image00018.jpeg' },
-  { title: 'Merzouga & Erg Chebbi', href: '/merzouga-erg-chebbi', image: '/images/image00019.jpeg' },
+  { title: 'Merzouga & Erg Chebbi', href: '/merzouga-erg-chebbi', image: '/images/image00012.jpeg' },
 ]
 
 // Photos this page already shows (hero, style tiles, closing banner), so tour cards avoid them.
-const PAGE_IMAGES = ['/images/camels.jpeg', '/images/image00004.jpeg', ...STYLES.map((s) => s.image)]
+const PAGE_IMAGES = ['/images/image00016.jpeg', '/images/image00021.jpeg', ...STYLES.map((s) => s.image)]
 
 export default async function ToursPage() {
   const tours = await getTours()
@@ -49,8 +49,8 @@ export default async function ToursPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <PageHero
-        image="/images/camels.jpeg"
-        imageAlt="Camel caravan crossing a dune ridge in the Sahara"
+        image="/images/image00016.jpeg"
+        imageAlt="Camels crossing the golden dunes of Erg Chebbi"
         eyebrow="Morocco & Sahara tours"
         title="Find your Sahara journey"
         subtitle="Private and small-group tours from Marrakech, Fes, Casablanca, Agadir and Errachidia. Every itinerary can be tailored to your dates and pace."

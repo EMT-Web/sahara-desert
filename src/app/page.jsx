@@ -90,7 +90,7 @@ async function getHomepageData() {
     const cityCounts = Object.fromEntries(Object.entries(toursByCity).map(([k, v]) => [k, v.length]))
 
     // Homepage photos already shown in other sections, so tour cards avoid them.
-    const shownElsewhere = ['/images/image00015.jpeg', '/images/image00006.jpeg', '/images/image00024.jpeg', '/images/image00020.jpeg', '/images/image00022.jpeg', '/images/image00041.jpeg', '/images/image00037.jpeg', '/images/image00027.jpeg', ...DEPARTURE_CITIES.map((c) => c.image)]
+    const shownElsewhere = ['/images/image00015.jpeg', '/images/image00006.jpeg', '/images/image00024.jpeg', '/images/image00020.jpeg', '/images/image00022.jpeg', '/images/image00041.jpeg', '/images/image00023.jpeg', '/images/image00027.jpeg', ...DEPARTURE_CITIES.map((c) => c.image)]
     return { homepage, tours: withUniqueCardImages(featuredTours.slice(0, maxTours), { exclude: shownElsewhere }), total: allTours?.length || 0, cityCounts, contact }
   } catch (error) {
     console.error('Error fetching homepage data:', error)
@@ -273,7 +273,7 @@ export default async function HomePage() {
         <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="relative" data-reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl lg:sticky lg:top-28">
-              <Image src="/images/image00037.jpeg" alt="Travellers gathered around the campfire at our desert camp under the night sky" fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover" />
+              <Image src="/images/image00023.jpeg" alt="Travellers gathered around the campfire at our desert camp at night" fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover" />
             </div>
           </div>
           <div>

@@ -38,7 +38,7 @@ export default async function StoriesPage() {
   return (
     <>
       <PageHero
-        image="/images/image00035.jpeg"
+        image="/images/image00056.jpeg"
         imageAlt="Stories from the Sahara Desert"
         eyebrow="From the Dunes"
         title="Stories from the Desert"
