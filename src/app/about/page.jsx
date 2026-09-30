@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import PageHero from '@/components/PageHero'
 import Link from 'next/link'
 import SectionTitle from '@/components/SectionTitle'
 import GuideCard from '@/components/GuideCard'
@@ -41,24 +42,17 @@ export default async function AboutPage() {
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Page Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/gathering_team.JPG" alt="Sahara Desert team gathering" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Our Company</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">
-            {about?.title || 'Our Story'}
-          </h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            {about?.subtitle || 'Born from a passion for the Sahara and a commitment to authentic experiences'}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/gathering_team.JPG"
+        imageAlt="Sahara Desert team gathering"
+        eyebrow="Our Company"
+        title={about?.title || 'Our Story'}
+        subtitle={about?.subtitle || 'Born from a passion for the Sahara and a commitment to authentic experiences'}
+      />
 
       {/* Stats bar */}
       <section className="bg-desert-700 text-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
             {[
               { value: '10+', label: 'Years in the Desert' },
@@ -67,7 +61,7 @@ export default async function AboutPage() {
               { value: '100%', label: 'Berber-Led' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center py-6 px-4 text-center">
-                <span className="text-2xl md:text-3xl font-serif font-bold text-desert-200">{stat.value}</span>
+                <span className="text-2xl md:text-3xl font-serif font-medium text-desert-200">{stat.value}</span>
                 <span className="text-xs md:text-sm text-white/70 mt-1 tracking-wide uppercase">{stat.label}</span>
               </div>
             ))}
@@ -77,7 +71,7 @@ export default async function AboutPage() {
 
       {/* Founders Story */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="max-w-4xl mx-auto">
             <SectionTitle
               title="How It Began"
@@ -85,7 +79,7 @@ export default async function AboutPage() {
             />
 
             {about?.foundersStory && (
-              <div className="mt-10 text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+              <div className="mt-10 text-ink-700 leading-relaxed whitespace-pre-line text-lg">
                 {about.foundersStory}
               </div>
             )}
@@ -122,14 +116,14 @@ export default async function AboutPage() {
 
       {/* Why We're Different */}
       <section className="bg-sand-50 py-20">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <SectionTitle
             title="Why We're Different"
             subtitle="Our team brings generations of Saharan wisdom to every journey"
           />
 
           {about?.localExpertise && (
-            <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto -mt-4 mb-14 leading-relaxed">
+            <p className="text-center text-lg text-ink-600 max-w-3xl mx-auto -mt-4 mb-14 leading-relaxed">
               {about.localExpertise}
             </p>
           )}
@@ -167,8 +161,8 @@ export default async function AboutPage() {
                     {item.icon}
                   </svg>
                 </div>
-                <h3 className="text-lg font-serif font-bold mb-3 text-gray-900">{item.title}</h3>
-                <p className="text-sm text-gray-900 leading-relaxed">{item.body}</p>
+                <h3 className="text-lg font-serif font-medium mb-3 text-ink-900">{item.title}</h3>
+                <p className="text-sm text-ink-900 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
@@ -178,7 +172,7 @@ export default async function AboutPage() {
       {/* Meet Our Guides */}
       {guides.length > 0 && (
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container-site">
             <SectionTitle
               title="Meet Our Expert Guides"
               subtitle="Local experts who bring the Sahara to life"
@@ -202,10 +196,10 @@ export default async function AboutPage() {
 
       {/* Sustainability Commitment */}
       <section className="bg-gradient-to-r from-desert-700 to-desert-800 py-20">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="max-w-3xl mx-auto text-center">
             <span className="text-desert-300 text-xs font-semibold tracking-widest uppercase mb-4 block">Our Promise</span>
-            <h2 className="text-4xl font-serif font-bold text-white mb-6">
+            <h2 className="text-4xl font-serif font-medium text-white mb-6">
               Protecting the Sahara for Future Generations
             </h2>
             <p className="text-xl text-white/85 leading-relaxed mb-10">
@@ -224,10 +218,10 @@ export default async function AboutPage() {
 
       {/* From Our Blog */}
       <section className="bg-white py-16 border-t border-sand-200">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="mb-8">
-            <h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">From Our Blog</h2>
-            <p className="text-gray-500 text-sm">Stories and insights from a decade in the desert</p>
+            <h2 className="text-2xl font-serif font-medium text-ink-900 mb-2">From Our Blog</h2>
+            <p className="text-ink-500 text-sm">Stories and insights from a decade in the desert</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -237,8 +231,8 @@ export default async function AboutPage() {
             ].map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group bg-sand-50 rounded-xl p-6 border border-sand-200 hover:shadow-md transition-shadow">
                 <span className="text-xs font-semibold text-desert-600 uppercase tracking-wide">{post.category}</span>
-                <h3 className="font-serif font-bold text-gray-900 mt-2 mb-2 text-base leading-snug group-hover:text-desert-600 transition-colors">{post.title}</h3>
-                <p className="text-sm text-gray-900 leading-relaxed line-clamp-3">{post.excerpt}</p>
+                <h3 className="font-serif font-medium text-ink-900 mt-2 mb-2 text-base leading-snug group-hover:text-desert-600 transition-colors">{post.title}</h3>
+                <p className="text-sm text-ink-900 leading-relaxed line-clamp-3">{post.excerpt}</p>
                 <span className="text-desert-600 text-sm font-medium mt-3 inline-block group-hover:underline">Read more →</span>
               </Link>
             ))}

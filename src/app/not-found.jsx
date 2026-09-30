@@ -21,10 +21,10 @@ export default function NotFound() {
         <p className="text-desert-300 text-xs font-semibold tracking-widest uppercase mb-6">
           Lost in the Dunes
         </p>
-        <h1 className="text-8xl md:text-9xl font-serif font-bold text-white/20 leading-none mb-2">
+        <h1 className="text-8xl md:text-9xl font-serif font-medium text-white/20 leading-none mb-2">
           404
         </h1>
-        <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
+        <h2 className="text-2xl md:text-3xl font-serif font-medium text-white mb-4">
           This Page Has Wandered Off
         </h2>
         <p className="text-white/70 text-sm leading-relaxed mb-10">

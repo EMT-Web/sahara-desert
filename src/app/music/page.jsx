@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import PageHero from '@/components/PageHero'
 import SectionTitle from '@/components/SectionTitle'
 import MusicCard from '@/components/MusicCard'
 import { client } from '@/lib/sanity'
@@ -29,24 +29,19 @@ export default async function MusicPage() {
 
   return (
     <>
-      {/* Page Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/image00050.jpeg" alt="Traditional Saharan music" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Rhythm of the Sahara</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">Sounds of the Sahara</h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            Traditional music and rhythms that have echoed through the desert for generations
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/image00050.jpeg"
+        imageAlt="Traditional Saharan music"
+        eyebrow="Rhythm of the Sahara"
+        title="Sounds of the Sahara"
+        subtitle="Traditional music and rhythms that have echoed through the desert for generations"
+      />
 
       {/* Intro */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-ink-600 leading-relaxed">
               Music is the heartbeat of the Sahara. From the deep pulse of the guembri to the call-and-response of
               Gnawa ceremonies, Berber sound is ancient, alive, and inseparable from the desert landscape.
               Listen to these recordings and let the Sahara come to you.
@@ -57,7 +52,7 @@ export default async function MusicPage() {
 
       {/* Music grid */}
       <section className="pb-20 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           {musicEntries.length > 0 ? (
             <>
               <SectionTitle
@@ -76,8 +71,8 @@ export default async function MusicPage() {
                 <svg className="w-16 h-16 text-desert-300 mx-auto mb-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
-                <h3 className="text-2xl font-serif font-bold text-gray-900 mb-3">Music Collection Coming Soon</h3>
-                <p className="text-gray-900 leading-relaxed">
+                <h3 className="text-2xl font-serif font-medium text-ink-900 mb-3">Music Collection Coming Soon</h3>
+                <p className="text-ink-900 leading-relaxed">
                   We are curating a collection of traditional Saharan music from desert communities. Check back soon to experience the sounds of the desert.
                 </p>
               </div>
@@ -88,7 +83,7 @@ export default async function MusicPage() {
 
       {/* Music context section */}
       <section className="bg-sand-50 py-20 border-t border-sand-200">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="max-w-4xl mx-auto">
             <SectionTitle
               title="Music as a Way of Life"
@@ -115,8 +110,8 @@ export default async function MusicPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-serif font-bold mb-3 text-gray-900">{item.title}</h3>
-                  <p className="text-sm text-gray-900 leading-relaxed">{item.body}</p>
+                  <h3 className="text-lg font-serif font-medium mb-3 text-ink-900">{item.title}</h3>
+                  <p className="text-sm text-ink-900 leading-relaxed">{item.body}</p>
                 </div>
               ))}
             </div>

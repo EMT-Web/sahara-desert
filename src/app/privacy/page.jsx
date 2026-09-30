@@ -56,31 +56,31 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-desert-700 pt-32 pb-12">
-        <div className="container mx-auto px-4 max-w-3xl">
+      <div className="bg-night-900 pt-36 pb-14">
+        <div className="container-site max-w-3xl">
           <p className="text-desert-300 text-xs font-semibold tracking-widest uppercase mb-3">Legal</p>
-          <h1 className="text-4xl font-serif font-bold text-white">Privacy Policy</h1>
+          <h1 className="text-4xl font-serif font-medium text-white">Privacy Policy</h1>
           <p className="text-white/70 mt-3 text-sm">Last updated: May 2026</p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 max-w-3xl py-16">
-        <p className="text-gray-600 leading-relaxed mb-10 text-base border-l-4 border-desert-300 pl-5">
+      <div className="container-site max-w-3xl py-16">
+        <p className="text-ink-600 leading-relaxed mb-10 text-base border-l-4 border-desert-300 pl-5">
           Your privacy matters to us. This policy explains what personal data Visit Sahara Desert collects when you visit our website or submit a booking inquiry, and how we use and protect that data.
         </p>
 
         <div className="space-y-10">
           {sections.map((s) => (
             <div key={s.title}>
-              <h2 className="text-lg font-serif font-bold text-gray-900 mb-3">{s.title}</h2>
-              <p className="text-gray-600 leading-relaxed text-sm">{s.body}</p>
+              <h2 className="text-lg font-serif font-medium text-ink-900 mb-3">{s.title}</h2>
+              <p className="text-ink-600 leading-relaxed text-sm">{s.body}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-14 pt-8 border-t border-sand-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-gray-400 text-xs">
+          <p className="text-ink-500 text-xs">
             Questions? Email us at{' '}
             <a href="mailto:info@visitsaharadesert.com" className="text-desert-600 hover:underline">
               info@visitsaharadesert.com

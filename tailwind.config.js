@@ -8,34 +8,61 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Warm neutrals: sand, linen and dune shadow. Backgrounds, borders, muted text.
         sand: {
-          50: '#fdf8f3',
-          100: '#f9ede0',
-          200: '#f3dbc1',
-          300: '#e9c49a',
-          400: '#dda56f',
-          500: '#d4894f',
-          600: '#c66f43',
-          700: '#a55739',
-          800: '#854733',
-          900: '#6d3b2b',
+          50: '#faf7f2',
+          100: '#f4ede3',
+          200: '#e9dccb',
+          300: '#d9c4a8',
+          400: '#c2a47f',
+          500: '#a8865f',
+          600: '#8a6a48',
+          700: '#6c5239',
+          800: '#4f3c2b',
+          900: '#2e241b',
         },
+        // Brand accent: burnt terracotta / Saharan ochre. CTAs, links, highlights.
+        // 600+ passes WCAG AA for text on white and for white text on it.
         desert: {
-          50: '#fef9ee',
-          100: '#fcefd6',
-          200: '#f8dcac',
-          300: '#f4c378',
-          400: '#f0a342',
-          500: '#eb871c',
-          600: '#d66a12',
-          700: '#b24f11',
-          800: '#903e15',
-          900: '#753414',
+          50: '#fcf5ee',
+          100: '#f7e6d5',
+          200: '#efcaa8',
+          300: '#e4a877',
+          400: '#d6874f',
+          500: '#c46d36',
+          600: '#a9562a',
+          700: '#8a4424',
+          800: '#6e3721',
+          900: '#5a2f1e',
+        },
+        // Text colours: warm near-black rather than cold gray.
+        ink: {
+          900: '#1c1714',
+          800: '#2b2420',
+          700: '#463c35',
+          600: '#625650',
+          500: '#82766e',
+        },
+        // Sahara night sky: dark feature sections and the footer.
+        night: {
+          700: '#27324a',
+          800: '#1b2433',
+          900: '#121925',
         },
       },
       fontFamily: {
-        serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
-        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
+      maxWidth: {
+        site: '80rem',
+      },
+      boxShadow: {
+        soft: '0 1px 2px rgba(28,23,20,0.04), 0 8px 24px -8px rgba(28,23,20,0.12)',
+        lift: '0 2px 4px rgba(28,23,20,0.05), 0 20px 40px -12px rgba(28,23,20,0.22)',
+      },
+      transitionTimingFunction: {
+        'out-soft': 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

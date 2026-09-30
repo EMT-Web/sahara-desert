@@ -29,15 +29,15 @@ export default function StoryCard({ story }) {
       )}
 
       <div className="p-6">
-        <h3 className="text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-desert-600 smooth-transition">
+        <h3 className="text-2xl font-serif font-medium text-ink-900 mb-3 group-hover:text-desert-600 smooth-transition">
           {story.title}
         </h3>
         {story.excerpt && (
-          <p className="text-gray-600 mb-4 line-clamp-3">
+          <p className="text-ink-600 mb-4 line-clamp-3">
             {story.excerpt}
           </p>
         )}
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-ink-500">
           <div className="flex items-center">
             {story.author?.image && (
               <div className="relative w-8 h-8 rounded-full overflow-hidden mr-2">

@@ -4,38 +4,161 @@
 
 @layer base {
   html {
-    background-color: #f3dbc1 !important; /* sand-200 - desert brownish */
-    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem; /* keep anchor targets clear of the fixed header */
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
   }
 
   body {
-    background: linear-gradient(to bottom, #e9c49a, #f3dbc1, #e9c49a) !important; /* sand-300 to sand-200 to sand-300 - warm desert brown */
-    background-attachment: fixed;
-    min-height: 100vh;
-    color: #111827; /* gray-900 */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-sand-50 text-ink-800 font-sans;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+    @apply font-serif text-ink-900;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection { @apply bg-desert-200 text-ink-900; }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.desert.500');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+@layer components {
+  /* Layout */
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  /* Typography */
+  .eyebrow {
+    @apply inline-block text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-desert-600;
+  }
+  .eyebrow-light {
+    @apply inline-block text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-desert-200;
+  }
+  .heading-xl {
+    @apply font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium;
+  }
+  .heading-lg {
+    @apply font-serif text-3xl leading-tight md:text-[2.75rem] md:leading-[1.1] font-medium;
+  }
+  .heading-md {
+    @apply font-serif text-2xl leading-snug md:text-3xl font-medium;
+  }
+  .lede {
+    @apply text-base leading-relaxed text-ink-600 md:text-lg;
+  }
+  .prose-site p { @apply mb-4 leading-relaxed text-ink-700; }
+
+  /* Buttons: min 44px touch target */
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 ease-out-soft focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-desert-600 text-white shadow-sm hover:bg-desert-700 hover:shadow-md active:scale-[0.98];
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-700 active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn border border-ink-900/15 bg-white text-ink-900 hover:border-ink-900/40 hover:bg-sand-50;
+  }
+  .btn-light {
+    @apply btn bg-white text-ink-900 hover:bg-sand-100 active:scale-[0.98];
+  }
+  .btn-ghost-light {
+    @apply btn border border-white/40 bg-white/10 text-white backdrop-blur-sm hover:border-white/70 hover:bg-white/20;
+  }
+  .btn-whatsapp {
+    @apply btn bg-[#1faa59] text-white hover:bg-[#178a48] active:scale-[0.98];
+  }
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-desert-700 transition-all hover:gap-2.5 hover:text-desert-800;
+  }
+
+  /* Surfaces */
+  .card {
+    @apply rounded-2xl border border-sand-200/70 bg-white shadow-soft;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-sand-200 bg-white px-3 py-1 text-xs font-medium text-ink-700;
+  }
+
+  /* Image readability overlays */
+  .scrim-b { background: linear-gradient(to top, rgba(18,14,11,0.82) 0%, rgba(18,14,11,0.45) 40%, rgba(18,14,11,0.08) 75%, rgba(18,14,11,0.25) 100%); }
+  .scrim-l { background: linear-gradient(90deg, rgba(18,14,11,0.72) 0%, rgba(18,14,11,0.35) 50%, rgba(18,14,11,0) 80%); }
+
+  /* Form controls */
+  .field-label { @apply mb-1.5 block text-sm font-medium text-ink-800; }
+  .field {
+    @apply block w-full min-h-[48px] rounded-xl border border-sand-300 bg-white px-4 py-3 text-base text-ink-900 placeholder:text-ink-500/70 transition-colors focus:border-desert-500 focus:outline-none focus:ring-4 focus:ring-desert-100;
   }
 }
 
 @layer utilities {
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .smooth-transition {
-    transition: all 0.3s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.4s ease-out;
-  }
+  .text-shadow { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35); }
+  .smooth-transition { transition: all 0.3s ease-in-out; }
+  .animate-slide-up { animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .pb-safe { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
 }
 
 @keyframes slideUp {
   from { transform: translateY(100%); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Scroll reveal. Hidden state only applies once JS has flagged the document,
+   so content is always visible without JS and to crawlers. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slow hero zoom */
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+.hero-zoom { animation: heroZoom 9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Hero copy entrance */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.fade-up { animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] { opacity: 1; transform: none; }
 }

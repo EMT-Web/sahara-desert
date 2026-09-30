@@ -1,7 +1,8 @@
-import { Inter, Lora } from 'next/font/google'
+import { Inter, Fraunces } from 'next/font/google'
 import '@/styles/globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import RevealObserver from '@/components/RevealObserver'
 import dynamic from 'next/dynamic'
 import { Analytics } from '@vercel/analytics/next'
 
@@ -13,18 +14,24 @@ import { siteSettingsQuery, contactQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateOrganizationSchema } from '@/lib/seo'
 import Script from 'next/script'
 
-const inter = Inter({ 
-  subsets: ['latin'], 
+const inter = Inter({
+  subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
-  preload: true,
 })
-const lora = Lora({ 
-  subsets: ['latin'], 
+// Display serif for headings. Variable font, so one file covers all weights.
+const fraunces = Fraunces({
+  subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
-  preload: true,
+  axes: ['opsz'],
 })
+
+export const viewport = {
+  themeColor: '#faf7f2',
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata = generateSEOMetadata({
   title: 'Authentic Sahara Desert Experiences',
@@ -63,8 +70,10 @@ export default async function RootLayout({ children }) {
   const organizationSchema = generateOrganizationSchema(contact)
 
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} suppressHydrationWarning>
       <head>
+        {/* Flags JS support before first paint so scroll-reveal hidden states never flash or hide content without JS. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
           id="organization-schema"
           type="application/ld+json"
@@ -75,11 +84,12 @@ export default async function RootLayout({ children }) {
         <Script id="google-analytics" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PPVZW7BWLB');" }} />
       </head>
       <body className="antialiased">
-        <Navbar navigation={settings?.navigation} />
-        <main className="min-h-screen bg-transparent">
+        <Navbar navigation={settings?.navigation} whatsapp={contact?.whatsapp} />
+        <main id="main" className="min-h-screen">
           {children}
         </main>
         <Footer contactInfo={contact} />
+        <RevealObserver />
         <WhatsAppButton number={contact?.whatsapp} />
         <BackToTop />
         <CookieConsent />

@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import CTASection from '@/components/CTASection'
 import Link from 'next/link'
 import SectionTitle from '@/components/SectionTitle'
 import { client, urlFor } from '@/lib/sanity'
@@ -37,24 +39,17 @@ export default async function SustainabilityPage() {
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Page Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/camp_in_desert.jpeg" alt="Sustainable desert camp in the Sahara" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Travel with Purpose</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">
-            {sustainability?.title || 'Our Commitment to Sustainability'}
-          </h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            Protecting the Sahara for future generations through responsible tourism
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/camp_in_desert.jpeg"
+        imageAlt="Sustainable desert camp in the Sahara"
+        eyebrow="Travel with Purpose"
+        title={sustainability?.title || 'Our Commitment to Sustainability'}
+        subtitle="Protecting the Sahara for future generations through responsible tourism"
+      />
 
       {/* Impact stats */}
       <section className="bg-desert-700 text-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
             {[
               { value: '10%', label: 'Profits to Communities' },
@@ -63,7 +58,7 @@ export default async function SustainabilityPage() {
               { value: '8+', label: 'Villages Supported' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center py-6 px-4 text-center">
-                <span className="text-2xl md:text-3xl font-serif font-bold text-desert-200">{stat.value}</span>
+                <span className="text-2xl md:text-3xl font-serif font-medium text-desert-200">{stat.value}</span>
                 <span className="text-xs md:text-sm text-white/70 mt-1 tracking-wide uppercase">{stat.label}</span>
               </div>
             ))}
@@ -74,9 +69,9 @@ export default async function SustainabilityPage() {
       {/* Introduction */}
       {sustainability?.introduction && (
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container-site">
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-xl text-ink-600 leading-relaxed">
                 {sustainability.introduction}
               </p>
             </div>
@@ -86,7 +81,7 @@ export default async function SustainabilityPage() {
 
       {/* Initiatives */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <SectionTitle
             title="Our Initiatives"
             subtitle="Concrete actions we take on every tour, every day"
@@ -107,8 +102,8 @@ export default async function SustainabilityPage() {
                     </div>
                   )}
                   <div className="p-8 md:p-10">
-                    <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">{initiative.title}</h3>
-                    <p className="text-gray-600 leading-relaxed whitespace-pre-line">{initiative.description}</p>
+                    <h3 className="text-2xl font-serif font-medium text-ink-900 mb-4">{initiative.title}</h3>
+                    <p className="text-ink-600 leading-relaxed whitespace-pre-line">{initiative.description}</p>
                   </div>
                 </div>
               ))}
@@ -145,8 +140,8 @@ export default async function SustainabilityPage() {
                       {item.icon}
                     </svg>
                   </div>
-                  <h3 className="text-lg font-serif font-bold mb-3 text-gray-900">{item.title}</h3>
-                  <p className="text-sm text-gray-900 leading-relaxed">{item.body}</p>
+                  <h3 className="text-lg font-serif font-medium mb-3 text-ink-900">{item.title}</h3>
+                  <p className="text-sm text-ink-900 leading-relaxed">{item.body}</p>
                 </div>
               ))}
             </div>
@@ -156,13 +151,13 @@ export default async function SustainabilityPage() {
 
       {/* Our Pledge */}
       <section className="bg-sand-50 py-20 border-t border-sand-200">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="max-w-3xl mx-auto">
             <blockquote className="text-center">
               <svg className="w-10 h-10 text-desert-400 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
-              <p className="text-2xl font-serif italic text-gray-700 leading-relaxed mb-6">
+              <p className="text-2xl font-serif italic text-ink-700 leading-relaxed mb-6">
                 &ldquo;The desert does not belong to us. We belong to it. Our job is to share it carefully, and to leave it better than we found it.&rdquo;
               </p>
               <footer className="text-sm text-desert-600 font-semibold tracking-wide uppercase">
@@ -175,9 +170,9 @@ export default async function SustainabilityPage() {
 
       {/* External Resources + Internal Links */}
       <section className="bg-white py-14 border-t border-sand-200">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-xl font-serif font-bold text-gray-900 mb-2">Responsible Travel: Further Reading</h2>
-          <p className="text-gray-500 text-sm mb-6">Resources on sustainable tourism and desert conservation</p>
+        <div className="container-site max-w-4xl">
+          <h2 className="text-xl font-serif font-medium text-ink-900 mb-2">Responsible Travel: Further Reading</h2>
+          <p className="text-ink-500 text-sm mb-6">Resources on sustainable tourism and desert conservation</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
             {[
               { label: 'UNWTO: Sustainable Tourism Development', url: 'https://www.unwto.org/sustainable-development', desc: 'Global standards and frameworks for responsible travel' },
@@ -191,14 +186,14 @@ export default async function SustainabilityPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 <div>
-                  <p className="font-semibold text-gray-800 text-sm group-hover:text-desert-700 transition-colors">{item.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                  <p className="font-semibold text-ink-800 text-sm group-hover:text-desert-700 transition-colors">{item.label}</p>
+                  <p className="text-xs text-ink-500 mt-0.5">{item.desc}</p>
                 </div>
               </a>
             ))}
           </div>
           <div className="pt-6 border-t border-sand-200">
-            <p className="text-sm font-semibold text-gray-700 mb-4">On our site</p>
+            <p className="text-sm font-semibold text-ink-700 mb-4">On our site</p>
             <div className="flex flex-wrap gap-3">
               <Link href="/blog/sustainable-travel-sahara" className="px-4 py-2 bg-sand-50 rounded-lg border border-sand-200 text-sm text-desert-700 font-medium hover:border-desert-400 hover:shadow-sm transition-all">How to Travel the Sahara Sustainably: Blog</Link>
               <Link href="/about" className="px-4 py-2 bg-sand-50 rounded-lg border border-sand-200 text-sm text-desert-700 font-medium hover:border-desert-400 hover:shadow-sm transition-all">About Our Company</Link>
@@ -208,34 +203,13 @@ export default async function SustainabilityPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden">
-        <Image src="/images/desert8.jpeg" alt="Sahara Desert sustainable tourism" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/40" />
-        <div className="relative container mx-auto px-4 py-24 flex flex-col items-center text-center text-white">
-          <span className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-4">Travel Responsibly</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-5 max-w-2xl leading-tight">
-            Join a Tour That Gives Back
-          </h2>
-          <p className="text-base md:text-lg text-white/75 mb-10 max-w-xl">
-            Every booking with us directly supports local Berber communities and desert conservation. Choose travel that makes a difference.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="/tours"
-              className="px-10 py-4 bg-desert-600 hover:bg-desert-500 text-white font-semibold rounded-lg shadow-lg smooth-transition hover:scale-105 transition-transform"
-            >
-              Browse Responsible Tours
-            </a>
-            <a
-              href="/contact"
-              className="px-10 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/30 smooth-transition backdrop-blur-sm"
-            >
-              Ask Us Anything
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        image="/images/desert8.jpeg"
+        imageAlt="Sahara Desert sustainable tourism"
+        eyebrow="Travel Responsibly"
+        title="Join a Tour That Gives Back"
+        text="Every booking with us directly supports local Berber communities and desert conservation. Choose travel that makes a difference."
+      />
 
     </>
   )

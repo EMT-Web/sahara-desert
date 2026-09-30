@@ -93,11 +93,12 @@ Sanity Studio is served at `/studio` via `src/app/studio/[[...tool]]/`. Configur
 ### Root Layout — Global Components
 
 `src/app/layout.jsx` fetches `siteSettings` and `contact` from Sanity on every request and injects them into global components. The following are always mounted at the app level:
-- `<Navbar navigation={settings?.navigation} />` — transparent over hero, white on scroll
+- `<Navbar navigation={settings?.navigation} whatsapp={contact?.whatsapp} />` — transparent over hero, white on scroll; desktop mega menu and mobile full-screen accordion menu, all links always in the HTML
 - `<Footer contactInfo={contact} />`
-- `<WhatsAppButton number={contact?.whatsapp} />` — floating, appears after 300px scroll; loaded with `dynamic(..., { ssr: false })`
-- `<BackToTop />` — appears after 500px scroll; loaded with `dynamic(..., { ssr: false })`
-- `<CookieConsent />` — slides up once, persisted in localStorage; loaded with `dynamic(..., { ssr: false })`
+- `<WhatsAppButton number={contact?.whatsapp} />` — compact floating pill, appears after 400px scroll; hidden below `lg` on tour detail pages, where the mobile booking bar carries WhatsApp; loaded with `dynamic(..., { ssr: false })`
+- `<BackToTop />` — desktop only, stacked above the WhatsApp button; loaded with `dynamic(..., { ssr: false })`
+- `<CookieConsent />` — compact card bottom-left, persisted in localStorage; loaded with `dynamic(..., { ssr: false })`
+- `<RevealObserver />` — scroll-reveal for `[data-reveal]` elements
 - `<Analytics />` from `@vercel/analytics/next` — Vercel Analytics, no configuration needed
 
 `WhatsAppButton`, `BackToTop`, and `CookieConsent` are client-only (they use `window`/`localStorage`) and must keep `ssr: false` to avoid hydration mismatches. Follow the same pattern for any new component that reads browser APIs at mount.
@@ -147,13 +148,23 @@ The logo is a static raster file, `public/logo.png`, referenced directly via `<i
 
 `src/app/api/contact/route.js` is the only API route. It uses the **Resend** SDK to send booking inquiries. Destination address defaults to `contact@visitsaharadesert.com` but is overridden by `CONTACT_TO_EMAIL`.
 
-The newsletter signup components (`NewsletterStrip.jsx`, `NewsletterFooterRow.jsx`) are **not wired to anything** — they fake success with a `setTimeout` and discard the email. There is no newsletter API route or email-list integration; add one before relying on those forms.
+The contact form (`ContactForm.jsx`) is a two-step trip planner (dates, travellers, start/end city, travel style, accommodation, interests, then name/email; phone is optional). It prefills the tour from `?tour=<title>` — tour pages link to `/contact?tour=...`. Both API routes have a hidden `company` honeypot field.
 
-### Styling
+`NewsletterFooterRow.jsx` posts to `src/app/api/newsletter/route.js`, which emails each signup to `CONTACT_TO_EMAIL` via Resend. There is no mailing-list provider yet.
 
-Custom Tailwind color palette — use `sand-*` and `desert-*` tokens (defined in `tailwind.config.js`) rather than generic gray/amber when working on UI. Font family: `font-serif` for headings (Georgia stack), `font-sans` for body (system-ui stack). Note: Google Fonts (Inter + Lora) are loaded in the root layout via `next/font/google` and exposed as CSS variables `--font-sans` / `--font-serif`, but the Tailwind `fontFamily` config uses static stacks rather than those CSS variables — use `var(--font-sans)` / `var(--font-serif)` in custom CSS if you need the Google Font.
+### Design System
 
-Custom utilities in `src/styles/globals.css`: `.text-shadow`, `.smooth-transition`, `.animate-slide-up`.
+Tokens live in `tailwind.config.js`: `sand-*` (warm neutrals), `desert-*` (terracotta accent; use 600+ for text/buttons for AA contrast), `ink-*` (text), `night-*` (dark sections, footer). Don't use generic gray/amber. Fonts: Fraunces (`font-serif`, headings) and Inter (`font-sans`), loaded with `next/font` in the root layout and wired to Tailwind through `--font-serif` / `--font-sans`.
+
+Reusable classes in `src/styles/globals.css` (`@layer components`): layout `.container-site`, `.section`; type `.eyebrow`, `.eyebrow-light`, `.heading-xl/lg/md`, `.lede`; buttons `.btn-primary`, `.btn-outline`, `.btn-dark`, `.btn-light`, `.btn-ghost-light`, `.btn-whatsapp`, `.link-arrow`; surfaces `.card`, `.chip`; overlays `.scrim-b`, `.scrim-l`; forms `.field`, `.field-label`. Use these instead of one-off button/heading styles.
+
+Shared building blocks: `PageHero` (every inner page's top hero, with breadcrumbs), `SectionTitle`, `CTASection` (closing banner), `TourCard`, `BlogCard`, `FAQSection` / `FAQList` (`<details>`-based, pass the same array to `generateFAQSchema`), `TestimonialsSection`, `CityToursTemplate` (all five `/tours/<city>` pages), `ItineraryTimeline`, and `Icon` (inline SVG icon set plus `WhatsAppIcon` and `Stars`).
+
+Site structure constants (main nav groups, departure cities, WhatsApp helpers) live in `src/lib/site.js`. The header menu is built from `NAV_GROUPS`; any extra links in Sanity `siteSettings.navigation` that aren't already in it are appended to the About dropdown. `src/data/team.js` holds the guide list used on `/guides` (fallback) and the homepage.
+
+Scroll-reveal animation: add `data-reveal` (optionally `style={{ '--reveal-delay': '90ms' }}`) to any element. `RevealObserver` (mounted in the layout) reveals them; the hidden state only applies when `<html>` has the `js` class, and `prefers-reduced-motion` disables all motion.
+
+Photos in `public/images` were resized to a 2400px maximum edge (mozjpeg quality 80, EXIF rotation baked in) in September 2026. Keep new uploads at a similar size; `next/image` does the per-device resizing.
 
 ## Deployment
 

@@ -1,15 +1,14 @@
-export default function SectionTitle({ title, subtitle, centered = true }) {
+// Section heading used across the site: small eyebrow, serif title, optional intro.
+export default function SectionTitle({ title, subtitle, eyebrow, centered = true, light = false, className = '' }) {
   return (
-    <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
-      <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
-        {title}
-      </h2>
+    <div className={`mb-10 md:mb-14 ${centered ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl'} ${className}`} data-reveal>
+      {eyebrow && <p className={light ? 'eyebrow-light' : 'eyebrow'}>{eyebrow}</p>}
+      <h2 className={`heading-lg ${eyebrow ? 'mt-3' : ''} ${light ? '!text-white' : ''}`}>{title}</h2>
       {subtitle && (
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className={`mt-4 text-base leading-relaxed md:text-lg ${light ? 'text-white/75' : 'text-ink-600'}`}>
           {subtitle}
         </p>
       )}
-      <div className={`w-24 h-1 bg-gradient-to-r from-desert-500 to-sand-500 mt-6 ${centered ? 'mx-auto' : ''}`} />
     </div>
   )
 }

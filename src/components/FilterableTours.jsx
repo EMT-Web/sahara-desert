@@ -1,108 +1,102 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import TourCard from '@/components/TourCard'
 
 function capitalize(str = '') {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+// Number of days from a free-text duration like "3 Days / 2 Nights".
+function days(duration = '') {
+  const m = String(duration).match(/(\d+)\s*day/i)
+  return m ? parseInt(m[1], 10) : null
+}
+
+const LENGTHS = [
+  { id: 'all', label: 'Any length' },
+  { id: 'short', label: '2–3 days', test: (d) => d && d <= 3 },
+  { id: 'mid', label: '4–7 days', test: (d) => d && d >= 4 && d <= 7 },
+  { id: 'long', label: '8+ days', test: (d) => d && d >= 8 },
+]
+
+const price = (t) => t.priceDouble || t.price || 0
+
 export default function FilterableTours({ tours }) {
   const [activeCity, setActiveCity] = useState('all')
+  const [length, setLength] = useState('all')
   const [sortBy, setSortBy] = useState('default')
 
-  const cities = useMemo(() => {
-    const found = [...new Set(tours.map(t => t.departureCity).filter(Boolean))]
-    return found.sort()
-  }, [tours])
+  const cities = useMemo(() => [...new Set(tours.map((t) => t.departureCity).filter(Boolean))].sort(), [tours])
 
   const filtered = useMemo(() => {
-    let result = activeCity === 'all'
-      ? tours
-      : tours.filter(t => t.departureCity === activeCity)
-
-    if (sortBy === 'price-asc')  result = [...result].sort((a, b) => (a.price || 0) - (b.price || 0))
-    if (sortBy === 'price-desc') result = [...result].sort((a, b) => (b.price || 0) - (a.price || 0))
-
+    let result = activeCity === 'all' ? tours : tours.filter((t) => t.departureCity === activeCity)
+    const len = LENGTHS.find((l) => l.id === length)
+    if (len?.test) result = result.filter((t) => len.test(days(t.duration)))
+    // Tours without a price sort last either way.
+    if (sortBy === 'price-asc') result = [...result].sort((a, b) => (price(a) || Infinity) - (price(b) || Infinity))
+    if (sortBy === 'price-desc') result = [...result].sort((a, b) => price(b) - price(a))
+    if (sortBy === 'length') result = [...result].sort((a, b) => (days(a.duration) || 99) - (days(b.duration) || 99))
     return result
-  }, [tours, activeCity, sortBy])
+  }, [tours, activeCity, length, sortBy])
 
   if (!tours.length) {
     return (
-      <div className="text-center py-20">
-        <p className="text-gray-500">Tours coming soon, check back shortly!</p>
+      <div className="card mx-auto max-w-2xl p-10 text-center">
+        <h2 className="heading-md">Our tours are being updated</h2>
+        <p className="mt-3 text-ink-600">Tell us your dates and wishes and we will send you a tailor-made itinerary.</p>
+        <Link href="/contact" className="btn-primary mt-6">Plan my trip</Link>
       </div>
     )
   }
 
+  const pill = (active) =>
+    `min-h-[40px] whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+      active ? 'border-ink-900 bg-ink-900 text-white' : 'border-sand-300 bg-white text-ink-700 hover:border-ink-900/40'
+    }`
+
   return (
     <>
-      {/* Filter bar */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10 pb-6 border-b border-sand-100">
-        {/* City pills */}
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setActiveCity('all')}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-              activeCity === 'all'
-                ? 'bg-desert-600 text-white'
-                : 'bg-sand-100 text-gray-600 hover:bg-sand-200'
-            }`}
-          >
-            All Tours
-            <span className="ml-1.5 text-xs opacity-70">({tours.length})</span>
-          </button>
-          {cities.map(city => (
-            <button
-              key={city}
-              onClick={() => setActiveCity(city)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeCity === city
-                  ? 'bg-desert-600 text-white'
-                  : 'bg-sand-100 text-gray-600 hover:bg-sand-200'
-              }`}
-            >
-              {capitalize(city)}
-              <span className="ml-1.5 text-xs opacity-70">
-                ({tours.filter(t => t.departureCity === city).length})
-              </span>
+      <div className="sticky top-16 z-20 -mx-4 mb-10 border-b border-sand-200 bg-sand-50/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-2xl lg:border lg:px-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Departure city">
+            <button type="button" onClick={() => setActiveCity('all')} className={pill(activeCity === 'all')} aria-pressed={activeCity === 'all'}>
+              All cities <span className="opacity-60">{tours.length}</span>
             </button>
-          ))}
+            {cities.map((city) => (
+              <button key={city} type="button" onClick={() => setActiveCity(city)} className={pill(activeCity === city)} aria-pressed={activeCity === city}>
+                {capitalize(city)} <span className="opacity-60">{tours.filter((t) => t.departureCity === city).length}</span>
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 gap-2 sm:flex">
+            <label className="sr-only" htmlFor="tour-length">Tour length</label>
+            <select id="tour-length" value={length} onChange={(e) => setLength(e.target.value)} className="field !min-h-[40px] !rounded-full !py-2 text-sm">
+              {LENGTHS.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
+            </select>
+            <label className="sr-only" htmlFor="tour-sort">Sort tours</label>
+            <select id="tour-sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="field !min-h-[40px] !rounded-full !py-2 text-sm">
+              <option value="default">Featured</option>
+              <option value="length">Shortest first</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+            </select>
+          </div>
         </div>
-
-        {/* Sort */}
-        <select
-          value={sortBy}
-          onChange={e => setSortBy(e.target.value)}
-          className="text-sm border border-sand-200 rounded-lg px-3 py-2 text-gray-600 bg-white focus:outline-none focus:border-desert-400 flex-shrink-0"
-        >
-          <option value="default">Sort: Featured</option>
-          <option value="price-asc">Price: Low → High</option>
-          <option value="price-desc">Price: High → Low</option>
-        </select>
       </div>
 
-      {/* Results */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-gray-500 mb-4">No tours found for <strong>{capitalize(activeCity)}</strong>.</p>
-          <button
-            onClick={() => setActiveCity('all')}
-            className="text-desert-600 hover:text-desert-700 underline text-sm"
-          >
-            Show all tours
-          </button>
+        <div className="py-16 text-center">
+          <p className="text-ink-600">No tours match these filters.</p>
+          <button type="button" onClick={() => { setActiveCity('all'); setLength('all') }} className="link-arrow mt-3">Show all tours</button>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map(tour => (
-              <TourCard key={tour._id} tour={tour} />
-            ))}
+          <p className="mb-6 text-sm text-ink-500" aria-live="polite">Showing {filtered.length} of {tours.length} tours</p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((tour, i) => <TourCard key={tour._id} tour={tour} priority={i < 3} />)}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-8">
-            Showing {filtered.length} of {tours.length} tours
-          </p>
         </>
       )}
     </>

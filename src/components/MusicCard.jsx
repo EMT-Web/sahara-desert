@@ -15,7 +15,7 @@ export default function MusicCard({ music }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6">
-            <h3 className="text-2xl font-serif font-bold text-white text-shadow">
+            <h3 className="text-2xl font-serif font-medium text-white text-shadow">
               {music.title}
             </h3>
           </div>
@@ -24,7 +24,7 @@ export default function MusicCard({ music }) {
 
       <div className="p-6">
         {music.description && (
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-600 mb-4">
             {music.description}
           </p>
         )}

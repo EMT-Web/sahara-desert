@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import PageHero from '@/components/PageHero'
 import Link from 'next/link'
 import TourCard from '@/components/TourCard'
 import { client } from '@/lib/sanity'
@@ -49,29 +49,24 @@ export default async function LuxuryDesertCampsPage() {
       <script id="breadcrumb-schema-luxury-camps" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/camp_in_desert.jpeg" alt="Desert camp set among the dunes of the Sahara" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Where You Will Sleep</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">Luxury Sahara Desert Camps</h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            A night in the dunes, without giving up comfort
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/camp_in_desert.jpeg"
+        imageAlt="Desert camp set among the dunes of the Sahara"
+        eyebrow="Where You Will Sleep"
+        title="Luxury Sahara Desert Camps"
+        subtitle="A night in the dunes, without giving up comfort"
+      />
 
       {/* Intro */}
       <section className="py-16">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <p className="text-gray-600 leading-relaxed text-base mb-6">
+        <div className="container-site max-w-3xl">
+          <p className="text-ink-600 leading-relaxed text-base mb-6">
             Luxury camping in the Sahara has come a long way from a basic canvas tent. On our multi-night tours
             that include a luxury desert camp, you can expect a private en-suite bathroom with a hot shower, a
             proper bed with quality linen rather than a floor mattress, and a gourmet Moroccan dinner served in a
             shared lounge tent — all inside a camp positioned among the dunes rather than beside a car park.
           </p>
-          <p className="text-gray-600 leading-relaxed text-base mb-6">
+          <p className="text-ink-600 leading-relaxed text-base mb-6">
             We work with two very different dune systems. <strong className="text-desert-700 font-semibold">Erg Chebbi</strong>,
             near Merzouga, is the more accessible of the two and features on most of our tours — see our{' '}
             <Link href="/merzouga-erg-chebbi" className="text-desert-600 hover:underline">Merzouga &amp; Erg Chebbi guide</Link>{' '}
@@ -79,7 +74,7 @@ export default async function LuxuryDesertCampsPage() {
             Zagora and {"M'Hamid"}, is the largest and most remote dune field in Morocco — camps here sit further
             from any road, which means a longer 4x4 approach but a genuinely quieter, more exclusive night in the dunes.
           </p>
-          <p className="text-gray-600 leading-relaxed text-base">
+          <p className="text-ink-600 leading-relaxed text-base">
             Not every tour includes a luxury camp night by default, and comfort levels vary between traditional,
             mid-range, and luxury tents. If you want to understand those differences in more depth before you
             book, read{' '}
@@ -91,10 +86,10 @@ export default async function LuxuryDesertCampsPage() {
 
       {/* Tours with luxury camp nights */}
       <section className="py-16 bg-sand-50">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="text-xs font-semibold tracking-widest uppercase text-desert-500 mb-3">Book a Night in the Dunes</p>
-            <h2 className="text-3xl font-serif font-bold text-gray-900">Tours That Include a Luxury Desert Camp</h2>
+            <p className="text-xs font-semibold tracking-widest uppercase text-desert-600 mb-3">Book a Night in the Dunes</p>
+            <h2 className="text-3xl font-serif font-medium text-ink-900">Tours That Include a Luxury Desert Camp</h2>
           </div>
           {curated.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -103,7 +98,7 @@ export default async function LuxuryDesertCampsPage() {
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500">Tours coming soon, check back shortly!</p>
+            <p className="text-center text-ink-500">Tours coming soon, check back shortly!</p>
           )}
           <div className="text-center mt-10">
             <Link href="/contact" className="inline-flex items-center gap-2 text-desert-600 font-semibold hover:underline">
