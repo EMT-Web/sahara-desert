@@ -18,7 +18,7 @@ export default function FilterableBlog({ posts }) {
     <>
       {/* Category Filter */}
       <div className="bg-sand-50 border-b border-sand-200 py-5 sticky top-20 z-30">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="flex flex-wrap gap-2 justify-center">
             {allCategories.map((cat) => (
               <button
@@ -27,7 +27,7 @@ export default function FilterableBlog({ posts }) {
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === cat
                     ? 'bg-desert-600 text-white shadow-sm'
-                    : 'bg-white text-gray-600 border border-sand-200 hover:border-desert-300 hover:text-desert-600'
+                    : 'bg-white text-ink-600 border border-sand-200 hover:border-desert-300 hover:text-desert-600'
                 }`}
               >
                 {cat}
@@ -39,8 +39,8 @@ export default function FilterableBlog({ posts }) {
 
       {/* Posts Grid */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <p className="text-gray-400 text-sm mb-8">
+        <div className="container-site">
+          <p className="text-ink-500 text-sm mb-8">
             {filtered.length} {filtered.length === 1 ? 'article' : 'articles'}
             {activeCategory !== 'All' ? ` in ${activeCategory}` : ''}
           </p>

@@ -19,7 +19,7 @@ export default function GuideCard({ guide }) {
       )}
 
       <div className="p-6">
-        <h3 className="text-2xl font-serif font-bold text-gray-900 mb-2">
+        <h3 className="text-2xl font-serif font-medium text-ink-900 mb-2">
           {guide.name}
         </h3>
         {guide.role && (
@@ -28,7 +28,7 @@ export default function GuideCard({ guide }) {
           </p>
         )}
         {guide.bio && (
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-600 mb-4">
             {guide.bio}
           </p>
         )}
@@ -36,14 +36,14 @@ export default function GuideCard({ guide }) {
         <div className="space-y-2 text-sm">
           {guide.languages && guide.languages.length > 0 && (
             <div className="flex items-start">
-              <span className="font-semibold text-gray-700 mr-2">Languages:</span>
-              <span className="text-gray-600">{guide.languages.join(', ')}</span>
+              <span className="font-semibold text-ink-700 mr-2">Languages:</span>
+              <span className="text-ink-600">{guide.languages.join(', ')}</span>
             </div>
           )}
           {guide.experience && (
             <div className="flex items-start">
-              <span className="font-semibold text-gray-700 mr-2">Experience:</span>
-              <span className="text-gray-600">{guide.experience}</span>
+              <span className="font-semibold text-ink-700 mr-2">Experience:</span>
+              <span className="text-ink-600">{guide.experience}</span>
             </div>
           )}
         </div>

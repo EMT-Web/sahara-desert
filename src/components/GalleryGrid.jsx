@@ -10,7 +10,7 @@ export default function GalleryGrid({ items }) {
   if (!items || items.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">No gallery items available yet.</p>
+        <p className="text-ink-600">No gallery items available yet.</p>
       </div>
     )
   }
@@ -88,7 +88,7 @@ export default function GalleryGrid({ items }) {
             {(selectedItem.title || selectedItem.caption) && (
               <div className="mt-4 text-white text-center">
                 {selectedItem.title && (
-                  <h3 className="text-2xl font-serif font-bold mb-2">
+                  <h3 className="text-2xl font-serif font-medium mb-2">
                     {selectedItem.title}
                   </h3>
                 )}

@@ -27,7 +27,7 @@ export default function AudioPlayer({ audioUrl, title }) {
       />
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-sm font-semibold text-gray-700">
+          <p className="text-sm font-semibold text-ink-700">
             {title || 'Audio Track'}
           </p>
         </div>

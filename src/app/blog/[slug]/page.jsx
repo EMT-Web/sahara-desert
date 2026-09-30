@@ -1,4 +1,5 @@
-import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import CTASection from '@/components/CTASection'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BlogCard from '@/components/BlogCard'
@@ -182,6 +183,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
+// Photos not used as any blog post's own image or as a page header.
+const CTA_IMAGES = ['/images/image00007.jpeg', '/images/image00051.jpeg', '/images/image00049.jpeg', '/images/desert_midday.jpeg', '/images/image00035.jpeg', '/images/image00027.jpeg', '/images/image00030.jpeg', '/images/image00058.jpeg']
+
 export default async function BlogPostPage({ params }) {
   const post = getBlogPost(params.slug)
   if (!post) notFound()
@@ -191,6 +195,13 @@ export default async function BlogPostPage({ params }) {
   const related = getRelatedPosts(post.slug, post.category, 3)
   const resources = resourcesByCategory[post.category] || []
   const ctaLinks = internalLinks[post.slug] || defaultInternalLinks
+
+  // Closing banner photo varies by post and never repeats the post's own photo
+  // or a related-post card on the same page.
+  const onPage = new Set([post.image, ...related.map((r) => r.image)])
+  const ctaChoices = CTA_IMAGES.filter((src) => !onPage.has(src))
+  const slugHash = [...post.slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7)
+  const ctaImage = ctaChoices[slugHash % ctaChoices.length] || CTA_IMAGES[0]
 
   const blogPostSchema = generateBlogPostSchema(post)
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -212,46 +223,35 @@ export default async function BlogPostPage({ params }) {
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero */}
-      <section className="relative h-72 md:h-[500px] flex items-end overflow-hidden">
-        <Image src={post.image} alt={post.title} fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-        <div className="relative container mx-auto px-4 pb-12 max-w-4xl">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-white/50 text-xs mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
-            <span>/</span>
-            <span className="text-white/70 line-clamp-1">{post.title}</span>
-          </nav>
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">
-            {post.category}
-          </p>
-          <h1 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight max-w-3xl">
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
-            <span>{post.author}</span>
-            <span>·</span>
-            <span>{date}</span>
-            <span>·</span>
-            <span>{post.readTime} min read</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        image={post.image}
+        imageAlt={post.title}
+        eyebrow={post.category}
+        title={post.title}
+        breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Blog', url: '/blog' }, { name: post.title }]}
+        size="lg"
+      >
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/80">
+          <span>{post.author}</span>
+          <span aria-hidden="true">·</span>
+          <span>{date}</span>
+          <span aria-hidden="true">·</span>
+          <span>{post.readTime} min read</span>
+        </p>
+      </PageHero>
 
       {/* Article */}
       <article className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container-site max-w-3xl">
           {/* Intro */}
-          <p className="text-xl text-gray-700 leading-relaxed mb-10 font-serif">
+          <p className="text-xl text-ink-700 leading-relaxed mb-10 font-serif">
             {post.intro}
           </p>
 
           {/* Sections */}
           <div className="space-y-6">
             {post.sections.map((section, i) => (
-              <p key={i} className="text-gray-600 leading-relaxed text-lg">
+              <p key={i} className="text-ink-600 leading-relaxed text-lg">
                 {section.content}
               </p>
             ))}
@@ -260,7 +260,7 @@ export default async function BlogPostPage({ params }) {
           {/* Outbound Resources */}
           {resources.length > 0 && (
             <div className="mt-14 pt-10 border-t border-sand-200">
-              <h2 className="text-lg font-serif font-bold text-gray-900 mb-4">Helpful Resources</h2>
+              <h2 className="text-lg font-serif font-medium text-ink-900 mb-4">Helpful Resources</h2>
               <ul className="space-y-3">
                 {resources.map((res) => (
                   <li key={res.url}>
@@ -274,8 +274,8 @@ export default async function BlogPostPage({ params }) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                       <div>
-                        <p className="font-semibold text-gray-800 text-sm group-hover:text-desert-700 transition-colors">{res.label}</p>
-                        <p className="text-xs text-gray-500 mt-0.5">{res.desc}</p>
+                        <p className="font-semibold text-ink-800 text-sm group-hover:text-desert-700 transition-colors">{res.label}</p>
+                        <p className="text-xs text-ink-500 mt-0.5">{res.desc}</p>
                       </div>
                     </a>
                   </li>
@@ -287,7 +287,7 @@ export default async function BlogPostPage({ params }) {
           {/* Matching tours: contextual links to real tour pages */}
           {matchingTours.length > 0 && (
             <div className="mt-12 pt-10 border-t border-sand-200">
-              <h2 className="text-lg font-serif font-bold text-gray-900 mb-4">Sahara Tours Related to This Guide</h2>
+              <h2 className="text-lg font-serif font-medium text-ink-900 mb-4">Sahara Tours Related to This Guide</h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {matchingTours.map((t) => (
                   <li key={t._id}>
@@ -295,8 +295,8 @@ export default async function BlogPostPage({ params }) {
                       href={`/tours/${t.slug.current}`}
                       className="block p-4 bg-sand-50 rounded-xl border border-sand-200 hover:border-desert-300 hover:shadow-sm transition-all"
                     >
-                      <span className="block font-semibold text-gray-800 text-sm">{t.title}</span>
-                      {t.duration && <span className="block text-xs text-gray-500 mt-1">{t.duration}</span>}
+                      <span className="block font-semibold text-ink-800 text-sm">{t.title}</span>
+                      {t.duration && <span className="block text-xs text-ink-500 mt-1">{t.duration}</span>}
                     </Link>
                   </li>
                 ))}
@@ -306,7 +306,7 @@ export default async function BlogPostPage({ params }) {
 
           {/* Internal CTA: plan your trip */}
           <div className="mt-12 bg-desert-700 rounded-2xl p-8 text-white">
-            <h2 className="font-serif font-bold text-xl mb-2">Ready to Experience the Sahara?</h2>
+            <h2 className="font-serif font-medium text-xl mb-2">Ready to Experience the Sahara?</h2>
             <p className="text-white/75 text-sm mb-5 leading-relaxed">
               Turn what you&apos;ve just read into a real memory. Our Berber-led tours bring every story in this blog to life.
             </p>
@@ -331,8 +331,8 @@ export default async function BlogPostPage({ params }) {
               </svg>
             </div>
             <div>
-              <p className="font-serif font-bold text-gray-900">{post.author}</p>
-              <p className="text-sm text-gray-500">
+              <p className="font-serif font-medium text-ink-900">{post.author}</p>
+              <p className="text-sm text-ink-500">
                 Berber desert guide and founder of Visit Sahara Desert, born and raised in the Draa Valley
               </p>
             </div>
@@ -356,9 +356,9 @@ export default async function BlogPostPage({ params }) {
       {/* Related Posts */}
       {related.length > 0 && (
         <section className="bg-sand-50 py-16 border-t border-sand-200">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">More to Read</h2>
-            <p className="text-gray-500 text-sm mb-8">Continue exploring the Sahara</p>
+          <div className="container-site">
+            <h2 className="text-2xl font-serif font-medium text-ink-900 mb-2">More to Read</h2>
+            <p className="text-ink-500 text-sm mb-8">Continue exploring the Sahara</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {related.map((p) => (
                 <BlogCard key={p.slug} post={p} />
@@ -368,34 +368,13 @@ export default async function BlogPostPage({ params }) {
         </section>
       )}
 
-      {/* CTA */}
-      <section className="relative overflow-hidden">
-        <Image src="/images/image00001.jpeg" alt="Sahara Desert landscape" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
-        <div className="relative container mx-auto px-4 py-24 flex flex-col items-center text-center text-white">
-          <span className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-4">Ready to Go?</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-5 max-w-2xl leading-tight">
-            Turn Words Into Memories
-          </h2>
-          <p className="text-base md:text-lg text-white/75 mb-10 max-w-xl">
-            Every article you read here is lived experience. Let us take you into the desert and give you your own story to tell.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="px-10 py-4 bg-desert-600 hover:bg-desert-500 text-white font-semibold rounded-lg shadow-lg smooth-transition hover:scale-105 transition-transform"
-            >
-              Plan My Trip
-            </Link>
-            <Link
-              href="/tours"
-              className="px-10 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/30 smooth-transition backdrop-blur-sm"
-            >
-              Browse Tours
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        image={ctaImage}
+        imageAlt="Sahara Desert landscape"
+        eyebrow="Ready to Go?"
+        title="Turn Words Into Memories"
+        text="Every article you read here is lived experience. Let us take you into the desert and give you your own story to tell."
+      />
 
     </>
   )

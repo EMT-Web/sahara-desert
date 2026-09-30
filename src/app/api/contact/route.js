@@ -6,53 +6,62 @@ if (process.env.RESEND_API_KEY) {
   resend = new Resend(process.env.RESEND_API_KEY)
 }
 
+const clean = (v, max = 2000) => (v == null ? '' : String(v).slice(0, max).trim())
+
 export async function POST(request) {
   try {
-    const body = await request.json()
+    const body = (await request.json()) || {}
 
-    const {
-      name,
-      email,
-      phone,
-      arrivalDate,
-      departureDate,
-      flightDetails,
-      numberOfTravelers,
-      tourInterest,
-      message,
-    } = body || {}
+    // Honeypot field filled => bot. Pretend success, send nothing.
+    if (body.company) return NextResponse.json({ success: true })
 
-    if (!name || !email || !phone) {
+    const name = clean(body.name, 200)
+    const email = clean(body.email, 200)
+    const phone = clean(body.phone, 60)
+
+    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
-        { error: 'Missing required fields: name, email, phone' },
+        { error: 'Missing required fields: name and a valid email' },
         { status: 400 }
       )
     }
+
+    const interests = Array.isArray(body.interests) ? body.interests.map((i) => clean(i, 60)).join(', ') : clean(body.interests)
+    // Older form versions sent numberOfTravelers / flightDetails; keep accepting them.
+    const travellers = body.adults
+      ? `${clean(body.adults, 5)} adult(s), ${clean(body.children, 5) || '0'} child(ren)`
+      : clean(body.numberOfTravelers, 20)
 
     const toEmail = process.env.CONTACT_TO_EMAIL || 'contact@visitsaharadesert.com'
     const fromEmail =
       process.env.CONTACT_FROM_EMAIL || 'Visit Sahara Desert <no-reply@visitsaharadesert.com>'
 
-    const emailSubject = `New Booking / Inquiry from ${name}`
+    const tour = clean(body.tourInterest, 200)
+    const emailSubject = `New trip request from ${name}${tour ? `: ${tour}` : ''}`
 
-    const textContent = `
-New booking / inquiry submitted from the website contact form:
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-
-Arrival Date: ${arrivalDate || 'Not specified'}
-Departure Date: ${departureDate || 'Not specified'}
-Number of Travelers: ${numberOfTravelers || 'Not specified'}
-Tour Interest: ${tourInterest || 'Not specified'}
-
-Flight Details:
-${flightDetails || 'Not specified'}
-
-Additional Message:
-${message || 'No additional message'}
-`.trim()
+    const line = (label, value) => `${label}: ${value || 'Not specified'}`
+    const textContent = [
+      'New trip request from the website:',
+      '',
+      line('Name', name),
+      line('Email', email),
+      line('Phone / WhatsApp', phone),
+      line('Preferred reply', clean(body.preferredContact, 20)),
+      '',
+      line('Tour of interest', tour),
+      line('Arrival date', clean(body.arrivalDate, 20)),
+      line('Departure date', clean(body.departureDate, 20)),
+      line('Flexible dates', body.flexibleDates ? 'Yes' : 'No'),
+      line('Travellers', travellers),
+      line('Starting city', clean(body.startCity, 60)),
+      line('Ending city', clean(body.endCity, 60)),
+      line('Travel style', clean(body.travelStyle, 30)),
+      line('Accommodation', clean(body.accommodation, 30)),
+      line('Interests', interests),
+      '',
+      body.flightDetails ? `Flight details:\n${clean(body.flightDetails)}\n` : '',
+      `Message:\n${clean(body.message, 5000) || 'No additional message'}`,
+    ].join('\n').trim()
 
     if (!resend) {
       console.error('RESEND_API_KEY is not configured')
@@ -76,5 +85,3 @@ ${message || 'No additional message'}
     )
   }
 }
-
-

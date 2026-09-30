@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import CTASection from '@/components/CTASection'
 import GalleryGrid from '@/components/GalleryGrid'
 import { client } from '@/lib/sanity'
 import { galleryQuery } from '@/lib/queries'
@@ -18,7 +20,6 @@ export async function generateMetadata() {
 
 const staticPhotos = [
   { src: '/images/desert1.jpeg', alt: 'Golden Sahara dunes at sunrise' },
-  { src: '/images/camels_farview.jpeg', alt: 'Camel caravan crossing the dunes' },
   { src: '/images/evening.jpeg', alt: 'Desert camp at evening' },
   { src: '/images/desert2.jpeg', alt: 'Rippled sand dunes, Erg Chebbi' },
   { src: '/images/morningsunset.jpeg', alt: 'Morning light over the Sahara' },
@@ -39,7 +40,6 @@ const staticPhotos = [
   { src: '/images/image00011.jpeg', alt: 'Desert landscape' },
   { src: '/images/desert9.jpeg', alt: 'Desert horizon' },
   { src: '/images/image00016.jpeg', alt: 'Desert scenery' },
-  { src: '/images/desert_midday.jpeg', alt: 'Sahara desert under midday sun' },
   { src: '/images/image00017.jpeg', alt: 'Desert landscape' },
   { src: '/images/image00019.jpeg', alt: 'Desert scenery' },
   { src: '/images/image00021.jpeg', alt: 'Desert landscape' },
@@ -94,31 +94,22 @@ export default async function GalleryPage() {
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/desert_midday.jpeg" alt="Sahara Desert gallery" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">
-            Through the Lens
-          </p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">
-            Desert Gallery
-          </h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            Golden dunes, starlit camps, and the faces of the Sahara, captured on tour
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/desert_midday.jpeg"
+        imageAlt="Sahara Desert gallery"
+        eyebrow="Through the Lens"
+        title="Desert Gallery"
+        subtitle="Golden dunes, starlit camps, and the faces of the Sahara, captured on tour"
+      />
 
       {/* Gallery grid */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container-site">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-widest uppercase text-desert-500 mb-2">
+            <p className="text-xs font-semibold tracking-widest uppercase text-desert-600 mb-2">
               Our Photography
             </p>
-            <p className="text-gray-900 text-sm max-w-xl mx-auto">
+            <p className="text-ink-900 text-sm max-w-xl mx-auto">
               Every image taken by guides and guests on real tours, no stock photography
             </p>
           </div>
@@ -126,30 +117,13 @@ export default async function GalleryPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden">
-        <Image src="/images/camels_farview.jpeg" alt="Camels in the Sahara Desert" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
-        <div className="relative container mx-auto px-4 py-24 flex flex-col items-center text-center text-white">
-          <span className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-4">
-            Your Story Starts Here
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-5 max-w-2xl leading-tight">
-            Be in the Next Photo
-          </h2>
-          <p className="text-base md:text-lg text-white/75 mb-10 max-w-xl">
-            Join a tour and your own desert moments become part of our story.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/tours" className="px-10 py-4 bg-desert-600 hover:bg-desert-500 text-white font-semibold rounded-lg shadow-lg smooth-transition hover:scale-105 transition-transform">
-              View Tours
-            </a>
-            <a href="/contact" className="px-10 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/30 smooth-transition backdrop-blur-sm">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        image="/images/image00040.jpeg"
+        imageAlt="Camels in the Sahara Desert"
+        eyebrow="Your Story Starts Here"
+        title="Be in the Next Photo"
+        text="Join a tour and your own desert moments become part of our story."
+      />
     </>
   )
 }

@@ -1,9 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import PageHero from '@/components/PageHero'
 import FilterableTours from '@/components/FilterableTours'
+import CTASection from '@/components/CTASection'
+import Icon from '@/components/Icon'
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
-import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
+import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } from '@/lib/seo'
+import { DEPARTURE_CITIES } from '@/lib/site'
 
 export async function generateMetadata() {
   return generateSEOMetadata({
@@ -16,68 +20,81 @@ export async function generateMetadata() {
 
 async function getTours() {
   try {
-    return await client.fetch(toursListQuery) || []
+    return (await client.fetch(toursListQuery)) || []
   } catch {
     return []
   }
 }
 
+const STYLES = [
+  { title: 'Luxury desert camps', href: '/luxury-desert-camps', image: '/images/image00029.jpeg' },
+  { title: 'Honeymoon tours', href: '/honeymoon-morocco-tours', image: '/images/image00030.jpeg' },
+  { title: 'Family tours', href: '/family-morocco-tours', image: '/images/image00018.jpeg' },
+  { title: 'Merzouga & Erg Chebbi', href: '/merzouga-erg-chebbi', image: '/images/image00012.jpeg' },
+]
+
+// Photos this page already shows (hero, style tiles, closing banner), so tour cards avoid them.
+const PAGE_IMAGES = ['/images/image00016.jpeg', '/images/image00021.jpeg', ...STYLES.map((s) => s.image)]
+
 export default async function ToursPage() {
   const tours = await getTours()
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Tours', url: '/tours' },
+  ])
 
   return (
     <>
-      {/* Page Hero */}
-      <section className="relative h-72 md:h-[420px] flex items-end overflow-hidden">
-        <Image src="/images/image00003.jpeg" alt="Discover Sahara Desert tours" fill className="object-cover object-center" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
-        <div className="relative container mx-auto px-4 pb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-desert-300 mb-3">Explore the Sahara</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">Discover Our Desert Tours</h1>
-          <p className="text-white/75 mt-3 text-lg max-w-2xl">
-            Filter by departure city or price to find your perfect Sahara experience
-          </p>
+      <script id="breadcrumb-schema" type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
+      <PageHero
+        image="/images/image00016.jpeg"
+        imageAlt="Camels crossing the golden dunes of Erg Chebbi"
+        eyebrow="Morocco & Sahara tours"
+        title="Find your Sahara journey"
+        subtitle="Private and small-group tours from Marrakech, Fes, Casablanca, Agadir and Errachidia. Every itinerary can be tailored to your dates and pace."
+        breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Tours' }]}
+      />
+
+      {/* Quick routes by city */}
+      <section className="border-b border-sand-200 bg-white">
+        <div className="container-site no-scrollbar flex gap-2 overflow-x-auto py-5">
+          <span className="flex shrink-0 items-center pr-2 text-sm font-medium text-ink-500">Departing from:</span>
+          {DEPARTURE_CITIES.map((c) => (
+            <Link key={c.slug} href={`/tours/${c.slug}`} className="chip shrink-0 !px-4 !py-2 !text-sm hover:border-desert-500 hover:text-desert-700">
+              <Icon name="pin" className="h-3.5 w-3.5" /> {c.name}
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Stats bar */}
-      <section className="bg-desert-700 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-            {[
-              { value: `${tours.length || '50'}+`, label: 'Desert Tours' },
-              { value: '5', label: 'Departure Cities' },
-              { value: '100%', label: 'Berber-Guided' },
-              { value: '5★', label: 'Guest Rating' },
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center py-6 px-4 text-center">
-                <span className="text-2xl md:text-3xl font-serif font-bold text-desert-200">{stat.value}</span>
-                <span className="text-xs md:text-sm text-white/70 mt-1 tracking-wide uppercase">{stat.label}</span>
-              </div>
+      <section className="section !pt-10">
+        <div className="container-site">
+          <FilterableTours tours={tours} excludeImages={PAGE_IMAGES} />
+        </div>
+      </section>
+
+      <section className="section border-t border-sand-200 bg-white">
+        <div className="container-site">
+          <p className="eyebrow">Travel your way</p>
+          <h2 className="heading-lg mt-3">Explore by travel style</h2>
+          <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {STYLES.map((s) => (
+              <Link key={s.href} href={s.href} className="group relative flex aspect-[4/5] items-end overflow-hidden rounded-2xl bg-night-800">
+                <Image src={s.image} alt="" fill sizes="(max-width: 1024px) 50vw, 300px" className="object-cover transition-transform duration-[1.2s] ease-out-soft group-hover:scale-105" />
+                <span className="scrim-b absolute inset-0" />
+                <span className="relative flex w-full items-end justify-between gap-2 p-4 text-white md:p-5">
+                  <span className="font-serif text-lg leading-tight md:text-xl">{s.title}</span>
+                  <Icon name="arrow" className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2} />
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tours */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <FilterableTours tours={tours} />
-        </div>
-      </section>
-
-      {/* Guides */}
-      <section className="py-12 bg-sand-50 border-t border-sand-100">
-        <div className="container mx-auto px-4">
-          <p className="text-center text-xs font-semibold tracking-widest uppercase text-desert-500 mb-6">Planning Your Trip?</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/merzouga-erg-chebbi" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Merzouga &amp; Erg Chebbi Guide</Link>
-            <Link href="/luxury-desert-camps" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Luxury Desert Camps</Link>
-            <Link href="/family-morocco-tours" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Family Tours</Link>
-            <Link href="/honeymoon-morocco-tours" className="px-4 py-2 rounded-full bg-white border border-sand-200 text-sm font-medium text-gray-700 hover:border-desert-400 hover:text-desert-600 transition-colors">Honeymoon Tours</Link>
-          </div>
-        </div>
-      </section>
+      <CTASection title="Can't find the perfect tour?" text="Most of our guests travel on a tailor-made itinerary. Tell us your dates, starting city and interests and we will design one around you, free of charge." secondary={null} />
     </>
   )
 }

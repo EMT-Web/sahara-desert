@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import Image from 'next/image'
 import { client, urlFor } from '@/lib/sanity'
@@ -5,9 +6,11 @@ import { storyDetailQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 
 export async function generateStaticParams() {
+  // Don't fail the whole build if Sanity is briefly unreachable; pages then
+  // render on demand instead of at build time.
   const stories = await client.fetch(
     `*[_type == "story" && !(_id in path("drafts.**"))]{ "slug": slug.current }`
-  )
+  ).catch(() => [])
   return (stories || []).filter(s => s.slug).map(s => ({ slug: s.slug }))
 }
 
@@ -46,24 +49,8 @@ export default async function StoryDetailPage({ params }) {
   ])
 
   if (!story) {
-    return (
-      <div className="pt-32 pb-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-serif font-bold text-gray-900 mb-4">
-            Story Not Found
-          </h1>
-          <p className="text-gray-600 mb-8">
-            The story you are looking for could not be found.
-          </p>
-          <a
-            href="/stories"
-            className="inline-block px-8 py-4 bg-desert-600 hover:bg-desert-700 text-white font-semibold rounded-lg shadow-lg smooth-transition"
-          >
-            Browse All Stories
-          </a>
-        </div>
-      </div>
-    )
+    // Real 404 instead of a 200 "not found" page (avoids soft-404 indexing).
+    notFound()
   }
 
   const formattedDate = story.publishedAt
@@ -102,14 +89,14 @@ export default async function StoryDetailPage({ params }) {
         </div>
       )}
 
-      <article className="container mx-auto px-4 py-16 max-w-4xl">
+      <article className="container-site py-16 max-w-4xl">
         <header className="mb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl md:text-6xl font-serif font-medium text-ink-900 mb-6">
             {story.title}
           </h1>
           
           {story.excerpt && (
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-ink-600 mb-8">
               {story.excerpt}
             </p>
           )}
@@ -127,12 +114,12 @@ export default async function StoryDetailPage({ params }) {
             )}
             <div className="text-left">
               {story.author?.name && (
-                <p className="font-semibold text-gray-900">
+                <p className="font-semibold text-ink-900">
                   {story.author.name}
                 </p>
               )}
               {formattedDate && (
-                <time className="text-gray-600" dateTime={story.publishedAt}>
+                <time className="text-ink-600" dateTime={story.publishedAt}>
                   {formattedDate}
                 </time>
               )}
@@ -141,14 +128,14 @@ export default async function StoryDetailPage({ params }) {
         </header>
 
         <div className="prose prose-lg max-w-none">
-          <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+          <div className="text-ink-700 leading-relaxed whitespace-pre-line">
             {story.body}
           </div>
         </div>
 
         {story.author?.bio && (
           <div className="mt-16 p-8 bg-sand-100 rounded-xl">
-            <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl font-serif font-medium text-ink-900 mb-4">
               About the Author
             </h3>
             <div className="flex items-start space-x-4">
@@ -163,10 +150,10 @@ export default async function StoryDetailPage({ params }) {
                 </div>
               )}
               <div>
-                <p className="font-semibold text-gray-900 text-lg mb-2">
+                <p className="font-semibold text-ink-900 text-lg mb-2">
                   {story.author.name}
                 </p>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-ink-600 leading-relaxed">
                   {story.author.bio}
                 </p>
               </div>
