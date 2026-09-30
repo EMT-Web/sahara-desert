@@ -6,6 +6,7 @@ import { client, urlFor } from '@/lib/sanity'
 import { tourDetailQuery, relatedToursQuery, contactQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateTourSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo'
 import TourCard from '@/components/TourCard'
+import { withUniqueCardImages, imageRef } from '@/lib/tourImages'
 import ItineraryTimeline from '@/components/ItineraryTimeline'
 import { FAQList } from '@/components/FAQSection'
 import Icon, { WhatsAppIcon } from '@/components/Icon'
@@ -115,7 +116,7 @@ export default async function TourDetailPage({ params }) {
   const fromPrice = tour.priceDouble || tour.price
   const rooms = ROOM_TYPES.filter((r) => tour[r.key])
   const overview = (tour.body || '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
-  const heroImage = tour.mainImage ? urlFor(tour.mainImage).width(2000).height(1125).quality(72).url() : '/images/image00015.jpeg'
+  const heroImage = tour.mainImage ? urlFor(tour.mainImage).width(2000).height(1125).quality(72).url() : '/images/camels_farview.jpeg'
 
   const facts = [
     tour.duration && { icon: 'clock', label: 'Duration', value: tour.duration },
@@ -415,7 +416,7 @@ export default async function TourDetailPage({ params }) {
               )}
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedTours.map((t) => <TourCard key={t._id} tour={t} />)}
+              {withUniqueCardImages(relatedTours, { exclude: [imageRef(tour.mainImage)] }).map((t) => <TourCard key={t._id} tour={t} />)}
             </div>
           </div>
         </section>

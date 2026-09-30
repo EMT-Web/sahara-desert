@@ -40,7 +40,7 @@ export default async function SustainabilityPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <PageHero
-        image="/images/camp_in_desert.jpeg"
+        image="/images/image00062.jpeg"
         imageAlt="Sustainable desert camp in the Sahara"
         eyebrow="Travel with Purpose"
         title={sustainability?.title || 'Our Commitment to Sustainability'}

@@ -34,6 +34,20 @@ export default function Navbar({ navigation, whatsapp }) {
   const [openGroup, setOpenGroup] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileGroup, setMobileGroup] = useState(null)
+  // After a menu link is clicked, the pointer is still over the dropdown and
+  // the link keeps focus, so CSS :hover / :focus-within would keep it open.
+  // `suppressed` switches those off until the pointer leaves that menu item.
+  const [suppressed, setSuppressed] = useState(null)
+
+  const closeMenus = (groupTitle) => {
+    setOpenGroup(null)
+    setMobileOpen(false)
+    setMobileGroup(null)
+    if (groupTitle) setSuppressed(groupTitle)
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+  }
   const navRef = useRef(null)
   const groups = buildGroups(navigation)
   const solid = scrolled || startsSolid(pathname) || mobileOpen
@@ -96,7 +110,7 @@ export default function Navbar({ navigation, whatsapp }) {
       </a>
       <nav aria-label="Main" className="container-site">
         <div className={`flex items-center justify-between gap-4 transition-[height] duration-500 ${scrolled ? 'h-16' : 'h-[72px] lg:h-20'}`}>
-          <Link href="/" className="flex shrink-0 items-center" aria-label="Visit Sahara Desert, home">
+          <Link href="/" onClick={() => closeMenus()} className="flex shrink-0 items-center" aria-label="Visit Sahara Desert, home">
             <Image
               src="/logo.png"
               alt="Visit Sahara Desert"
@@ -113,17 +127,17 @@ export default function Navbar({ navigation, whatsapp }) {
               const open = openGroup === g.title
               const mega = g.columns.length > 1
               return (
-                <li key={g.title} className="group relative">
+                <li key={g.title} className="group relative" onMouseLeave={() => suppressed === g.title && setSuppressed(null)}>
                   <button
                     type="button"
                     aria-expanded={open}
-                    onClick={() => setOpenGroup(open ? null : g.title)}
+                    onClick={() => { setSuppressed(null); setOpenGroup(open ? null : g.title) }}
                     className={`relative flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors ${
                       solid ? 'text-ink-800 hover:text-desert-700' : 'text-white text-shadow hover:text-desert-100'
                     }`}
                   >
                     {g.title}
-                    <Icon name="chevronDown" className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? 'rotate-180' : 'group-hover:rotate-180'}`} strokeWidth={2} />
+                    <Icon name="chevronDown" className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? 'rotate-180' : suppressed === g.title ? '' : 'group-hover:rotate-180'}`} strokeWidth={2} />
                     {isActive(g) && (
                       <span className={`absolute inset-x-3.5 -bottom-0.5 h-px ${solid ? 'bg-desert-600' : 'bg-white/80'}`} aria-hidden="true" />
                     )}
@@ -135,6 +149,8 @@ export default function Navbar({ navigation, whatsapp }) {
                     } ${
                       open
                         ? 'visible translate-y-0 opacity-100'
+                        : suppressed === g.title
+                        ? 'invisible translate-y-1 opacity-0'
                         : 'invisible translate-y-1 opacity-0 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100'
                     }`}
                   >
@@ -148,6 +164,7 @@ export default function Navbar({ navigation, whatsapp }) {
                                 <li key={l.url + l.title}>
                                   <Link
                                     href={l.url}
+                                    onClick={() => closeMenus(g.title)}
                                     className={`block rounded-lg text-[0.92rem] text-ink-700 transition-colors hover:bg-sand-50 hover:text-desert-700 ${mega ? 'px-2 py-1.5 -mx-2' : 'px-3 py-2.5'}`}
                                   >
                                     {l.title}
@@ -159,7 +176,7 @@ export default function Navbar({ navigation, whatsapp }) {
                         ))}
                       </div>
                       {g.feature && (
-                        <Link href={g.feature.url} className="group/feature relative block w-56 shrink-0 overflow-hidden">
+                        <Link href={g.feature.url} onClick={() => closeMenus(g.title)} className="group/feature relative block w-56 shrink-0 overflow-hidden">
                           <Image src={g.feature.image} alt="" fill sizes="224px" className="object-cover transition-transform duration-700 group-hover/feature:scale-105" />
                           <span className="scrim-b absolute inset-0" />
                           <span className="absolute inset-x-0 bottom-0 p-5 text-white">
@@ -246,7 +263,7 @@ export default function Navbar({ navigation, whatsapp }) {
                           <ul>
                             {col.links.map((l) => (
                               <li key={l.url + l.title}>
-                                <Link href={l.url} tabIndex={open ? 0 : -1} className="block py-2.5 text-[0.98rem] text-ink-700 active:text-desert-700">
+                                <Link href={l.url} tabIndex={open ? 0 : -1} onClick={() => closeMenus()} className="block py-2.5 text-[0.98rem] text-ink-700 active:text-desert-700">
                                   {l.title}
                                 </Link>
                               </li>
@@ -261,7 +278,7 @@ export default function Navbar({ navigation, whatsapp }) {
             })}
           </ul>
           <div className="mt-auto grid gap-3 border-t border-sand-200 pb-4 pt-6">
-            <Link href="/contact" className="btn-primary w-full">Plan Your Trip</Link>
+            <Link href="/contact" onClick={() => closeMenus()} className="btn-primary w-full">Plan Your Trip</Link>
             <a href={waHref} target="_blank" rel="noopener noreferrer" className="btn-whatsapp w-full">
               <WhatsAppIcon className="h-5 w-5" /> Chat on WhatsApp
             </a>

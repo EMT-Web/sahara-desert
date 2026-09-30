@@ -54,7 +54,7 @@ export default async function ErrachidiaToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Errachidia',
           subtitle: 'The closest gateway to Erg Chebbi: gorges, oases, and golden dunes within reach in a single day',
-          image: '/images/image00060.jpeg',
+          image: '/images/image00065.jpeg',
           imageAlt: 'Seasonal lake among the dunes near Merzouga',
         }}
         stops={stops}

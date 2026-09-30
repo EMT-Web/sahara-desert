@@ -54,8 +54,8 @@ export default async function CasablancaToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Casablanca',
           subtitle: "Morocco's great crossing, from the Atlantic coast to the heart of the Sahara in one epic journey",
-          image: '/images/fort2.jpg',
-          imageAlt: 'Taourirt kasbah in Ouarzazate on the road from Casablanca to the Sahara',
+          image: '/images/fort.jpg',
+          imageAlt: 'Kasbah village and palm grove in the Skoura oasis on the road to the Sahara',
         }}
         stops={stops}
         note={null}

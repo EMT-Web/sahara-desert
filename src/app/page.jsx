@@ -14,6 +14,7 @@ import { generateMetadata as generateSEOMetadata, generateFAQSchema } from '@/li
 import { blogPosts } from '@/data/blogPosts'
 import { team } from '@/data/team'
 import { DEPARTURE_CITIES } from '@/lib/site'
+import { withUniqueCardImages } from '@/lib/tourImages'
 
 const homepageFAQs = [
   { question: 'What is the best time of year to visit the Sahara?', answer: 'October to April is ideal: temperatures are comfortable (15–28°C by day) and the nights are cool and clear for stargazing. July and August bring extreme heat (40°C+) and are not recommended for desert treks.' },
@@ -88,7 +89,9 @@ async function getHomepageData() {
     }
     const cityCounts = Object.fromEntries(Object.entries(toursByCity).map(([k, v]) => [k, v.length]))
 
-    return { homepage, tours: featuredTours.slice(0, maxTours), total: allTours?.length || 0, cityCounts, contact }
+    // Homepage photos already shown in other sections, so tour cards avoid them.
+    const shownElsewhere = ['/images/image00015.jpeg', '/images/image00006.jpeg', '/images/image00024.jpeg', '/images/image00020.jpeg', '/images/image00022.jpeg', '/images/image00041.jpeg', '/images/image00037.jpeg', '/images/image00027.jpeg', ...DEPARTURE_CITIES.map((c) => c.image)]
+    return { homepage, tours: withUniqueCardImages(featuredTours.slice(0, maxTours), { exclude: shownElsewhere }), total: allTours?.length || 0, cityCounts, contact }
   } catch (error) {
     console.error('Error fetching homepage data:', error)
     return { homepage: null, tours: [], total: 0, cityCounts: {}, contact: null }
@@ -270,7 +273,7 @@ export default async function HomePage() {
         <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="relative" data-reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl lg:sticky lg:top-28">
-              <Image src="/images/gathering_team.JPG" alt="Our team playing traditional Berber music around a candlelit table in the desert camp" fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover" />
+              <Image src="/images/image00037.jpeg" alt="Travellers gathered around the campfire at our desert camp under the night sky" fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover" />
             </div>
           </div>
           <div>
@@ -372,8 +375,8 @@ export default async function HomePage() {
 
       {/* 11. Custom trip CTA */}
       <CTASection
-        image="/images/evening.jpeg"
-        imageAlt="Fiery sunset over the Sahara dunes"
+        image="/images/image00027.jpeg"
+        imageAlt="Sun setting over the Sahara dunes"
         eyebrow="Your journey, designed around you"
         title="Plan your private Morocco journey"
         whatsapp={contact?.whatsapp}

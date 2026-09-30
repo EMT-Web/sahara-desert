@@ -54,8 +54,8 @@ export default async function MarrakechToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Marrakech',
           subtitle: 'Cross the High Atlas, trace the Draa Valley, and arrive where the dunes rise above everything',
-          image: '/images/image00032.jpeg',
-          imageAlt: 'Kasbah village beneath the mountains on the road south from Marrakech',
+          image: '/images/image00042.jpeg',
+          imageAlt: 'Road through the Todra gorge on the route from Marrakech to the Sahara',
         }}
         stops={stops}
         note={null}

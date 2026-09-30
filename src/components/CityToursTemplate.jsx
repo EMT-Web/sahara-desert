@@ -3,10 +3,12 @@ import PageHero from '@/components/PageHero'
 import TourCard from '@/components/TourCard'
 import CTASection from '@/components/CTASection'
 import Icon from '@/components/Icon'
+import { withUniqueCardImages } from '@/lib/tourImages'
 
 // Shared layout for the /tours/<city> departure hubs. Each city page keeps its
 // own metadata, copy and data and passes them in.
-export default function CityToursTemplate({ city, tours, hero, stops, note, posts, cta }) {
+export default function CityToursTemplate({ city, tours: rawTours, hero, stops, note, posts, cta }) {
+  const tours = withUniqueCardImages(rawTours, { exclude: [hero.image, cta.image] })
   return (
     <>
       <PageHero

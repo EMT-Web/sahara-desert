@@ -33,6 +33,9 @@ const STYLES = [
   { title: 'Merzouga & Erg Chebbi', href: '/merzouga-erg-chebbi', image: '/images/image00019.jpeg' },
 ]
 
+// Photos this page already shows (hero, style tiles, closing banner), so tour cards avoid them.
+const PAGE_IMAGES = ['/images/camels.jpeg', '/images/image00004.jpeg', ...STYLES.map((s) => s.image)]
+
 export default async function ToursPage() {
   const tours = await getTours()
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -46,8 +49,8 @@ export default async function ToursPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <PageHero
-        image="/images/image00017.jpeg"
-        imageAlt="Travellers on a camel trek through the Erg Chebbi dunes"
+        image="/images/camels.jpeg"
+        imageAlt="Camel caravan crossing a dune ridge in the Sahara"
         eyebrow="Morocco & Sahara tours"
         title="Find your Sahara journey"
         subtitle="Private and small-group tours from Marrakech, Fes, Casablanca, Agadir and Errachidia. Every itinerary can be tailored to your dates and pace."
@@ -68,7 +71,7 @@ export default async function ToursPage() {
 
       <section className="section !pt-10">
         <div className="container-site">
-          <FilterableTours tours={tours} />
+          <FilterableTours tours={tours} excludeImages={PAGE_IMAGES} />
         </div>
       </section>
 

@@ -162,6 +162,10 @@ Shared building blocks: `PageHero` (every inner page's top hero, with breadcrumb
 
 Site structure constants (main nav groups, departure cities, WhatsApp helpers) live in `src/lib/site.js`. The header menu is built from `NAV_GROUPS`; any extra links in Sanity `siteSettings.navigation` that aren't already in it are appended to the About dropdown. `src/data/team.js` holds the guide list used on `/guides` (fallback) and the homepage.
 
+Tour card photos: every tour grid passes its list through `withUniqueCardImages()` (`src/lib/tourImages.js`) so no two cards in one list show the same picture. A tour keeps its Sanity `mainImage` unless an earlier card already used that asset (or it has none); then it gets an unused local photo (city pool first) via `cardImage`. Pass `exclude` with photos the page already shows (hero, banners) so cards avoid them. Use this for any new tour grid.
+
+Header dropdowns close when a link inside them is clicked (`closeMenus()` in `Navbar.jsx`); hover/focus reopening is suppressed until the pointer leaves that menu item.
+
 Scroll-reveal animation: add `data-reveal` (optionally `style={{ '--reveal-delay': '90ms' }}`) to any element. `RevealObserver` (mounted in the layout) reveals them; the hidden state only applies when `<html>` has the `js` class, and `prefers-reduced-motion` disables all motion.
 
 Photos in `public/images` were resized to a 2400px maximum edge (mozjpeg quality 80, EXIF rotation baked in) in September 2026. Keep new uploads at a similar size; `next/image` does the per-device resizing.

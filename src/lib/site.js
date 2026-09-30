@@ -80,7 +80,7 @@ export const NAV_GROUPS = [
       title: 'Plan a private journey',
       text: 'Tell us your dates. We design the route.',
       url: '/contact',
-      image: '/images/desert9.jpeg',
+      image: '/images/image00036.jpeg',
     },
   },
   {

@@ -54,9 +54,9 @@ export default async function FesToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Fes',
           subtitle: 'From ancient medina to endless dunes, descend through cedar forests and the Ziz Valley to reach Erg Chebbi',
-          image: '/images/image00017.jpeg',
+          image: '/images/image00019.jpeg',
           imageAlt: 'Travellers riding camels through the Erg Chebbi dunes',
-          imagePosition: 'center 75%',
+          imagePosition: 'center 70%',
         }}
         stops={stops}
         note={null}

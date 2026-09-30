@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import TourCard from '@/components/TourCard'
+import { withUniqueCardImages } from '@/lib/tourImages'
 
 function capitalize(str = '') {
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -23,7 +24,9 @@ const LENGTHS = [
 
 const price = (t) => t.priceDouble || t.price || 0
 
-export default function FilterableTours({ tours }) {
+export default function FilterableTours({ tours: rawTours, excludeImages = [] }) {
+  // Assign photos across the whole list once, so any filtered subset is also free of repeats.
+  const tours = useMemo(() => withUniqueCardImages(rawTours, { exclude: excludeImages }), [rawTours, excludeImages])
   const [activeCity, setActiveCity] = useState('all')
   const [length, setLength] = useState('all')
   const [sortBy, setSortBy] = useState('default')

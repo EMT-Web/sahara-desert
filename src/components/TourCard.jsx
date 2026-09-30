@@ -2,32 +2,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
 import Icon from '@/components/Icon'
-
-// Fallback photos when a tour has no mainImage in Sanity. Pools are chosen
-// per departure city; the pick is stable per tour id.
-const CITY_IMAGES = {
-  marrakech:  ['/images/image00032.jpeg', '/images/desert3.jpeg', '/images/fort.jpg', '/images/image00004.jpeg', '/images/desert4.jpeg'],
-  fes:        ['/images/image00017.jpeg', '/images/image00015.jpeg', '/images/image00016.jpeg', '/images/image00008.jpeg', '/images/desert2.jpeg'],
-  agadir:     ['/images/image00025.jpeg', '/images/desert8.jpeg', '/images/image00026.jpeg', '/images/image00011.jpeg', '/images/camels.jpeg'],
-  casablanca: ['/images/fort2.jpg', '/images/desert9.jpeg', '/images/image00012.jpeg', '/images/image00001.jpeg', '/images/image00027.jpeg'],
-  errachidia: ['/images/image00060.jpeg', '/images/camels2.jpeg', '/images/image00059.jpeg', '/images/image00018.jpeg', '/images/desert_midday.jpeg'],
-  default:    ['/images/camp_in_desert.jpeg', '/images/image00015.jpeg', '/images/desert1.jpeg', '/images/camels_farview.jpeg', '/images/evening.jpeg'],
-}
-
-function getFallbackImage(city = '', id = '') {
-  const pool = CITY_IMAGES[city?.toLowerCase()] || CITY_IMAGES.default
-  const index = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
-  return pool[index % pool.length]
-}
+import { fallbackImageFor } from '@/lib/tourImages'
 
 function capitalize(str = '') {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 export default function TourCard({ tour, priority = false }) {
-  const imageSrc = tour.mainImage
-    ? urlFor(tour.mainImage).width(800).height(600).quality(75).url()
-    : getFallbackImage(tour.departureCity, tour._id || tour.slug?.current || '')
+  // `cardImage` is set by withUniqueCardImages() when this tour's own photo is
+  // missing or already shown by another card in the same list.
+  const imageSrc = tour.cardImage
+    || (tour.mainImage ? urlFor(tour.mainImage).width(800).height(600).quality(75).url() : fallbackImageFor(tour))
 
   const excerpt = tour.excerpt || 'Discover an unforgettable journey through the golden dunes and hidden oases of the Sahara Desert.'
   const displayPrice = tour.priceDouble || tour.price

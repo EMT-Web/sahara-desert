@@ -54,7 +54,7 @@ export default async function AgadirToursPage() {
         hero={{
           title: 'Sahara Desert Tours from Agadir',
           subtitle: "Climb the Anti-Atlas, descend into the Draa Valley, and reach the dunes through Morocco's most dramatic landscapes",
-          image: '/images/image00025.jpeg',
+          image: '/images/image00026.jpeg',
           imageAlt: 'Soft golden Sahara dunes reached from Agadir',
         }}
         stops={stops}

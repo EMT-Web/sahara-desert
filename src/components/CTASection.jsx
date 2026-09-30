@@ -5,8 +5,8 @@ import { whatsappHref, DEFAULT_WHATSAPP_MESSAGE } from '@/lib/site'
 
 // Closing call to action used at the bottom of most pages.
 export default function CTASection({
-  image = '/images/desert9.jpeg',
-  imageAlt = 'Desert camp in the Sahara at sunset',
+  image = '/images/image00004.jpeg',
+  imageAlt = 'Pink and orange sky over the Sahara dunes at dusk',
   eyebrow = 'Tailor-made, private, personal',
   title = 'Tell us about the journey you imagine',
   text = 'Share your dates, your pace and what moves you. We will design a private itinerary around you and reply with a clear price, usually within a few hours.',
