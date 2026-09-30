@@ -159,8 +159,8 @@ export default async function HomePage() {
                 <Image src="/images/image00024.jpeg" alt="Mint tea around a low table inside a Berber tent" fill sizes="(max-width: 1024px) 40vw, 250px" className="object-cover" />
               </div>
               <div className="rounded-2xl bg-night-800 p-5 text-white">
-                <p className="font-serif text-3xl">10+</p>
-                <p className="mt-1 text-xs leading-snug text-white/75">years guiding travellers from 40+ countries</p>
+                <p className="font-serif text-3xl">20+</p>
+                <p className="mt-1 text-xs leading-snug text-white/75">years in the desert, welcoming travellers from 40+ countries</p>
               </div>
             </div>
           </div>

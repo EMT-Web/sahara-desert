@@ -55,8 +55,8 @@ export default async function AboutPage() {
         <div className="container-site">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
             {[
-              { value: '10+', label: 'Years in the Desert' },
-              { value: '50+', label: 'Expert Guides' },
+              { value: '20+', label: 'Years in the Desert' },
+              { value: '7+', label: 'Expert Guides' },
               { value: '40+', label: 'Countries Welcomed' },
               { value: '100%', label: 'Berber-Led' },
             ].map((stat) => (
