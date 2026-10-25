@@ -1,10 +1,12 @@
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import BlogCard from '@/components/BlogCard'
+import { FAQList } from '@/components/FAQSection'
 import { getBlogPost, getRelatedPosts, blogPosts } from '@/data/blogPosts'
-import { generateBlogPostSchema, generateBreadcrumbSchema, resolveSiteUrl } from '@/lib/seo'
+import { generateBlogPostSchema, generateBreadcrumbSchema, generateFAQSchema, resolveSiteUrl } from '@/lib/seo'
 import { client } from '@/lib/sanity'
 import { toursListQuery } from '@/lib/queries'
 
@@ -34,6 +36,81 @@ async function getMatchingTours(post) {
   } catch {
     return []
   }
+}
+
+// Post text is plain strings. `[label](/path)` inside a string becomes a link:
+// internal paths use next/link, http(s) URLs open in a new tab.
+const LINK_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g
+function renderInline(text) {
+  if (!text || !text.includes('](')) return text
+  const out = []
+  let last = 0
+  let m
+  LINK_RE.lastIndex = 0
+  while ((m = LINK_RE.exec(text))) {
+    if (m.index > last) out.push(text.slice(last, m.index))
+    const [, label, href] = m
+    out.push(
+      href.startsWith('http') ? (
+        <a key={m.index} href={href} target="_blank" rel="noopener noreferrer" className="text-desert-700 underline decoration-desert-300 underline-offset-2 hover:decoration-desert-700">{label}</a>
+      ) : (
+        <Link key={m.index} href={href} className="text-desert-700 underline decoration-desert-300 underline-offset-2 hover:decoration-desert-700">{label}</Link>
+      )
+    )
+    last = m.index + m[0].length
+  }
+  if (last < text.length) out.push(text.slice(last))
+  return out
+}
+
+// A section's `content` may hold several paragraphs separated by a blank line.
+function Paragraphs({ text }) {
+  if (!text) return null
+  return text.split(/\n\s*\n/).map((p, i) => (
+    <p key={i} className="text-ink-600 leading-relaxed text-lg">{renderInline(p.trim())}</p>
+  ))
+}
+
+function SectionBody({ block }) {
+  return (
+    <>
+      <Paragraphs text={block.content} />
+      {block.list?.length > 0 && (
+        <ul className="list-disc space-y-2 pl-6 text-ink-600 text-lg leading-relaxed marker:text-desert-500">
+          {block.list.map((item, i) => <li key={i}>{renderInline(item)}</li>)}
+        </ul>
+      )}
+      {block.table && (
+        <div className="overflow-x-auto rounded-xl border border-sand-200">
+          <table className="w-full text-left text-[0.95rem]">
+            {block.table.caption && <caption className="caption-bottom px-4 py-2 text-xs text-ink-500">{block.table.caption}</caption>}
+            <thead className="bg-night-900 text-white">
+              <tr>{block.table.headers.map((h) => <th key={h} scope="col" className="px-4 py-3 font-semibold">{h}</th>)}</tr>
+            </thead>
+            <tbody>
+              {block.table.rows.map((row, r) => (
+                <tr key={r} className="border-t border-sand-200 even:bg-sand-50">
+                  {row.map((cell, c) => (
+                    c === 0
+                      ? <th key={c} scope="row" className="px-4 py-3 align-top font-semibold text-ink-800">{renderInline(cell)}</th>
+                      : <td key={c} className="px-4 py-3 align-top text-ink-600">{renderInline(cell)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {block.image && (
+        <figure>
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl">
+            <Image src={block.image.src} alt={block.image.alt} fill sizes="(min-width: 768px) 720px, 100vw" className="object-cover" />
+          </div>
+          {block.image.caption && <figcaption className="mt-2 text-sm text-ink-500">{block.image.caption}</figcaption>}
+        </figure>
+      )}
+    </>
+  )
 }
 
 // Outbound authority resources keyed by post category
@@ -145,7 +222,20 @@ const internalLinks = {
     { label: 'Browse our Agadir desert tours', url: '/tours/agadir' },
     { label: 'Explore all Sahara tours', url: '/tours' },
   ],
+  '7-day-morocco-itinerary-sahara-desert': [
+    { label: 'See the 7 day Grand Sahara tour', url: '/tours/7-days-grand-sahara-marrakech' },
+    { label: 'Ask us to tailor your week', url: '/contact' },
+  ],
+  'christmas-new-year-sahara-desert-morocco': [
+    { label: 'Check holiday dates with us', url: '/contact' },
+    { label: 'Explore our luxury desert camps', url: '/luxury-desert-camps' },
+  ],
+  'casablanca-to-sahara-desert-merzouga': [
+    { label: 'Browse tours from Casablanca', url: '/tours/casablanca' },
+    { label: 'Get a quote for your dates', url: '/contact' },
+  ],
 }
+
 
 const defaultInternalLinks = [
   { label: 'Browse all Sahara desert tours', url: '/tours' },
@@ -159,22 +249,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const post = getBlogPost(params.slug)
   if (!post) return {}
+  const description = post.metaDescription || post.excerpt
   return {
-    title: `${post.title} | Sahara Desert Blog`,
-    description: post.excerpt,
+    title: post.metaTitle || `${post.title} | Sahara Desert Blog`,
+    description,
+    ...(post.keywords && { keywords: post.keywords }),
     authors: [{ name: post.author }],
     openGraph: {
       type: 'article',
       title: post.title,
-      description: post.excerpt,
-      images: [{ url: post.image, width: 1200, height: 630, alt: post.title }],
+      description,
+      images: [{ url: post.image, width: 1200, height: 630, alt: post.imageAlt || post.title }],
       publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description,
       images: [post.image],
     },
     alternates: {
@@ -204,6 +297,8 @@ export default async function BlogPostPage({ params }) {
   const ctaImage = ctaChoices[slugHash % ctaChoices.length] || CTA_IMAGES[0]
 
   const blogPostSchema = generateBlogPostSchema(post)
+  // FAQ markup only when the same questions are shown on the page
+  const faqSchema = post.faqs?.length ? generateFAQSchema(post.faqs) : null
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Blog', url: '/blog' },
@@ -222,10 +317,14 @@ export default async function BlogPostPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }} />
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && (
+        <script id="faq-schema" type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
 
       <PageHero
         image={post.image}
-        imageAlt={post.title}
+        imageAlt={post.imageAlt || post.title}
         eyebrow={post.category}
         title={post.title}
         breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Blog', url: '/blog' }, { name: post.title }]}
@@ -245,17 +344,50 @@ export default async function BlogPostPage({ params }) {
         <div className="container-site max-w-3xl">
           {/* Intro */}
           <p className="text-xl text-ink-700 leading-relaxed mb-10 font-serif">
-            {post.intro}
+            {renderInline(post.intro)}
           </p>
 
+          {/* Short, self-contained answer to the post's main question */}
+          {post.quickAnswer && (
+            <aside className="mb-12 rounded-2xl border border-desert-200 bg-sand-50 p-6" aria-label="Quick answer">
+              <p className="eyebrow mb-2">Quick answer</p>
+              <p className="text-ink-700 leading-relaxed">{renderInline(post.quickAnswer)}</p>
+            </aside>
+          )}
+
           {/* Sections */}
-          <div className="space-y-6">
+          <div className="space-y-12">
             {post.sections.map((section, i) => (
-              <p key={i} className="text-ink-600 leading-relaxed text-lg">
-                {section.content}
-              </p>
+              <section key={i} className="space-y-5">
+                {section.heading && (
+                  <h2 className="font-serif text-2xl md:text-[1.7rem] font-medium leading-snug text-ink-900">{section.heading}</h2>
+                )}
+                <SectionBody block={section} />
+                {section.subsections?.map((sub, j) => (
+                  <div key={j} className="space-y-4 pt-2">
+                    <h3 className="font-serif text-xl font-medium text-ink-900">{sub.heading}</h3>
+                    <SectionBody block={sub} />
+                  </div>
+                ))}
+              </section>
             ))}
           </div>
+
+          {/* FAQ: same array feeds the FAQPage schema above */}
+          {post.faqs?.length > 0 && (
+            <section className="mt-16">
+              <h2 className="font-serif text-2xl md:text-[1.7rem] font-medium text-ink-900 mb-4">Frequently Asked Questions</h2>
+              <FAQList faqs={post.faqs} />
+            </section>
+          )}
+
+          {/* Who wrote this and what it is based on */}
+          {post.expertise && (
+            <aside className="mt-14 rounded-2xl bg-sand-50 border border-sand-200 p-6">
+              <h2 className="font-serif text-lg font-medium text-ink-900 mb-2">Why you can trust this guide</h2>
+              <p className="text-ink-600 leading-relaxed text-[0.97rem]">{renderInline(post.expertise)}</p>
+            </aside>
+          )}
 
           {/* Outbound Resources */}
           {resources.length > 0 && (

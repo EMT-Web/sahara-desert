@@ -352,10 +352,12 @@ export function generateBlogPostSchema(post) {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription || post.excerpt,
     image: `${siteUrl}${post.image}`,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
+    inLanguage: 'en',
+    ...(post.about && { about: post.about.map((name) => ({ '@type': 'Thing', name })) }),
     author: {
       '@type': 'Person',
       name: post.author,
@@ -369,7 +371,8 @@ export function generateBlogPostSchema(post) {
       '@type': 'WebPage',
       '@id': `${siteUrl}/blog/${post.slug}`,
     },
-    keywords: post.category,
+    keywords: post.keywords || post.category,
+    articleSection: post.category,
     url: `${siteUrl}/blog/${post.slug}`,
   }
 }

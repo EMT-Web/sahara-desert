@@ -1,5 +1,295 @@
 export const blogPosts = [
   {
+    slug: '7-day-morocco-itinerary-sahara-desert',
+    title: '7 Day Morocco Itinerary with the Sahara Desert: Three Routes That Actually Work',
+    metaTitle: '7 Day Morocco Itinerary with the Sahara Desert (3 Routes)',
+    metaDescription: 'Three realistic one week Morocco itineraries that include the Sahara: a Marrakech round trip, Casablanca to Marrakech via Fes, and Marrakech to Casablanca.',
+    keywords: 'morocco itinerary 7 days, 7 day morocco itinerary with sahara, one week in morocco with desert, 7 day morocco tour merzouga, morocco desert tour itinerary',
+    about: ['Morocco', 'Sahara', 'Merzouga', 'Erg Chebbi', 'Fes', 'Marrakech'],
+    excerpt: 'Seven days is enough to see the Sahara and at least one imperial city without rushing. Here are three routes we run, day by day, with honest trade-offs.',
+    category: 'Itineraries',
+    image: '/images/blog/southern-morocco-kasbah-desert-route.jpg',
+    imageAlt: 'Earthen kasbah with crenellated towers on the road between the High Atlas and the Sahara in southern Morocco',
+    publishedAt: '2026-10-25',
+    updatedAt: '2026-10-25',
+    readTime: 9,
+    author: 'Mustapha Oufota',
+    intro: `One week is the most common trip length we plan, and the question is almost always the same: can you see the Sahara and still have time for the cities? Yes, as long as you pick a route that does not double back on itself. Below are the three 7 day routes our guests choose most often, built from our real itineraries, with the driving times and compromises spelled out.`,
+    quickAnswer: `The best 7 day Morocco itinerary with the Sahara crosses the country instead of returning the same way. Start in Casablanca or Fes and finish in Marrakech (or the reverse), spend one or two nights at Merzouga in the Erg Chebbi dunes, and break the long drive with a night in the Dades or Todra gorges. If you must fly in and out of Marrakech, a round trip with two desert nights works well. Expect two days of 6 to 8 hours on the road.`,
+    sections: [
+      {
+        heading: 'Can You Fit the Sahara into 7 Days?',
+        content: `Yes, but distance shapes everything. Marrakech to Merzouga is roughly 560 km, about 9 to 10 hours of driving before any stops, and Fes to Merzouga is about 468 km ([distance source](https://simply-morocco.com/?p=21039)). Nobody should do either in one push. Every good one week route splits the desert drive in two, usually with a night in the Dades Valley or near the Todra Gorge on the southern side, or with a long scenic day through the Middle Atlas and the [Ziz Valley](/blog/fes-to-merzouga-road-trip) on the northern side.
+
+That leaves room for one imperial city done properly (Fes or Marrakech) plus the desert, or two cities at a faster pace. Trying to add Chefchaouen, Essaouira and Fes to a desert week is where trips start to feel like a bus timetable.`,
+      },
+      {
+        heading: 'Route 1: Marrakech Round Trip with Two Nights in the Desert',
+        content: `Best if your flights are in and out of Marrakech, or if the Sahara is the main reason for your trip. This follows our [7 Days Grand Sahara Desert Tour from Marrakech](/tours/7-days-grand-sahara-marrakech). The second desert night is what makes it special: you are not packing up at sunrise, so you get a full day in the dunes, time with nomadic families, and a second evening of stars.`,
+        list: [
+          'Day 1: Marrakech over the High Atlas to Ait Benhaddou, then on to the Dades Valley.',
+          'Day 2: Dades Valley to the Todra Gorge and Erfoud, arriving in Merzouga for a sunset camel ride into camp.',
+          'Day 3: A day in the Sahara with tea at a nomad family\'s tent and time on the Erg Chebbi dunes.',
+          'Day 4: A slower desert day for walking, sandboarding or simply resting at camp.',
+          'Day 5: Merzouga via Rissani and the Draa Valley to Ouarzazate.',
+          'Day 6: Ouarzazate back over the High Atlas to Marrakech.',
+          'Day 7: A guided Marrakech city tour, or your airport drop off.',
+        ],
+      },
+      {
+        heading: 'Route 2: Casablanca to Marrakech via Fes and the Sahara',
+        content: `Best for travelers flying long haul into Casablanca and out of Marrakech, which is often the cheapest flight combination from North America. It is the classic one way crossing, run as our [7 Day Sahara Desert Tour from Casablanca to Marrakech via Fes](/tours/7-days-morocco-sahara-desert-tour-from-casablanca-to-marrakech), and it gives you a full guided day in the [Fes medina, a UNESCO World Heritage Site](https://whc.unesco.org/en/list/170/).`,
+        list: [
+          'Day 1: Pick up at Casablanca airport, a stop in Rabat, then on to Fes.',
+          'Day 2: A full day in the Fes medina with a local guide.',
+          'Day 3: Fes through the Middle Atlas and the cedar forest near Azrou to Merzouga.',
+          'Day 4: A Sahara day focused on desert life and nomadic culture.',
+          'Day 5: Merzouga to the Todra Gorge and the Dades Valley.',
+          'Day 6: Over the High Atlas to Marrakech.',
+          'Day 7: Marrakech sightseeing and departure.',
+        ],
+      },
+      {
+        heading: 'Route 3: Marrakech to Casablanca via the Desert, Fes and Chefchaouen',
+        content: `The same crossing in reverse, with the blue town of Chefchaouen and the Roman ruins of [Volubilis](https://whc.unesco.org/en/list/836/) added near the end. It packs in the most, so it suits travelers who prefer variety to slow days. It follows our [7 Days Morocco Desert Tour from Marrakech to Casablanca via Fes](/tours/7-days-marrakech-casablanca-via-fes).`,
+        list: [
+          'Day 1: Marrakech over the High Atlas past Ait Benhaddou, Ouarzazate and the Valley of Roses to the Dades Gorges.',
+          'Day 2: The Dades and Todra gorges, then Merzouga and a desert camp.',
+          'Day 3: A full desert day with nomads, Gnawa music, and the seasonal flamingo lake when there is water.',
+          'Day 4: North through the Ziz oasis and gorges, Midelt and the cedar forest to Fes.',
+          'Day 5: A walking tour of old Fes with a local guide.',
+          'Day 6: Fes via Meknes and Volubilis to Chefchaouen.',
+          'Day 7: Chefchaouen via Rabat to Casablanca for your drop off.',
+        ],
+      },
+      {
+        heading: 'The Three Routes Side by Side',
+        content: `Prices are what our tour pages show at the time of writing (October 2026), per person when two people share a room. Single travelers and larger groups pay different rates, and every route can be adjusted.`,
+        table: {
+          headers: ['', 'Route 1', 'Route 2', 'Route 3'],
+          rows: [
+            ['Starts and ends', 'Marrakech round trip', 'Casablanca to Marrakech', 'Marrakech to Casablanca'],
+            ['Nights in the desert', '2', '1 (plus a full desert day)', '1 (plus a full desert day)'],
+            ['Cities covered', 'Marrakech', 'Rabat, Fes, Marrakech', 'Fes, Meknes, Chefchaouen, Rabat'],
+            ['Longest driving days', 'Days 1, 2, 5 and 6', 'Days 3 and 6', 'Days 1, 4 and 7'],
+            ['Best for', 'Desert first, relaxed pace', 'Long haul flights into Casablanca', 'Seeing as much as possible'],
+            ['From (per person, double)', '€969', '€1,157', '€1,092'],
+          ],
+        },
+      },
+      {
+        heading: 'How to Choose Between Them',
+        content: `Start with your flights, not the sights. If you can book an open jaw ticket (arriving in one city, leaving from another), Routes 2 and 3 waste no time backtracking, and you see both sides of the Atlas. If your return flight is fixed to Marrakech, Route 1 is the calmer choice, and the second desert night is the part most guests tell us they would not give up.
+
+If this is your first time in Morocco and you want one city to feel rather than just see, Route 2 gives Fes a whole day. If you are traveling with children or older relatives, ask us to shorten the longest driving days; we can add a night in Ouarzazate or Midelt, which turns the trip into 8 days but makes it much easier. For more on pacing, see our guide to [how long a Sahara tour should be](/blog/how-many-days-sahara-desert-tour).`,
+      },
+      {
+        heading: 'What a Driving Day Really Feels Like',
+        content: `The long days are not empty hours in a car. The road from Marrakech climbs over the Tizi n'Tichka pass in the High Atlas, then drops past kasbahs, palm oases and the gorges, and your driver stops for viewpoints, lunch and photos along the way. Still, plan for a full day: leave after breakfast and arrive in time for dinner, or for the sunset camel ride on the day you reach Merzouga. Our [Marrakech to Merzouga road trip guide](/blog/marrakech-to-merzouga-road-trip) describes each stop in detail.`,
+        image: {
+          src: '/images/blog/erg-chebbi-dunes-merzouga-blue-sky.jpeg',
+          alt: 'Tall orange dunes of Erg Chebbi near Merzouga under a clear blue sky',
+          caption: 'The Erg Chebbi dunes at Merzouga, the desert stop on all three routes.',
+        },
+      },
+      {
+        heading: 'Private or Shared: Which Suits a One Week Trip?',
+        content: `We run both. A private tour gives you your own vehicle and driver, so you set the pace, choose the stops and can change the plan as you go. Our shared small group departures, available on set dates, keep groups to a maximum of 17 people and cost less, but the route and timings are fixed. For a full week, most couples and families choose private, because seven days together in one vehicle is easier when you control the schedule. Solo travelers on a budget often prefer the social side of a shared group.`,
+      },
+      {
+        heading: 'When to Go',
+        content: `Spring (March to May) and autumn (late September to November) give the most comfortable mix of warm days and cool desert nights. Winter is clear and beautiful but cold after dark, and July and August are very hot in the desert. Our [best time to visit the Sahara](/blog/best-time-to-visit-sahara-desert) guide goes month by month.`,
+      },
+    ],
+    faqs: [
+      { question: 'Is 7 days enough for Morocco and the Sahara?', answer: 'Yes. Seven days is enough to spend one or two nights in the Sahara at Merzouga and see one or two imperial cities, as long as the route crosses the country instead of backtracking and the desert drive is split over two days.' },
+      { question: 'What is the best route for one week in Morocco with the desert?', answer: 'If you can fly into Casablanca or Fes and out of Marrakech, a one way crossing via Fes, Merzouga and the Dades Valley is the most efficient. If you must start and end in Marrakech, a round trip with two nights in the desert is the most relaxed option.' },
+      { question: 'How long is the drive from Marrakech to the Sahara?', answer: 'Marrakech to Merzouga is roughly 560 km, about 9 to 10 hours of driving without stops. Tours split it over two days with a night in the Dades Valley or Todra Gorge area.' },
+      { question: 'How much does a 7 day Morocco tour with the Sahara cost?', answer: 'Our 7 day private routes start from €969 to €1,157 per person when two people share a room, at October 2026 prices. The price depends on the route, group size, room type and level of desert camp.' },
+      { question: 'Can I add Chefchaouen or Essaouira to a 7 day desert itinerary?', answer: 'Chefchaouen fits on a Marrakech to Casablanca route via Fes. Essaouira does not fit comfortably in seven days with the desert; it is better as an add on day or two at the end of the trip.' },
+    ],
+    expertise: `Written by Mustapha Oufota, lead desert guide at Visit Sahara Desert. Mustapha was born in the Draa Valley and has guided travelers across Erg Chebbi and Erg Zgid for more than 15 years. The three routes above are the itineraries our own team runs, and the prices are taken from our tour pages in October 2026.`,
+  },
+  {
+    slug: 'christmas-new-year-sahara-desert-morocco',
+    title: 'Christmas and New Year in the Sahara Desert: A Practical Guide',
+    metaTitle: 'Christmas & New Year in the Sahara Desert, Morocco',
+    metaDescription: 'Planning Christmas or New Year\'s Eve in the Sahara? Desert weather in late December, cold nights at camp, how Morocco marks the holidays, and when to book.',
+    keywords: 'christmas in morocco, christmas in the sahara desert, new year sahara desert, new years eve merzouga, sahara desert in december, morocco in winter',
+    about: ['Christmas', 'New Year', 'Sahara', 'Merzouga', 'Yennayer'],
+    excerpt: 'Swapping tinsel for dunes is one of the best ideas you can have in December. Here is what the desert is like over the holidays, and how to plan it well.',
+    category: 'Planning',
+    image: '/images/blog/sahara-desert-camp-campfire-night-merzouga.jpeg',
+    imageAlt: 'Travelers gathered around a campfire at a Sahara desert camp near Merzouga at night',
+    publishedAt: '2026-10-25',
+    updatedAt: '2026-10-25',
+    readTime: 8,
+    author: 'Mustapha Oufota',
+    intro: `Every December we welcome families and couples who decided to skip the usual holiday routine and spend Christmas or New Year's Eve in the dunes. It is one of the most beautiful times to be in the Sahara: clear skies, long starry nights and soft winter light. It is also the busiest and the coldest week of our season, so a little planning makes a big difference.`,
+    quickAnswer: `Yes, you can spend Christmas or New Year's Eve in the Sahara. Late December days at Merzouga are mild, averaging around 20°C, but nights average about 7°C and feel colder in the open dunes, so warm layers are essential. Christmas is not a public holiday in Morocco, but desert camps are used to international guests, and New Year's Eve at camp usually means a special dinner, drums and a fire under the stars. This is peak season, so book camps and drivers well ahead.`,
+    sections: [
+      {
+        heading: 'Is Christmas Celebrated in Morocco?',
+        content: `Morocco is a Muslim country and 25 December is a normal working day, so you will not find Christmas markets or decorated streets in Merzouga. What you will find is a warm welcome: camps, riads and guides who host international guests all winter and are happy to make the evening feel festive. If a Christmas dinner matters to your family, tell us when you book and we will check what your camp can arrange.
+
+New Year's Day (1 January) is a public holiday in Morocco, and so is Yennayer, the Amazigh New Year, which was made a national holiday in 2023 and is marked on 14 January ([public holidays in Morocco](https://en.wikipedia.org/wiki/Public_holidays_in_Morocco)). If your trip runs into mid January, you may share in a celebration that matters deeply to the Amazigh communities of the south. Read more about that heritage in our guide to [Berber culture and the people of the Sahara](/blog/berber-culture-people-of-the-sahara).`,
+      },
+      {
+        heading: 'What the Weather Is Like in Late December',
+        content: `Winter in the Sahara is not the image most people have. Days are bright and pleasant, and nights are genuinely cold. Long term averages for Merzouga in December are a high of about 20°C and a low of about 7°C, with only a couple of rainy days in the month ([climate data](https://weather-and-climate.com/merzouga-December-averages)). Out on the dunes, after the sun goes down before 6 pm and the wind picks up, it can feel close to freezing.`,
+        table: {
+          headers: ['', 'What to expect', 'What to wear'],
+          rows: [
+            ['Daytime', 'Sunny and mild, around 18 to 20°C', 'Light layers, sunglasses, sun cream'],
+            ['Sunset camel ride', 'Cooling fast once the sun drops', 'A fleece or warm jacket, a scarf'],
+            ['Night at camp', 'Average lows near 7°C, colder in wind', 'Thermal base layer, hat, warm socks'],
+            ['Sunrise', 'The coldest hour of the day', 'Everything you own, plus a blanket'],
+          ],
+          caption: 'Typical late December conditions at Merzouga. Temperatures are long term averages, not a forecast.',
+        },
+      },
+      {
+        heading: 'New Year\'s Eve at a Desert Camp',
+        content: `On 31 December most camps around Erg Chebbi make the evening a celebration: a longer dinner, often with tagine, couscous and fresh bread, then music around the fire. Our guides play traditional drums, guests usually end up joining in, and at midnight you are under a sky with thousands of stars rather than fireworks. It is a quieter, more memorable way to start the year.
+
+Because it is a special night, some camps add a supplement for 31 December, and the most popular camps fill early. Ask what is included before you confirm. If comfort in the cold is a priority, compare camp types: our [luxury desert camps](/luxury-desert-camps) have en suite tents with hot showers, while our standard camps offer private tents with comfortable bedding and thick blankets. Our guide to [choosing a desert camp](/blog/how-to-choose-desert-camp) explains the differences.`,
+        image: {
+          src: '/images/blog/sahara-dunes-winter-sunset-sky.jpeg',
+          alt: 'Fiery orange winter sunset sky over dark Sahara dunes',
+          caption: 'Winter sunsets are short and spectacular. Be on the dunes by mid afternoon.',
+        },
+      },
+      {
+        heading: 'Planning Around the Holiday Season',
+        content: `The two weeks from about 20 December to early January are among the busiest of the whole year in the Sahara. Flights into Marrakech and Fes are at their most expensive, and the best camps and drivers are booked first.`,
+        subsections: [
+          {
+            heading: 'Book earlier than usual',
+            content: `We normally suggest booking two to four weeks ahead. For the Christmas and New Year week, we recommend confirming your desert nights as soon as your flights are set, ideally by October or early November.`,
+          },
+          {
+            heading: 'Expect shorter days',
+            content: `Daylight is limited in December, so long driving days feel longer. On the Marrakech route, a 3 day trip such as our [3 Days Marrakech to Merzouga tour](/tours/3-days-marrakech-merzouga) is the minimum; four days gives you more light for stops. From Fes, the [2 Days Fes to Merzouga express](/tours/2-days-fes-merzouga-express) is the fastest way to be in the dunes for one night.`,
+          },
+          {
+            heading: 'Allow for mountain weather',
+            content: `Snow can fall in winter on the Tizi n'Tichka pass in the High Atlas and around Ifrane and Azrou in the Middle Atlas. It rarely stops a trip, but it can slow the road or mean a short delay. A private driver can adjust the timing or route on the day, which is one reason many winter guests choose a private tour.`,
+          },
+        ],
+      },
+      {
+        heading: 'What to Pack for a Winter Desert Trip',
+        content: `Pack as if you were going to the mountains, not the beach:`,
+        list: [
+          'A warm jacket (down or synthetic) and a fleece for evenings.',
+          'Thermal leggings and top to sleep in.',
+          'A wool hat, gloves and warm socks.',
+          'A scarf or shesh to protect your face from wind and sand.',
+          'Sunglasses and sun cream, because the winter sun is still strong.',
+          'A head torch for walking around camp after dark.',
+        ],
+      },
+      {
+        heading: 'Is It a Good Trip for Families at Christmas?',
+        content: `Very much so. School holidays line up with the desert's most comfortable daytime temperatures, and children usually love the camels, sandboarding and the campfire. The main thing is keeping little ones warm at night. Our [family Morocco tours](/family-morocco-tours) page and our [Sahara with kids guide](/blog/sahara-desert-with-kids) cover pacing and practical details.`,
+      },
+    ],
+    faqs: [
+      { question: 'Is it cold in the Sahara Desert at Christmas?', answer: 'The days are mild, around 18 to 20°C at Merzouga, but nights are cold. December lows average about 7°C and the open dunes can feel close to freezing, especially at sunrise, so pack a warm jacket, hat and thermal layers.' },
+      { question: 'Is Christmas celebrated in Morocco?', answer: 'Christmas is not a public holiday in Morocco, which is a Muslim country, but hotels, riads and desert camps that host international travelers welcome guests warmly and can often arrange a special dinner if asked in advance.' },
+      { question: 'What happens on New Year\'s Eve at a desert camp?', answer: 'Most camps near Erg Chebbi hold a festive dinner followed by traditional drumming and music around the campfire, and guests see in the new year under a starry sky. Some camps charge a supplement for 31 December, so check what is included when booking.' },
+      { question: 'How far ahead should I book a desert tour for Christmas or New Year?', answer: 'Book as soon as your flights are confirmed, ideally by October or early November. The weeks around Christmas and New Year are among the busiest of the year, and the most popular camps and drivers fill first.' },
+      { question: 'Can snow affect a winter desert trip?', answer: 'Snow can fall on the High Atlas pass between Marrakech and the south, and in the Middle Atlas near Ifrane. It rarely cancels a trip but can cause delays, so build in flexibility and travel with an experienced driver.' },
+    ],
+    expertise: `Written by Mustapha Oufota, lead desert guide at Visit Sahara Desert, who has guided travelers through more than 15 winters in Erg Chebbi and Erg Zgid. Weather figures come from published long term averages for Merzouga, and holiday dates from Morocco's official public holiday calendar.`,
+  },
+  {
+    slug: 'casablanca-to-sahara-desert-merzouga',
+    title: 'Casablanca to the Sahara Desert: How to Reach Merzouga and Which Tour to Choose',
+    metaTitle: 'Casablanca to the Sahara Desert (Merzouga): Routes & Tours',
+    metaDescription: 'How to get from Casablanca to the Sahara at Merzouga: realistic driving times, why most trips go via Fes, flying to Errachidia, and which tour length fits.',
+    keywords: 'casablanca to sahara desert, casablanca to merzouga, casablanca desert tour, morocco desert tour from casablanca, sahara desert tour from casablanca',
+    about: ['Casablanca', 'Merzouga', 'Sahara', 'Fes', 'Errachidia'],
+    excerpt: 'Casablanca is Morocco\'s main long haul gateway, but it is a long way from the dunes. Here are the realistic ways to get there and the tours that make sense.',
+    category: 'Itineraries',
+    image: '/images/blog/camel-caravan-crossing-sahara-dunes.jpeg',
+    imageAlt: 'Camel caravan with riders crossing the crest of a Sahara dune near Merzouga',
+    publishedAt: '2026-10-25',
+    updatedAt: '2026-10-25',
+    readTime: 8,
+    author: 'Mustapha Oufota',
+    intro: `Many of our guests land at Casablanca's Mohammed V airport, the country's main hub for flights from North America, and their first question is how quickly they can reach the desert. The honest answer: not in a day. The good news is that the road there runs through some of Morocco's best sights, so the journey becomes part of the trip.`,
+    quickAnswer: `Casablanca to Merzouga, the gateway to the Erg Chebbi dunes, is roughly 760 km by road via Fes, more than 10 hours of driving, so it is not a realistic day trip. Most travelers drive or take the train to Fes first (about 295 km), stay one or two nights, then continue to Merzouga the next day. The fastest option is a domestic flight to Errachidia, about two hours' drive from the dunes. Multi day tours from Casablanca usually go via Fes and the desert and finish in Marrakech.`,
+    sections: [
+      {
+        heading: 'Can You Visit the Sahara from Casablanca in a Day?',
+        content: `No. Casablanca to Fes is about 295 km, and Fes to Merzouga is another 468 km, roughly seven hours with stops ([distance source](https://simply-morocco.com/?p=21039)). Even on a direct road, you would arrive after dark and see nothing of the dunes. Anyone offering a "Sahara day trip" from Casablanca is really selling a very long drive.
+
+The minimum that works is three days from Fes, or four to six days starting in Casablanca. If you only have a weekend, a shorter coastal or city trip is a better use of your time, and the desert can wait for a longer visit.`,
+      },
+      {
+        heading: 'Three Ways to Get from Casablanca to Merzouga',
+        subsections: [
+          {
+            heading: '1. A private tour via Fes (the most popular)',
+            content: `Your driver collects you at the airport or your hotel and you travel via Rabat to Fes, with a full day in the Fes medina before crossing the Middle Atlas to the desert. You avoid any changes of transport, and your luggage stays in the car. This is how all of our [tours from Casablanca](/tours/casablanca) work.`,
+          },
+          {
+            heading: '2. Train to Fes, then a desert tour',
+            content: `Morocco's national rail operator, [ONCF](https://www.oncf-voyages.ma/en), runs direct trains between Casablanca and Fes. From Fes you can join a desert tour such as our [3 Day Sahara Desert Tour from Fes](/tours/3-days-fes-merzouga), which reaches Merzouga on day one and ends in Marrakech. This suits travelers who want a day or two in Fes on their own first. There is no train line to Merzouga.`,
+          },
+          {
+            heading: '3. Fly to Errachidia, then drive',
+            content: `Errachidia, about two hours' drive from the dunes, has a small airport with domestic flights from Casablanca; check current schedules, as they change by season. Our [2 Day Sahara Desert Tour from Errachidia](/tours/2-days-errachidia-merzouga) fits this well: it starts with a morning pickup in Errachidia, spends a night in the dunes and returns the next day. Tell us your flight times and we will plan the pickup around them. It is the quickest way to the Sahara if your time is very short.`,
+          },
+        ],
+      },
+      {
+        heading: 'Why Most Casablanca Tours Finish in Marrakech',
+        content: `If you start in Casablanca, drive to the desert via Fes and then return to Casablanca, you cover the longest stretch of road twice. Ending in Marrakech instead lets you come back over the High Atlas through the Dades Valley, the Todra Gorge and the kasbahs near Ouarzazate, so every day shows you something new. Marrakech has plenty of international flights, so many guests book an open jaw ticket: into Casablanca, out of Marrakech.`,
+        image: {
+          src: '/images/blog/mint-tea-desert-lake-merzouga.jpeg',
+          alt: 'Silver teapot and glasses of mint tea overlooking a seasonal lake among the dunes near Merzouga',
+          caption: 'Mint tea by a seasonal lake near Merzouga, a welcome sight after the long drive south.',
+        },
+      },
+      {
+        heading: 'Our Desert Tours from Casablanca Compared',
+        content: `Each tour below can be taken privately, with your own vehicle and driver guide, or as a shared small group departure (up to 17 guests) where dates are available. Prices are per person in a double room, from our tour pages at the time of writing (October 2026).`,
+        table: {
+          headers: ['Tour', 'Route highlights', 'From (per person, double)'],
+          rows: [
+            ['[6 Days, Casablanca to Marrakech](/tours/6-days-morocco-sahara-desert-tour-from-casablanca-to-marrakech)', 'Rabat, Chefchaouen, Fes, Merzouga, Dades Gorges, Ait Benhaddou', '€988'],
+            ['[7 Days, via Fes](/tours/7-days-morocco-sahara-desert-tour-from-casablanca-to-marrakech)', 'Rabat, Fes, Merzouga, nomadic culture, Todra, Dades, Marrakech', '€1,157'],
+            ['[8 Days, Imperial Cities & Sahara](/tours/8-day-morocco-imperial-cities-sahara-tour-from-casablanca)', 'Rabat, Chefchaouen, Volubilis, Meknes, Fes, Merzouga, Marrakech', '€1,332'],
+            ['[11 Days, with Chefchaouen](/tours/11-day-morocco-imperial-cities-chefchaouen-sahara-trek)', 'Imperial cities, Chefchaouen and the desert at a slower pace', '€1,846'],
+            ['[15 Days, Grand Morocco](/tours/15-day-morocco-imperial-cities-sahara-coastal-adventure)', 'Imperial cities, Chefchaouen, the Sahara and the coast', '€2,587'],
+          ],
+        },
+      },
+      {
+        heading: 'Which Length Is Right for You?',
+        content: `Six days is the shortest comfortable loop from Casablanca that includes the desert, and it moves quickly. Seven days adds a full day in the Sahara with nomadic families instead of arriving and leaving within a few hours, which is the version we recommend to most first time visitors. Eight days or more lets you add Chefchaouen and the Roman ruins at Volubilis without long days on the road. For a wider look at one week routes across Morocco, see our [7 day Morocco itinerary with the Sahara](/blog/7-day-morocco-itinerary-sahara-desert).`,
+      },
+      {
+        heading: 'Private or Shared from Casablanca?',
+        content: `Each of our Casablanca tours can run privately or, when a departure is available, as a shared small group of up to 17 guests. On routes this long we usually recommend private: you choose when to stop, and your driver can adapt if your flight is delayed. Shared departures cost less per person and suit solo travelers. Our [tour cost guide](/blog/sahara-desert-tour-cost-guide) explains how private and shared prices compare.`,
+      },
+      {
+        heading: 'Before You Leave Casablanca',
+        content: `If you arrive a day early, the [Hassan II Mosque](https://en.wikipedia.org/wiki/Hassan_II_Mosque) is one of the few mosques in Morocco that non Muslim visitors can enter on a guided tour, and it is worth a morning. Most of our Casablanca itineraries stop in Rabat on the first day, whose modern capital and historic city are [listed by UNESCO](https://whc.unesco.org/en/list/1401/).`,
+      },
+    ],
+    faqs: [
+      { question: 'How far is the Sahara Desert from Casablanca?', answer: 'Merzouga, the gateway to the Erg Chebbi dunes, is roughly 760 km from Casablanca by road via Fes. That is more than 10 hours of driving, so the trip is always split over at least two days.' },
+      { question: 'Can I do a Sahara day trip from Casablanca?', answer: 'Not realistically. The dunes are too far for a return trip in one day. The shortest practical option is to fly to Errachidia and take a 2 day tour, or to travel via Fes on a tour of at least four days.' },
+      { question: 'Is there a train from Casablanca to the Sahara?', answer: 'There is no train to the desert. ONCF trains run from Casablanca to Fes and Marrakech, and from there you continue by road on a private or shared desert tour.' },
+      { question: 'What is the best desert tour from Casablanca?', answer: 'For most first time visitors, a 7 day tour from Casablanca to Marrakech via Fes is the best balance: a full day in Fes, a full day in the Sahara, and a return over the High Atlas without backtracking.' },
+      { question: 'How much does a Sahara tour from Casablanca cost?', answer: 'Our private tours from Casablanca start from €988 per person for 6 days and €1,157 for 7 days when two people share a room, at October 2026 prices. Single travelers and larger groups pay different rates.' },
+    ],
+    expertise: `Written by Mustapha Oufota, lead desert guide at Visit Sahara Desert. Mustapha was born in the Draa Valley and has guided travelers across Erg Chebbi and Erg Zgid for more than 15 years. The routes and prices in this guide come from our own Casablanca tours as published in October 2026.`,
+  },
+  {
     slug: '10-things-to-know-sahara-desert',
     title: '10 Things to Know Before Your First Sahara Desert Trip',
     excerpt: 'The Sahara is unlike any destination on earth. Here is what every first-time visitor needs to know before stepping onto the sand.',
