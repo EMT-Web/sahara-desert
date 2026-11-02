@@ -1,5 +1,5 @@
 // One-off: adds the 7 day Marrakech Dakar trails tour (Tafraoute Sidi Ali, Remlia, Ouzina, Merzouga).
-// Usage: SANITY_API_TOKEN=... node scripts/add-dakar-trails-tour.mjs   (createOrReplace, safe to rerun)
+// Usage: SANITY_API_TOKEN=... node tools-oneoff/add-dakar-trails-tour.mjs   (createOrReplace, safe to rerun)
 // Without a token it only prints the document (dry run).
 import { createClient } from '@sanity/client'
 
