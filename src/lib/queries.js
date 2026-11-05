@@ -1,3 +1,11 @@
+// Price adjustment applied on top of the prices stored in Sanity.
+// 115 = all tour prices shown on the site are raised by 15% (set on 5 Nov 2026).
+// Change this one number to adjust every price on the site; 100 = Sanity prices as stored.
+export const PRICE_PERCENT = 115
+
+// GROQ projection that returns a price field rounded to the nearest euro after the adjustment.
+const priced = (field) => `"${field}": round(${field} * ${PRICE_PERCENT} / 100)`
+
 export const homepageQuery = `
   *[_type == "homepage" && !(_id in path("drafts.**"))][0]{
     heroTitle,
@@ -12,8 +20,8 @@ export const homepageQuery = `
       mainImage,
       excerpt,
       duration,
-      price,
-      priceDouble,
+      ${priced('price')},
+      ${priced('priceDouble')},
       departureCity
     }
   }
@@ -27,8 +35,8 @@ export const toursListQuery = `
     mainImage,
     excerpt,
     duration,
-    price,
-    priceDouble,
+    ${priced('price')},
+    ${priced('priceDouble')},
     departureCity,
     publishedAt,
     _updatedAt
@@ -43,8 +51,8 @@ export const toursByCityQuery = `
     mainImage,
     excerpt,
     duration,
-    price,
-    priceDouble,
+    ${priced('price')},
+    ${priced('priceDouble')},
     departureCity,
     publishedAt
   }
@@ -60,11 +68,11 @@ export const tourDetailQuery = `
     excerpt,
     body,
     duration,
-    price,
-    priceSingle,
-    priceDouble,
-    priceTriple,
-    priceQuad,
+    ${priced('price')},
+    ${priced('priceSingle')},
+    ${priced('priceDouble')},
+    ${priced('priceTriple')},
+    ${priced('priceQuad')},
     departureCity,
     highlights,
     included,
@@ -254,8 +262,8 @@ export const relatedToursQuery = `
     mainImage,
     excerpt,
     duration,
-    price,
-    priceDouble,
+    ${priced('price')},
+    ${priced('priceDouble')},
     departureCity
   }
 `
