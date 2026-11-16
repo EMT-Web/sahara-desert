@@ -144,6 +144,8 @@ export const NAV_GROUPS = [
 // Legal operator. Visit Sahara Desert is a brand of Escorted Morocco Tours
 // (EMT): every contract, invoice, receipt and payment is issued in EMT's name.
 // Used by the About page, footer, Terms and the Organization JSON-LD.
+// Links to OPERATOR.url are rel="nofollow" on purpose: the sitewide link
+// between the two owned domains must not pass ranking signals.
 export const OPERATOR = {
   name: 'Escorted Morocco Tours',
   shortName: 'EMT',
