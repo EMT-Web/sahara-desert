@@ -2,17 +2,20 @@ import Image from 'next/image'
 import PageHero from '@/components/PageHero'
 import Link from 'next/link'
 import SectionTitle from '@/components/SectionTitle'
+import Icon from '@/components/Icon'
 import GuideCard from '@/components/GuideCard'
 import { client, urlFor } from '@/lib/sanity'
 import { aboutQuery, guidesQuery } from '@/lib/queries'
-import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } from '@/lib/seo'
+import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo'
+import { FAQList } from '@/components/FAQSection'
+import { OPERATOR, OPERATOR_FAQS } from '@/lib/site'
 
 export async function generateMetadata() {
   return generateSEOMetadata({
     title: 'About Us: Berber Desert Guides Since 2014',
-    description: 'Meet the people behind Sahara Desert Travel: native Berber guides born in the Sahara with over a decade of experience. Learn about our story, values, and commitment to authentic, sustainable desert tourism.',
+    description: 'Meet the Berber guides behind Visit Sahara Desert, operated by Escorted Morocco Tours (EMT), a licensed Moroccan tour operator. Our story, values and how bookings work.',
     url: '/about',
-    keywords: ['About Sahara Desert Travel', 'Berber desert guides', 'Morocco travel company', 'sustainable desert tourism', 'authentic Morocco experience', 'local guides Sahara', 'Mustapha Oufota'],
+    keywords: ['Escorted Morocco Tours', 'EMT licensed tour operator', 'licensed Morocco tour operator', 'About Sahara Desert Travel', 'Berber desert guides', 'Morocco travel company', 'sustainable desert tourism', 'authentic Morocco experience', 'local guides Sahara', 'Mustapha Oufota'],
   })
 }
 
@@ -37,8 +40,12 @@ export default async function AboutPage() {
     { name: 'About Us', url: '/about' },
   ])
 
+  const faqSchema = generateFAQSchema(OPERATOR_FAQS)
+
   return (
     <>
+      <script id="faq-schema" type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script id="breadcrumb-schema" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
@@ -110,6 +117,63 @@ export default async function AboutPage() {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+
+      {/* Licensed operator: who runs the brand, who you pay */}
+      <section id="licensed-operator" className="section bg-sand-50 border-y border-sand-200">
+        <div className="container-site">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div data-reveal>
+              <span className="eyebrow">Licensed &amp; accountable</span>
+              <h2 className="heading-lg mt-3">Operated by {OPERATOR.name} ({OPERATOR.shortName})</h2>
+              <div className="mt-6 space-y-4 text-ink-700 leading-relaxed">
+                <p>
+                  Visit Sahara Desert is a brand of{' '}
+                  <a href={OPERATOR.url} target="_blank" rel="noopener" className="font-medium text-desert-700 underline underline-offset-2 hover:text-desert-800">
+                    {OPERATOR.name}
+                  </a>{' '}
+                  ({OPERATOR.shortName}), a registered and licensed tour operator in Morocco. Our Berber guides design and lead
+                  the journeys; {OPERATOR.shortName} is the legal company that stands behind every one of them.
+                </p>
+                <p>
+                  That means your trip is not arranged by a freelancer or an anonymous middleman. {OPERATOR.shortName} holds the
+                  operating licence, contracts the licensed drivers, guides, desert camps and hotels on your itinerary, and is
+                  accountable to you from the first quote to the final transfer.
+                </p>
+                <p>
+                  All official paperwork carries {OPERATOR.shortName}&rsquo;s name: your booking confirmation, contract, invoice and
+                  receipts are issued by {OPERATOR.name}, and every deposit or balance payment is made to {OPERATOR.name}.
+                </p>
+              </div>
+            </div>
+
+            <div data-reveal style={{ '--reveal-delay': '90ms' }}>
+              <ul className="grid gap-4">
+                {[
+                  { icon: 'shield', title: 'Licensed Moroccan tour operator', body: `Tours run under the licence of ${OPERATOR.name}, with vehicles authorised for tourist transport and professionally licensed drivers and guides.` },
+                  { icon: 'mail', title: 'Official documents in EMT\u2019s name', body: 'Booking confirmations, contracts, invoices and receipts are all issued by Escorted Morocco Tours.' },
+                  { icon: 'check', title: 'Payments made to EMT only', body: 'Deposits and balances are paid to Escorted Morocco Tours. If anyone asks you to pay a private person or another company, contact us first.' },
+                ].map((item) => (
+                  <li key={item.title} className="card flex gap-4 p-6">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-desert-50 text-desert-600">
+                      <Icon name={item.icon} className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <h3 className="font-serif text-lg text-ink-900">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink-600">{item.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-16 max-w-4xl" data-reveal>
+            <h3 className="heading-md mb-4">Bookings, licensing and payments</h3>
+            <FAQList faqs={OPERATOR_FAQS} />
           </div>
         </div>
       </section>

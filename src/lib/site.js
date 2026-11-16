@@ -140,3 +140,28 @@ export const NAV_GROUPS = [
     ],
   },
 ]
+
+// Legal operator. Visit Sahara Desert is a brand of Escorted Morocco Tours
+// (EMT): every contract, invoice, receipt and payment is issued in EMT's name.
+// Used by the About page, footer, Terms and the Organization JSON-LD.
+export const OPERATOR = {
+  name: 'Escorted Morocco Tours',
+  shortName: 'EMT',
+  url: 'https://www.escortedmoroccotours.com',
+  country: 'Morocco',
+}
+
+export const OPERATOR_FAQS = [
+  {
+    question: 'Who operates Visit Sahara Desert?',
+    answer: 'Visit Sahara Desert is a brand operated by Escorted Morocco Tours (EMT), a licensed Moroccan tour operator. EMT is the legal company behind every Visit Sahara Desert tour: it holds the operating licence, contracts the drivers, guides, camps and hotels, and is responsible for your trip from the first quote to the final transfer.',
+  },
+  {
+    question: 'Who do I pay, and whose name appears on my booking documents?',
+    answer: 'All payments are made to Escorted Morocco Tours (EMT). Your booking confirmation, invoice, receipts and any bank-transfer or card-payment details are issued in the name of Escorted Morocco Tours. If you are ever asked to pay a private individual or a company other than EMT for a Visit Sahara Desert tour, please contact us before sending any money.',
+  },
+  {
+    question: 'Is Visit Sahara Desert a licensed tour operator?',
+    answer: 'Yes. Tours are run under the licence of Escorted Morocco Tours (EMT), a registered and licensed Moroccan tour operator. Our vehicles are authorised for tourist transport, our drivers and guides are professionally licensed, and every booking is backed by an official EMT contract and invoice.',
+  },
+]

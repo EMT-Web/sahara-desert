@@ -1,5 +1,6 @@
 import { urlFor } from './sanity'
 import { testimonials, TRIPADVISOR_URL } from '../data/testimonials'
+import { OPERATOR } from './site'
 
 const CANONICAL_HOST = 'www.visitsaharadesert.com'
 const BARE_HOST = 'visitsaharadesert.com'
@@ -27,6 +28,17 @@ const siteUrl = resolveSiteUrl()
 const siteName = 'Visit Sahara Desert'
 const defaultDescription =
   'Visit Sahara Desert offers authentic Morocco desert tours with expert local Berber guides, sustainable travel, and unforgettable journeys through golden dunes and desert oases.'
+
+// Legal operator, referenced from Organization / LocalBusiness JSON-LD so
+// search engines and AI assistants can connect the brand to the licensed company.
+const operatorEntity = {
+  '@type': 'TravelAgency',
+  name: OPERATOR.name,
+  alternateName: OPERATOR.shortName,
+  url: OPERATOR.url,
+  address: { '@type': 'PostalAddress', addressCountry: 'MA' },
+}
+const operatorNote = `Visit Sahara Desert is operated by ${OPERATOR.name} (${OPERATOR.shortName}), a licensed Moroccan tour operator. All contracts, invoices and payments are issued in the name of ${OPERATOR.name}.`
 
 function trimDescription(text, max = 158) {
   if (!text) return text
@@ -123,7 +135,9 @@ export function generateOrganizationSchema(contact = null) {
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
     image: `${siteUrl}/og-image.jpg`,
-    description: defaultDescription,
+    description: `${defaultDescription} ${operatorNote}`,
+    parentOrganization: operatorEntity,
+    legalName: OPERATOR.name,
     priceRange: '$$',
     areaServed: { '@type': 'Country', name: 'Morocco' },
     address: {
@@ -192,7 +206,9 @@ export function generateLocalBusinessSchema(contact = null) {
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
     image: `${siteUrl}/og-image.jpg`,
-    description: defaultDescription,
+    description: `${defaultDescription} ${operatorNote}`,
+    parentOrganization: operatorEntity,
+    legalName: OPERATOR.name,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MA',
