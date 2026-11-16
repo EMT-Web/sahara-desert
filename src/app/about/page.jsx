@@ -168,6 +168,15 @@ export default async function AboutPage() {
                   </li>
                 ))}
               </ul>
+
+              <dl className="mt-4 grid gap-x-6 gap-y-3 rounded-2xl border border-sand-200 bg-white p-6 text-sm sm:grid-cols-[auto_1fr]">
+                <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">Company</dt>
+                <dd className="text-ink-900">{OPERATOR.legalName}</dd>
+                <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">ICE</dt>
+                <dd className="font-mono text-ink-900">{OPERATOR.ice}</dd>
+                <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">Registered office</dt>
+                <dd className="text-ink-900">{OPERATOR.streetAddress}, {OPERATOR.locality}, {OPERATOR.country}</dd>
+              </dl>
             </div>
           </div>
 
