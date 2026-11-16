@@ -179,56 +179,88 @@ export default async function AboutPage() {
       </section>
 
       {/* Why We're Different */}
-      <section className="bg-sand-50 py-20">
+      <section className="section bg-white">
         <div className="container-site">
-          <SectionTitle
-            title="Why We're Different"
-            subtitle="Our team brings generations of Saharan wisdom to every journey"
-          />
-
-          {about?.localExpertise && (
-            <p className="text-center text-lg text-ink-600 max-w-3xl mx-auto -mt-4 mb-14 leading-relaxed">
-              {about.localExpertise}
+          <div className="mx-auto max-w-3xl text-center" data-reveal>
+            <span className="eyebrow">Why travel with us</span>
+            <h2 className="heading-lg mt-3">Why We&rsquo;re Different</h2>
+            <p className="lede mt-5">
+              Every Visit Sahara Desert journey is designed and led by Berber guides who were born in the desert. We
+              don&rsquo;t hand you a script. We share the land, the people and the traditions we grew up with, at a pace
+              that suits you.
             </p>
-          )}
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               {
-                icon: (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                ),
-                title: 'Born in the Desert',
-                body: 'Our guides grew up in Saharan communities, learning traditions passed down through generations. No scripts, just real stories.',
+                icon: 'users',
+                title: 'Guides Born in the Sahara',
+                body: 'Our guides grew up in desert communities and learned its routes, stories and customs from their families. What you hear on the trail is first-hand knowledge, not a memorised commentary.',
               },
               {
-                icon: (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                ),
-                title: 'Cultural Guardians',
-                body: 'We preserve and share Berber traditions, music, and storytelling, living culture, not a performance for tourists.',
+                icon: 'music',
+                title: 'Living Berber Culture',
+                body: 'Music, storytelling, food and hospitality are part of daily life in our villages. We share them as they really are, not as a performance staged for visitors.',
               },
               {
-                icon: (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                ),
-                title: 'Low-Impact Travel',
-                body: 'Small groups only. We put 10% of profits back into desert communities and follow leave-no-trace principles on every journey.',
+                icon: 'leaf',
+                title: 'Responsible, Low-Impact Travel',
+                body: 'Private tours and small shared groups, leave-no-trace practice in the dunes, and 10% of our profits reinvested in the desert communities we work with.',
               },
-            ].map((item) => (
+            ].map((item, i) => (
               <div
                 key={item.title}
-                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-sand-100"
+                data-reveal
+                style={{ '--reveal-delay': `${i * 90}ms` }}
+                className="card p-8"
               >
-                <div className="w-12 h-12 bg-desert-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-desert-100 transition-colors">
-                  <svg className="w-6 h-6 text-desert-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {item.icon}
-                  </svg>
-                </div>
-                <h3 className="text-lg font-serif font-medium mb-3 text-ink-900">{item.title}</h3>
-                <p className="text-sm text-ink-900 leading-relaxed">{item.body}</p>
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-desert-50 text-desert-600">
+                  <Icon name={item.icon} className="h-6 w-6" />
+                </span>
+                <h3 className="mt-6 font-serif text-xl text-ink-900">{item.title}</h3>
+                <p className="mt-3 text-[0.97rem] leading-relaxed text-ink-600">{item.body}</p>
               </div>
             ))}
+          </div>
+
+          {/* Signature experiences */}
+          <div className="mt-20 rounded-3xl bg-sand-50 px-6 py-12 md:px-12 md:py-14">
+            <div className="max-w-2xl" data-reveal>
+              <span className="eyebrow">What you can experience</span>
+              <h3 className="heading-md mt-3">Our Signature Sahara Experiences</h3>
+              <p className="mt-4 leading-relaxed text-ink-600">
+                Each itinerary is built around you. These are the experiences our guests ask for most, and any of them can
+                be added to a private or small-group tour.
+              </p>
+            </div>
+
+            <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: 'route', title: 'Camel Trekking', body: 'Ride across the dunes of Erg Chebbi (Merzouga) or Erg Chigaga at sunrise or sunset, following old caravan routes.' },
+                { icon: 'tent', title: 'Desert Camps', body: 'Spend the night in a traditional Berber camp, from simple nomad tents to luxury camps with private bathrooms.' },
+                { icon: 'mountain', title: 'Sandboarding', body: 'Board down the highest dunes of the Sahara, with equipment and guidance provided.' },
+                { icon: 'users', title: 'Nomad Family Visits', body: 'Share mint tea with a nomadic family and see how desert life, crafts and herding continue today.' },
+                { icon: 'leaf', title: 'Oases & Gorges', body: 'Walk through palm groves, springs and canyons such as the Todra and Dades gorges.' },
+                { icon: 'camera', title: 'Desert Photography', body: 'Time your stops for the best light on the dunes, kasbahs and valleys, with guides who know the angles.' },
+                { icon: 'moon', title: 'Stargazing Evenings', body: 'Far from any city lights, enjoy one of the clearest night skies on earth around the campfire.' },
+                { icon: 'music', title: 'Music & Desert Cuisine', body: 'Join Gnawa and Berber drumming at camp and learn to cook tagine and sand-baked bread.' },
+              ].map((exp) => (
+                <li key={exp.title} className="flex gap-4" data-reveal>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-desert-600 shadow-sm">
+                    <Icon name={exp.icon} className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h4 className="font-serif text-lg text-ink-900">{exp.title}</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-600">{exp.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-10">
+              <Link href="/tours" className="btn-primary">Explore our tours</Link>
+            </div>
           </div>
         </div>
       </section>
