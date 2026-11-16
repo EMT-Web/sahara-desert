@@ -35,8 +35,15 @@ const operatorEntity = {
   '@type': 'TravelAgency',
   name: OPERATOR.name,
   alternateName: OPERATOR.shortName,
+  legalName: OPERATOR.legalName,
   url: OPERATOR.url,
-  address: { '@type': 'PostalAddress', addressCountry: 'MA' },
+  identifier: { '@type': 'PropertyValue', propertyID: 'ICE', value: OPERATOR.ice },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: OPERATOR.streetAddress,
+    addressLocality: OPERATOR.locality,
+    addressCountry: 'MA',
+  },
 }
 const operatorNote = `Visit Sahara Desert is operated by ${OPERATOR.name} (${OPERATOR.shortName}), a licensed Moroccan tour operator. All contracts, invoices and payments are issued in the name of ${OPERATOR.name}.`
 
@@ -137,7 +144,7 @@ export function generateOrganizationSchema(contact = null) {
     image: `${siteUrl}/og-image.jpg`,
     description: `${defaultDescription} ${operatorNote}`,
     parentOrganization: operatorEntity,
-    legalName: OPERATOR.name,
+    legalName: OPERATOR.legalName,
     priceRange: '$$',
     areaServed: { '@type': 'Country', name: 'Morocco' },
     address: {
@@ -208,7 +215,7 @@ export function generateLocalBusinessSchema(contact = null) {
     image: `${siteUrl}/og-image.jpg`,
     description: `${defaultDescription} ${operatorNote}`,
     parentOrganization: operatorEntity,
-    legalName: OPERATOR.name,
+    legalName: OPERATOR.legalName,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'MA',

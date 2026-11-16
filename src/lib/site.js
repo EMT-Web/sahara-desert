@@ -151,6 +151,13 @@ export const OPERATOR = {
   shortName: 'EMT',
   url: 'https://www.escortedmoroccotours.com',
   country: 'Morocco',
+  // Official company details, as used on EMT invoices.
+  legalName: 'Escorted Morocco Tours SARLAU',
+  ice: '003967997000096',
+  streetAddress: 'Dr Taftchna, Commune Taftchna',
+  locality: 'Zagora',
+  // Tour-operator licence number: not yet provided. Add it here as
+  // `licenceNumber` and it should be shown next to the ICE on /about.
 }
 
 export const OPERATOR_FAQS = [
