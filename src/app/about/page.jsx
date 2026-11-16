@@ -174,6 +174,8 @@ export default async function AboutPage() {
                 <dd className="text-ink-900">{OPERATOR.legalName}</dd>
                 <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">ICE</dt>
                 <dd className="font-mono text-ink-900">{OPERATOR.ice}</dd>
+                <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">RC (Trade Register)</dt>
+                <dd className="font-mono text-ink-900">{OPERATOR.rc}</dd>
                 <dt className="font-semibold uppercase tracking-wider text-xs text-ink-500 sm:pt-0.5">Registered office</dt>
                 <dd className="text-ink-900">{OPERATOR.streetAddress}, {OPERATOR.locality}, {OPERATOR.country}</dd>
               </dl>

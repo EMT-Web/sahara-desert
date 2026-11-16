@@ -37,7 +37,10 @@ const operatorEntity = {
   alternateName: OPERATOR.shortName,
   legalName: OPERATOR.legalName,
   url: OPERATOR.url,
-  identifier: { '@type': 'PropertyValue', propertyID: 'ICE', value: OPERATOR.ice },
+  identifier: [
+    { '@type': 'PropertyValue', propertyID: 'ICE', value: OPERATOR.ice },
+    { '@type': 'PropertyValue', propertyID: 'RC', value: OPERATOR.rc },
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: OPERATOR.streetAddress,
