@@ -10,7 +10,7 @@ import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } fro
 export async function generateMetadata() {
   return generateSEOMetadata({
     title: 'Sustainable Desert Tourism in Morocco',
-    description: 'We protect the Sahara for future generations. Zero single-use plastic, 100% local suppliers, 10% of profits invested in Berber communities, and leave-no-trace principles on every tour.',
+    description: 'We protect the Sahara for future generations. Zero single-use plastic, 100% local suppliers, 5% of every booking invested in Berber communities, and leave-no-trace principles on every tour.',
     url: '/sustainability',
     keywords: ['sustainable desert tourism', 'eco-friendly Morocco tours', 'responsible travel Sahara', 'Berber community investment', 'low-impact desert tours', 'leave no trace Morocco', 'conservation Sahara'],
   })
@@ -52,7 +52,7 @@ export default async function SustainabilityPage() {
         <div className="container-site">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
             {[
-              { value: '10%', label: 'Profits to Communities' },
+              { value: '5%', label: 'Of Every Booking to Communities' },
               { value: '0', label: 'Single-Use Plastic' },
               { value: '100%', label: 'Local Suppliers' },
               { value: '8+', label: 'Villages Supported' },
@@ -124,7 +124,7 @@ export default async function SustainabilityPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   ),
                   title: 'Community Investment',
-                  body: 'We work directly with local communities, employ Berber guides, source supplies locally, and contribute 10% of profits to community development.',
+                  body: 'We work directly with local communities, employ Berber guides, source supplies locally, and contribute 5% of every booking to community development.',
                 },
                 {
                   icon: (
