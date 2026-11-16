@@ -13,7 +13,7 @@ import { homepageQuery, toursListQuery, contactQuery } from '@/lib/queries'
 import { generateMetadata as generateSEOMetadata, generateFAQSchema } from '@/lib/seo'
 import { blogPosts } from '@/data/blogPosts'
 import { team } from '@/data/team'
-import { DEPARTURE_CITIES } from '@/lib/site'
+import { DEPARTURE_CITIES, OPERATOR_FAQS } from '@/lib/site'
 import { withUniqueCardImages } from '@/lib/tourImages'
 
 const homepageFAQs = [
@@ -25,6 +25,7 @@ const homepageFAQs = [
   { question: 'What languages do your guides speak?', answer: 'We operate tours in 5 languages: English, French, Arabic, Spanish, and German. Our Berber guides are fluent in English, French, and Arabic, with many also speaking Spanish and German, and we can accommodate most other European languages with advance notice.' },
   { question: 'How far in advance should I book?', answer: 'We recommend booking at least 2–4 weeks in advance, especially for peak season (December–February). Last-minute bookings are sometimes possible: contact us via WhatsApp for availability.' },
   { question: 'What is your cancellation policy?', answer: 'Full refund for cancellations made 14+ days before departure. 50% refund between 7–14 days. No refund within 7 days, but we offer free date changes. Contact us and we will always do our best to help.' },
+  OPERATOR_FAQS[0],
 ]
 
 const EXPERIENCES = [

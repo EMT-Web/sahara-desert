@@ -12,7 +12,7 @@ export async function generateMetadata() {
 const sections = [
   {
     title: '1. About These Terms',
-    body: 'These Terms & Conditions govern every tour booking made with Visit Sahara Desert, a Berber-guided desert tour operator based in Morocco, through visitsaharadesert.com, WhatsApp, email, or any other direct channel. By submitting a booking inquiry or paying a deposit, you agree to the terms on this page.',
+    body: 'These Terms & Conditions govern every tour booking made with Visit Sahara Desert, a Berber-guided desert tour brand operated by Escorted Morocco Tours (EMT), a licensed Moroccan tour operator, through visitsaharadesert.com, WhatsApp, email, or any other direct channel. By submitting a booking inquiry or paying a deposit, you agree to the terms on this page.',
   },
   {
     title: '2. Booking Process',
@@ -20,7 +20,7 @@ const sections = [
   },
   {
     title: '3. Deposits and Payment',
-    body: 'Most tours require a deposit to confirm your reservation, with the balance due before or at the start of the tour, as agreed with our team when you book. We do not collect payment details through this website: all payment arrangements are confirmed directly with you by our team, and accepted methods (cash, bank transfer, or card) are set out at that time.',
+    body: 'Most tours require a deposit to confirm your reservation, with the balance due before or at the start of the tour, as agreed with our team when you book. We do not collect payment details through this website: all payment arrangements are confirmed directly with you by our team, and accepted methods (cash, bank transfer, or card) are set out at that time. Every payment is made to Escorted Morocco Tours (EMT), and all official documents (booking confirmations, contracts, invoices and receipts) are issued in EMT\'s name. If anyone asks you to pay a private individual or a different company for a Visit Sahara Desert tour, please contact us before sending money.',
   },
   {
     title: '4. Cancellation Policy',

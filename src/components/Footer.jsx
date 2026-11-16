@@ -3,7 +3,7 @@ import Image from 'next/image'
 import NewsletterFooterRow from '@/components/NewsletterFooterRow'
 import Icon, { WhatsAppIcon } from '@/components/Icon'
 import { TRIPADVISOR_URL } from '@/data/testimonials'
-import { DEPARTURE_CITIES, whatsappHref, FALLBACK_WHATSAPP } from '@/lib/site'
+import { DEPARTURE_CITIES, whatsappHref, FALLBACK_WHATSAPP, OPERATOR } from '@/lib/site'
 
 const COLUMNS = [
   {
@@ -51,6 +51,13 @@ export default function Footer({ contactInfo }) {
             <Image src="/logo.png" alt="Visit Sahara Desert" width={96} height={95} className="h-14 w-auto rounded-md" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-sand-300">
               Locally owned tour company running private and small-group Sahara Desert and Morocco tours, guided by Berber people who grew up among the dunes.
+            </p>
+            <p className="mt-4 max-w-sm text-xs leading-relaxed text-sand-400">
+              Operated by{' '}
+              <a href={OPERATOR.url} target="_blank" rel="noopener" className="font-medium text-sand-200 underline-offset-2 hover:text-white hover:underline">
+                {OPERATOR.name} ({OPERATOR.shortName})
+              </a>
+              , a licensed Moroccan tour operator. All contracts, invoices and payments are issued in the name of {OPERATOR.name}.
             </p>
             <ul className="mt-6 space-y-3 text-sm">
               <li>
@@ -100,7 +107,7 @@ export default function Footer({ contactInfo }) {
 
         <div className="mt-10 flex flex-col-reverse items-start justify-between gap-6 border-t border-white/10 pt-8 text-xs text-sand-400 md:flex-row md:items-center">
           <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span>&copy; {year} Visit Sahara Desert. All rights reserved.</span>
+            <span>&copy; {year} Visit Sahara Desert, operated by {OPERATOR.name}. All rights reserved.</span>
             <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
             <Link href="/terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
           </p>
