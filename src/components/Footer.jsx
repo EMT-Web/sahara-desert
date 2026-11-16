@@ -54,7 +54,7 @@ export default function Footer({ contactInfo }) {
             </p>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-sand-400">
               Operated by{' '}
-              <a href={OPERATOR.url} target="_blank" rel="noopener" className="font-medium text-sand-200 underline-offset-2 hover:text-white hover:underline">
+              <a href={OPERATOR.url} target="_blank" rel="nofollow noopener" className="font-medium text-sand-200 underline-offset-2 hover:text-white hover:underline">
                 {OPERATOR.name} ({OPERATOR.shortName})
               </a>
               , a licensed Moroccan tour operator. All contracts, invoices and payments are issued in the name of {OPERATOR.name}.

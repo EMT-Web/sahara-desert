@@ -132,7 +132,7 @@ export default async function AboutPage() {
               <div className="mt-6 space-y-4 text-ink-700 leading-relaxed">
                 <p>
                   Visit Sahara Desert is a brand of{' '}
-                  <a href={OPERATOR.url} target="_blank" rel="noopener" className="font-medium text-desert-700 underline underline-offset-2 hover:text-desert-800">
+                  <a href={OPERATOR.url} target="_blank" rel="nofollow noopener" className="font-medium text-desert-700 underline underline-offset-2 hover:text-desert-800">
                     {OPERATOR.name}
                   </a>{' '}
                   ({OPERATOR.shortName}), a registered and licensed tour operator in Morocco. Our Berber guides design and lead
