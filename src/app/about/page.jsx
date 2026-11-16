@@ -206,7 +206,7 @@ export default async function AboutPage() {
               {
                 icon: 'leaf',
                 title: 'Responsible, Low-Impact Travel',
-                body: 'Private tours and small shared groups, leave-no-trace practice in the dunes, and 10% of our profits reinvested in the desert communities we work with.',
+                body: 'Private tours and small shared groups, leave-no-trace practice in the dunes, and 5% of every booking reinvested in the desert communities we work with.',
               },
             ].map((item, i) => (
               <div
