@@ -154,6 +154,7 @@ export const OPERATOR = {
   // Official company details, as used on EMT invoices.
   legalName: 'Escorted Morocco Tours SARLAU',
   ice: '003967997000096',
+  rc: '4865', // Registre de Commerce number, as shown on escortedmoroccotours.com
   streetAddress: 'Dr Taftchna, Commune Taftchna',
   locality: 'Zagora',
   // Tour-operator licence number: not yet provided. Add it here as
