@@ -9,6 +9,8 @@ const siteUrl = resolveSiteUrl()
 // Using new Date() here told Google every page changed on every deploy,
 // which makes lastmod meaningless. Update this when those pages change.
 const SITE_UPDATED = new Date('2026-09-23')
+// 16 Nov 2026: EMT operator disclosure, About rewrite, 5% contribution fix.
+const OPERATOR_UPDATE = new Date('2026-11-16')
 
 async function getTours() {
   try {
@@ -43,7 +45,7 @@ export default async function sitemap() {
   const routes = [
     {
       url: siteUrl,
-      lastModified: SITE_UPDATED,
+      lastModified: OPERATOR_UPDATE,
       changeFrequency: 'weekly',
       priority: 1,
     },
@@ -85,7 +87,7 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/about`,
-      lastModified: new Date('2026-06-26'),
+      lastModified: OPERATOR_UPDATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -103,7 +105,7 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/sustainability`,
-      lastModified: new Date('2026-06-26'),
+      lastModified: OPERATOR_UPDATE,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -163,7 +165,7 @@ export default async function sitemap() {
     },
     {
       url: `${siteUrl}/terms`,
-      lastModified: new Date('2026-09-12'),
+      lastModified: OPERATOR_UPDATE,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
